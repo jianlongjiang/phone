@@ -1,0 +1,40 @@
+message
+
+1:    用户  吐槽...
+
+2:  聊天页面: 式发留言,,     只有msg
+
+3:  回复   , 对方的 消息   设置未读..
+4:  主动发 系统消息,   设置未读..
+
+
+用户 获取到数据, 状态设置wierd已读
+
+
+
+: 积分发送.....
+
+
+
+: 红包 钱发放的 规则
+2个 途径,   ,,,    
+
+1: 管理  员 直接发红包..
+com.phone.cn.action.member.CashUserLogAdminAction.addMoneys(Integer[], Double, HttpServletRequest)
+
+
+2:  被推荐人 成为 会员,   相互 有红包...
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>蜗牛巴巴</title>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" type="text/css" href="css/icons.css">
+    <link rel="stylesheet" type="text/css" href="css/af.ui.css">
+    <link rel="stylesheet" href="css/idangerous.swiper.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+
+    <script type="text/javascript" charset="utf-8" src="js/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/fastclick.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/af.shim.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/appframework.ui.js"></script>
+
+    <script src="js/af.desktopBrowsers.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/af.actionsheet.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/af.animation.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/af.touchEvents.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/af.popup.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/af.drawer.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/af.toast.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/af.animateheader.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/af.splashscreen.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/af.swipereveal.js"></script>
+    <script src="js/idangerous.swiper.js"></script>
+    <script src="js/drag.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/js.js"></script>
+    
+    <script src="js/base_common.js"></script>
+     <script src="js/jjl.js"></script>
+
+    <script type="text/javascript">
+        $.afui.useOSThemes = false;
+        $.afui.autoLaunch = true; //By default, it is set to true and you're app will run right away.  We set it to false to show a splashscreen
+        /* This function runs when the content is loaded.*/
+        $(document).ready(function(){
+            setTimeout(function(){
+                $.afui.launch();
+            },1500);
+        });
+        $(function() {
+            FastClick.attach(document.body);
+        });
+    </script>
+</head>
+
+<body class="ios7">
+<div class="view" id="mainview">
+    <header>
+        <h1></h1>
+        <a href="#login" class="button rightButton" data-transition="fade"><span class="icon user-ico"></span>个人中心</a>
+    </header>
+    <div class="pages">
+        <!--Tab View Pages-->
+        <!--首页-->
+        <div class="panel active"  data-defer="home.html"   data-title="蜗牛巴巴" id="home" data-selected="true">
+        </div>
+        
+        
+	<div class="view" id="user-center-view">
+    <header class="bg_black">
+        <!--<a class="button leftButton backbtn" href="#home" data-transition="fade"></a>-->
+        <h1>title</h1>
+        <!--<a href="#user-center" class="button rightButton" data-transition="fade"><span class="icon share-ico"></span></a>-->
+    </header>
+    <div class="pages">
+        <!--Tab View Pages-->
+        <!--个人中心-->
+        <div class="panel" data-title="我" id="user-center">
+            <ul class="list">
+                <li>
+                    <a href="#user-information">
+                        <img class="user-ava" src="image/user-ava.jpg">
+                        <p class="user-name">杨幂</p>
+                        <p>手机号：<span>18710803487</span></p>
+                        <p>ID号：<span>000001</span></p>
+                        <img class="user-snail" src="image/user-snail.png">
+                    </a>
+                </li>
+            </ul>
+            <ul class="list">
+                <li>
+                    <a href="#wallet">
+                        <img class="user-img" src="image/user01.png">
+                        <p>钱包</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="show()">
+                        <img class="user-img" src="image/user02.png">
+                        <p>修改密码</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <img class="user-img" src="image/user03.png">
+                        <p>消息</p>
+                        <span class="af-badge br">2</span>
+                    </a>
+                </li>
+            </ul>
+            <ul class="list">
+                <li>
+                    <a href="#">
+                        <img class="user-img" src="image/user04.png">
+                        <p>团队管理</p>
+                    </a>
+                </li>
+            </ul>
+            <ul class="list">
+                <li>
+                    <a href="#">
+                        <img class="user-img" src="image/user05.png">
+                        <p>关于</p>
+                    </a>
+                </li>
+            </ul>
+            <div id="alert" class="alert" style="display: none;">
+                <div class="wrap">
+                    <p>
+                        为保障你的数据安全，修改密码前请填写原密码
+                        <input type="password">
+                    </p>
+                    <a href="#" class="first">确定</a>
+                    <a class="" onclick="hide();">取消</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <a href="#home"><img src="image/ft1.png" class="ft_img">首页</a>
+        <a href="#"></a>
+        <a href="#news"><img src="image/ft2.png" class="ft_img">新闻</a>
+        <a href="#user-center"><img src="image/ft03.png" class="ft_img">我的</a>
+    </footer>
+</div>
+<div class="view" id="nview">
+    <header class="bg_black">
+        <a class="button leftButton backbtn" href="#home" data-transition="fade">返回</a>
+        <h1>title</h1>
+    </header>
+    <div class="pages">
+        <!--Tab View Pages-->
+        <div class="panel w-bg" data-title="查询号码" id="query-ID">
+            <div class="container">
+                <input type="text" class="query-ID-input" placeholder="输入要查询的号码">
+                <a href="#" class="submit-btn" data-transition="fade" onclick="">提交</a>
+                <div class="query-result">
+                    <p><span class="title">ID号：</span><span class="res">小尼</span></p>
+                    <p></span><span class="title">手机号：</span><span class="res">12345678</span></p>
+                    <p></span><span class="title">微信号：</span><span class="res">蜗牛排长</span></p>
+                    <p></span><span class="title">创业宣言：</span><span class="res">2015-03-09</span></p>
+                </div>
+            </div>
+        </div>
+        <div class="panel w-bg" data-title="下载号码" id="dl-ID">
+            <div class="container">
+                <div class="wrapper flexbox">
+                    <div class="flexbox-item select-div">
+                        <select>
+                            <option value="volvo">一级选择</option>
+                            <option value="saab">一级选择</option>
+                        </select>
+                    </div>
+                    <div class="flexbox-item select-div">
+                        <select>
+                            <option value="volvo">二级选择</option>
+                            <option value="saab">二级选择</option>
+                        </select>
+                    </div>
+                </div>
+                <select>
+                    <option value="volvo">数量</option>
+                </select>
+                <a href="#" class="import-btn">导入通讯录</a>
+                <p class="tip">蜗牛粑粑温馨提醒：这里加个积分不够怎么办？   通过邀请好友和签到可以加积分！</p>
+            </div>
+        </div>
+        <div class="panel w-bg" data-title="关于" id="about">
+            <div class="container about">
+                <img src="image/about.png" class="about-logo">
+                <p class="app-title">蜗牛巴巴</p>
+                <p class="version">版本v1.0</p>
+                <a href="#" class="about-btn">版本更新</a>
+                <a href="#" class="about-btn">意见反馈</a>
+                <a href="#" class="about-btn">评分</a>
+                <a href="#" class="about-btn">联系方式</a>
+                <a href="#" class="about-btn">联系方式</a>
+            </div>
+        </div>
+        <div class="panel w-bg" data-title="我有话对你说" id="comment">
+            <div class="container">
+                <input type="text" class="comment-title" placeholder="标题">
+                <textarea class="comment-text" placeholder="内容"></textarea>
+                <a href="#" class="submit-btn">提交</a>
+            </div>
+        </div>
+        <div class="panel w-bg" data-title="登录" id="login">
+            <p><span class="icon mobile-ico"></span><input type="text" placeholder="手机号"></p>
+            <p><span class="icon pw-ico"></span><input type="text" placeholder="密码"></p>
+            <div class="container">
+                <a href="#" class="submit-btn">提交</a>
+                <a href="#" class="forgot-pw">忘记密码</a>
+            </div>
+        </div>
+        <div class="panel w-bg" data-title="注册" id="reg">
+            <div class="container">
+                <p class="reg-mobile-p"><span class="icon mobile-ico"></span><input type="text" placeholder="手机号"><a href="#" class="get-verification">获取验证码</a></p>
+                <p><span class="icon verification-ico"></span><input type="text" placeholder="验证码"></p>
+                <p><span class="icon user-ico2"></span><input type="text" placeholder="昵称"></p>
+                <p><span class="icon pw-ico"></span><input type="password" placeholder="密码"></p>
+                <p><span class="icon pw-ico"></span><input type="password" placeholder="密码确认"></p>
+                <p><span class="icon recommend-ico"></span><input type="text" placeholder="邀请人帐号"></p>
+            </div>
+            <div class="container">
+                <div class="wrapper flexbox">
+                    <div class="flexbox-item select-div">
+                        <select>
+                            <option value="volvo">一级选择</option>
+                            <option value="saab">一级选择</option>
+                        </select>
+                    </div>
+                    <div class="flexbox-item select-div">
+                        <select>
+                            <option value="volvo">二级选择</option>
+                            <option value="saab">二级选择</option>
+                        </select>
+                    </div>
+                </div>
+                <a href="#" class="reg-btn">注册</a>
+            </div>
+        </div>
+        <div class="panel" data-title="我的消息" id="my-messages">
+            <div class="container">
+                <div class="wrapper flexbox message-btns">
+                    <a href="#" class="flexbox-item message-btn" id="sys-message-btn">系统消息</a>
+                    <a href="#" class="flexbox-item active message-btn" id="user-message-btn">个人消息</a>
+                </div>
+                <div class="messages" id="sys-message-div">
+                    <div class="message w-bg">
+                        <p class="message-title"><span class="message-from">系统消息：</span><span class="message-date">2015-10-10 12:00</span></p>
+                        <p class="message-content">我给你送来了一个积分红包。</p>
+                    </div>
+                    <div class="message w-bg">
+                        <p class="message-title"><span class="message-from">系统消息：</span><span class="message-date">2015-10-10 12:00</span></p>
+                        <p class="message-content">我给你送来了一个积分红包。</p>
+                    </div>
+                    <div class="message w-bg">
+                        <p class="message-title"><span class="message-from">系统消息：</span><span class="message-date">2015-10-10 12:00</span></p>
+                        <p class="message-content">我给你送来了一个积分红包。</p>
+                    </div>
+                </div>
+                <div class="messages" id="user-message-div">
+                    <div class="message w-bg">
+                        <p class="message-title"><span class="message-from">小花：</span><span class="message-date">2015-10-10 12:00</span></p>
+                        <p class="message-content">我给你送来了一个积分红包。</p>
+                    </div>
+                    <div class="message w-bg">
+                        <p class="message-title"><span class="message-from">小花：</span><span class="message-date">2015-10-10 12:00</span></p>
+                        <p class="message-content">我给你送来了一个积分红包。</p>
+                    </div>
+                    <div class="message w-bg">
+                        <p class="message-title"><span class="message-from">小花：</span><span class="message-date">2015-10-10 12:00</span></p>
+                        <p class="message-content">我给你送来了一个积分红包。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel" data-title="新闻" id="news">
+            <img src="image/news-banner.jpg" class="news-banner">
+            <div class="news-nav w-bg">
+                <div id="jtlg-pub-pic">
+                    <a href="#" class="active">分类B</a>
+                    <a href="#">分类C</a>
+                    <a href="#">分类D</a>
+                    <a href="#">分类E</a>
+                    <a href="#">分类F</a>
+                    <a href="#">分类G</a>
+                    <a href="#">分类H</a>
+                    <a href="#">分类I</a>
+                </div>
+            </div>
+            <div class="news-item">
+                <img src="image/news-title.png" class="news-item-png">
+                <p class="news-title">新闻标题</p>
+                <p class="news-date">2015-03-05 18:00:30</p>
+                <p class="news-content">蜗牛巴巴新闻蜗牛巴巴新闻蜗牛巴巴新闻蜗牛巴巴新闻蜗牛巴巴...</p>
+                <a href="#news-detail" data-transition="fade"></a>
+            </div>
+            <div class="news-item">
+                <img src="image/news-title.png" class="news-item-png">
+                <p class="news-title">新闻标题</p>
+                <p class="news-date">2015-03-05 18:00:30</p>
+                <p class="news-content">蜗牛巴巴新闻蜗牛巴巴新闻蜗牛巴巴新闻蜗牛巴巴新闻蜗牛巴巴...</p>
+                <a href="#news-detail" data-transition="fade"></a>
+            </div>
+            <div class="news-item">
+                <img src="image/news-title.png" class="news-item-png">
+                <p class="news-title">新闻标题</p>
+                <p class="news-date">2015-03-05 18:00:30</p>
+                <p class="news-content">蜗牛巴巴新闻蜗牛巴巴新闻蜗牛巴巴新闻蜗牛巴巴新闻蜗牛巴巴...</p>
+                <a href="#news-detail" data-transition="fade"></a>
+            </div>
+            <div class="news-item">
+                <img src="image/news-title.png" class="news-item-png">
+                <p class="news-title">新闻标题</p>
+                <p class="news-date">2015-03-05 18:00:30</p>
+                <p class="news-content">蜗牛巴巴新闻蜗牛巴巴新闻蜗牛巴巴新闻蜗牛巴巴新闻蜗牛巴巴...</p>
+                <a href="#news-detail" data-transition="fade"></a>
+            </div>
+            <div class="news-item">
+                <img src="image/news-title.png" class="news-item-png">
+                <p class="news-title">新闻标题</p>
+                <p class="news-date">2015-03-05 18:00:30</p>
+                <p class="news-content">蜗牛巴巴新闻蜗牛巴巴新闻蜗牛巴巴新闻蜗牛巴巴新闻蜗牛巴巴...</p>
+                <a href="#news-detail" data-transition="fade"></a>
+            </div>
+            <div class="news-item">
+                <img src="image/news-title.png" class="news-item-png">
+                <p class="news-title">新闻标题</p>
+                <p class="news-date">2015-03-05 18:00:30</p>
+                <p class="news-content">蜗牛巴巴新闻蜗牛巴巴新闻蜗牛巴巴新闻蜗牛巴巴新闻蜗牛巴巴...</p>
+                <a href="#news-detail" data-transition="fade"></a>
+            </div>
+        </div>
+        <div class="panel" data-title="金蜗牛" id="gold-snail" style="position: relative;">
+            <img src="image/snail.png" class="snail-banner">
+            <div class="container">
+                <p>成为金蜗牛会员，成为金蜗牛会员，成为金蜗牛会员，成为金蜗牛会员，成为金蜗牛会员，成为金蜗牛会员，成为金蜗牛会员，成为金蜗牛会员，成为金蜗牛会员</p>
+                <a class="submit-btn" onclick="show();">成为金牌会员</a>
+                <div id="alert" class="alert" style="display: none;">
+                    <div class="wrap">
+                        <p>前往支付包支付100元红包成为金牌会员</p>
+                        <a href="#" class="first">确定</a>
+                        <a class="" onclick="hide();">取消</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="view" id="wallet-view">
+    <div class="pages">
+        <!--钱包-->
+        <div class="panel b-bg" id="wallet">
+            <header class="bg_black">
+                <a class="button leftButton backbtn" href="#user-center" data-transition="fade">返回</a>
+                <h1>钱包</h1>
+                <h2>蜗牛巴巴安全支付</h2>
+            </header>
+            <a href="#my-red-one">
+                <div class="bg_green">
+                    <img src="image/red.png">
+                    <p>红包</p>
+                    <p class="price">￥1000.00</p>
+                </div>
+            </a>
+            <a href="#bound-alipay">
+                <div class="bg_red">
+                    <img src="image/alipay.png">
+                    <p>支付宝账号</p>
+                    <div class="account-number">9999999999999999</div>
+                </div>
+            </a>
+            <ul class="list">
+                <li>
+                    <a href="#">
+                        <input type="text" placeholder="输入兑换码兑换红包">
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!--钱包-提现-->
+        <div class="panel" id="my-red-one">
+            <header class="bg_black">
+                <a class="button leftButton backbtn" href="#wallet" data-transition="fade">返回</a>
+                <h1>钱包</h1>
+                <h2>蜗牛巴巴安全支付</h2>
+                <a class="button rightButton" href="#pay-details" data-transition="fade">收支明细</a>
+            </header>
+            <div class="container">
+                <img src="image/red.png">
+                <p>我的红包</p>
+                <p class="price">￥1000.00</p>
+                <a class="submit-btn" href="#withdraw-cash">提交</a>
+                <div class="bottom">
+                    <p class="problem">常见问题</p>
+                    <p class="service">本服务由蜗牛巴巴提供</p>
+                </div>
+            </div>
+        </div>
+        <!--钱包-绑定支付宝-->
+        <div class="panel" id="my-red-two">
+            <header class="bg_black">
+                <a class="button leftButton backbtn" href="#wallet" data-transition="fade">返回</a>
+                <h1>钱包</h1>
+                <h2>蜗牛巴巴安全支付</h2>
+                <a class="button rightButton" href="#pay-details" data-transition="fade">收支明细</a>
+            </header>
+            <div class="container">
+                <img src="image/red.png">
+                <p>我的红包</p>
+                <p class="price">￥1000.00</p>
+                <a class="submit-btn" href="#">绑定支付宝</a>
+                <div class="bottom">
+                    <p class="problem">常见问题</p>
+                    <p class="service">本服务由蜗牛巴巴提供</p>
+                </div>
+            </div>
+        </div>
+        <!--红包提现-->
+        <div class="panel" id="withdraw-cash">
+            <header class="bg_black">
+                <a class="button leftButton backbtn" href="#my-red-one" data-transition="fade">取消</a>
+                <h1>红包提现</h1>
+                <h2>蜗牛巴巴安全支付</h2>
+            </header>
+            <form>
+                <div class="input-group">
+                    <label for="test1">支付宝</label><input id="test1" type="text" placeholder="">
+                    <label for="test2">金额(元)</label><input id="test2" type="text" placeholder="可提现余额为XXXX，请输入10元的整数">
+                </div>
+            </form>
+            <div class="container">
+                <p>预计到账时间：2015-04-22 23：00</p>
+                <p>周一到周五为工作日，节假日稍有延迟</p>
+                <a href="#withdraw-cash-details" class="submit-btn" data-transition="fade">下一步</a>
+            </div>
+        </div>
+        <!--提现详情-->
+        <div class="panel" id="withdraw-cash-details">
+            <header class="bg_black">
+                <h1>提现详情</h1>
+                <h2>蜗牛巴巴安全支付</h2>
+            </header>
+            <div class="container">
+                <img src="image/withdraw-cash-details.png">
+                <p>提现申请已提交</p>
+                <p>预计到账时间：2015-04-22 23:00</p>
+            </div>
+            <ul class="list">
+                <li>支付宝<span>1851859418888888</span></li>
+                <li>提现金额<span>￥100.00</span></li>
+            </ul>
+            <div class="container">
+                <a href="#my-red-one" class="submit-btn" data-transition="fade">完成</a>
+            </div>
+        </div>
+        <!--支付明细-->
+        <div class="panel" id="pay-details">
+            <header class="bg_black">
+                <a class="button leftButton backbtn" href="#my-red-one" data-transition="fade">返回</a>
+                <h1>支付明细</h1>
+            </header>
+            <ul class="list">
+                <li>
+                    <p>总共收入现金红包金额为<span>￥100.00</span></p>
+                </li>
+                <li>
+                    <p>现金红包提现<span>-100.00</span></p>
+                    <b>2015-4-12 21:00</b>
+                </li>
+                <li>
+                    <p>赚到的现金红包<span>-100.00</span></p>
+                    <b>2015-4-12 21:00</b>
+                </li>
+                <li>
+                    <p>兑换码兑换红包<span>-100.00</span></p>
+                    <b>2015-4-12 21:00</b>
+                </li>
+            </ul>
+            <p>本服务由蜗牛巴巴提供</p>
+        </div>
+        <!--绑定支付宝-->
+        <div class="panel" id="bound-alipay">
+            <header class="bg_black">
+                <a class="button leftButton backbtn" href="#wallet" data-transition="fade">取消</a>
+                <h1>绑定支付宝</h1>
+                <h2>蜗牛巴巴安全支付</h2>
+            </header>
+            <div class="formGroupHead">请绑定持本人支付宝</div>
+            <form>
+                <div class="input-group">
+                    <label for="test3">账户名称</label><input id="test3" type="text">
+                    <label for="test4">支付宝账号</label><input id="test4" type="text">
+                </div>
+            </form>
+            <div class="container">
+                <a href="#wallet" class="submit-btn" data-transition="fade">提交绑定</a>
+                <p>为了您的账户资金安全，只能绑定本人的支付宝</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="view" id="user-information-view">
+    <header class="bg_black">
+        <a class="button leftButton backbtn" href="#user-center" data-transition="fade">我</a>
+        <h1>title</h1>
+    </header>
+    <div class="pages">
+        <!--金蜗牛个人信息-->
+        <div class="panel" data-title="个人信息" id="user-information">
+            <ul class="list">
+                <li>
+                    <a href="#">
+                        <img class="user-ava" src="image/user-ava.jpg">
+                        <p style="line-height: 68px;">金蜗牛会员</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="no-after">
+                        <p>手机号</p>
+                        <span>18710803487</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#weixin">
+                        <p>微信号</p>
+                        <span>18710803487</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#name">
+                        <p>昵称</p>
+                        <span>杨幂</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#address">
+                        <p>我的地址</p>
+                    </a>
+                </li>
+            </ul>
+            <ul class="list">
+                <li>
+                    <a href="#sex">
+                        <p>性别</p>
+                        <span>女</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#declaration">
+                        <p>创业宣言</p>
+                        <span>给梦想一个机会</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="view" id="change-information-view1">
+    <header class="bg_black">
+        <a class="button leftButton" href="#user-information" data-transition="fade">取消</a>
+        <h1>title</h1>
+        <a class="button rightButton" href="#" data-transition="fade">保存</a>
+    </header>
+    <div class="pages">
+        <div class="panel" data-title="微信号" id="weixin">
+            <form>
+                <input type="text" placeholder="微信号">
+                <span class="af-badge br">×</span>
+            </form>
+            <p>为保证账号安全，微信号只能修改3次</p>
+        </div>
+        <div class="panel" data-title="名字" id="name">
+            <form>
+                <input type="text" placeholder="昵称">
+                <span class="af-badge br">×</span>
+            </form>
+        </div>
+        <div class="panel" data-title="修改地址" id="address">
+            <form>
+                <div class="input-group">
+                    <label for="frm_text1">收货人</label><input id="frm_text1" type="text" placeholder="名字">
+                    <label for="frm_text2">手机号码</label><input id="frm_text2" type="text" placeholder="11位手机号码">
+                    <label for="frm_text3">选择地区</label><input id="frm_text3" type="text" placeholder="地区信息">
+                    <label for="frm_text4">详细地址</label><textarea id="frm_text4" rows="2" placeholder="街道门牌信息"></textarea>
+                    <label for="frm_text5">邮政编码</label><input id="frm_text5" type="text" placeholder="邮政编码">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="view" id="change-information-view2">
+    <header class="bg_black">
+        <a class="button leftButton backbtn" href="#user-information" data-transition="fade">个人信息</a>
+        <h1>title</h1>
+    </header>
+    <div class="pages">
+        <div class="panel" data-title="性别" id="sex">
+            <div class="input-group">
+                <a href="#user-information" onclick="radioSexMan()">
+                    <span>男</span><img id="man" src="image/radio.png" style="display: none;">
+                </a>
+                <a href="#user-information" onclick="radioSexWoman()">
+                    <span>女</span><img id="woman" src="image/radio.png" style="display: block;">
+                </a>
+            </div>
+        </div>
+        <div class="panel" data-title="创业宣言" id="declaration">
+            <form>
+                <textarea rows="2"></textarea>
+                <p>30</p>
+            </form>
+        </div>
+    </div>
+</div>
+<!--<div class="view" id="user-center-view">-->
+    <!--<header>-->
+        <!--<a class="button leftButton backbtn" href="#home" data-transition="fade"></a>-->
+        <!--<h1>title</h1>-->
+        <!--<a href="#user-center" class="button rightButton" data-transition="fade"><span class="icon share-ico"></span></a>-->
+    <!--</header>-->
+    <!--<div class="pages">-->
+        <!--<!--Tab View Pages-->-->
+        <!--<div class="panel w-bg" data-title="个人中心" id="user-center">-->
+            <!--<div class="user-info-top">-->
+                <!--<img src="image/user-ava.jpg" class="user-ava">-->
+                <!--<p><span class="title gw">手机号</span><input type="text"></p>-->
+                <!--<p><span class="title gw">昵称</span><input type="text"></p>-->
+                <!--<div class="wrapper">-->
+                    <!--<p><span class="title">级别</span></p>-->
+                    <!--<p><span class="title">经验</span></p>-->
+                    <!--<p><span class="title">微信</span></p>-->
+                    <!--<p><span class="title">下载总量</span></p>-->
+                    <!--<p><span class="title">积分</span></p>-->
+                    <!--<div class="flexbox info-btns">-->
+                        <!--<div class="flexbox-item">-->
+                            <!--<a href="#my-messages" class="info-btn" data-transition="fade">我的消息</a>-->
+                        <!--</div>-->
+                        <!--<div class="flexbox-item">-->
+                            <!--<a href="#" class="info-btn">修改密码</a>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="user-info-bottom">-->
+                <!--<p><span class="title">推荐人</span></p>-->
+                <!--<p><span class="title">注册时间</span></p>-->
+                <!--<div class="flexbox info-btns">-->
+                    <!--<div class="flexbox-item">-->
+                        <!--<a href="#" class="jifen-btn">积分红包</a>-->
+                    <!--</div>-->
+                    <!--<div class="flexbox-item">-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<p><span class="title">已推荐人数</span></p>-->
+                <!--<table class="recommend-users">-->
+                    <!--<tbody>-->
+                    <!--<th>-->
+                    <!--<td>手机号</td>-->
+                    <!--<td>昵称</td>-->
+                    <!--<td>级别</td>-->
+                    <!--<td>微信号</td>-->
+                    <!--<td>可以直接发红包</td>-->
+                    <!--</th>-->
+                    <!--</tbody>-->
+                <!--</table>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
+<div class="view" id="news-view">
+    <header>
+        <a class="button leftButton backbtn" href="#news" data-transition="fade"></a>
+        <h1>title</h1>
+    </header>
+    <div class="pages">
+        <!--Tab View Pages-->
+        <div class="panel" data-title="新闻详情" id="news-detail">
+            <div class="container w-bg" id="news-detail_1">
+                <p class="news-title">习近平参加吉林团审议</p>
+                <p class="news-date">作者：<span id="news-author">人民网</span> <span id="news-date">2015-03-05  18:00:30</span></p>
+                <img src="image/news-img.png" class="news-img">
+                <p class="news-content" id="news-content">【习近平：民生工作要一诺千金】3月9日，习近平参加吉林代表团审议时强调，要扎实推进保障和改善民生工作，他说，民生工作面广量大，具有稳定性、连续性、累积性等特点。要有坚持不懈的韧劲，一件接着一件办，不要贪多嚼不烂，不要狗熊掰棒子，眼大肚子小。要发扬钉钉子精神，不能虎头蛇尾。我们要一诺千金，说到就要做到。务求扎实，开空头支票不行，要同经济发展阶段相匹配，既要积极作为，又要量力而为。...</p>
+                <p class="news-btns"><span class="icon up-ico"></span><span id="icon-up-num">98</span><span class="icon down-ico"></span><span id="icon-down-num">23</span><span onclick="weixinshare(this,'新闻详情','http://wnbb.hzlianhai.com/index/')" data-value="" data-image="" class="icon share-gray-ico J_weixin_share_member"></span></p>
+            </div>
+            <p class="title">新闻</p>
+            <div class="news-item jjl_news-detail_news-item">
+                <img src="image/news-title.png" class="news-item-png">
+                <p class="news-title">新闻标题</p>
+                <p class="news-date">2015-03-05 18:00:30</p>
+                <p class="news-content">蜗牛巴巴新闻蜗牛巴巴新闻蜗牛巴巴新闻蜗牛巴巴新闻蜗牛巴巴...</p>
+                <a href="#news-detail" data-transition="fade"></a>
+            </div>
+            <div class="news-item jjl_news-detail_news-item">
+                <img src="image/news-title.png" class="news-item-png">
+                <p class="news-title">新闻标题</p>
+                <p class="news-date">2015-03-05 18:00:30</p>
+                <p class="news-content">蜗牛巴巴新闻蜗牛巴巴新闻蜗牛巴巴新闻蜗牛巴巴新闻蜗牛巴巴...</p>
+                <a href="#news-detail" data-transition="fade"></a>
+            </div>
+            <div class="news-item jjl_news-detail_news-item">
+                <img src="image/news-title.png" class="news-item-png">
+                <p class="news-title">新闻标题</p>
+                <p class="news-date">2015-03-05 18:00:30</p>
+                <p class="news-content">蜗牛巴巴新闻蜗牛巴巴新闻蜗牛巴巴新闻蜗牛巴巴新闻蜗牛巴巴...</p>
+                <a href="#news-detail" data-transition="fade"></a>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var mySwiper = new Swiper('.swiper-container',{
+        pagination: '.pagination',
+        grabCursor: true,
+        paginationClickable: true,
+        autoplay: 8000,
+        speed: 1500,
+        calculateHeight: true,
+        onSwiperCreated: function(swiper){
+            $(".swiper-pagination-switch:eq(0)").addClass('swiper-visible-switch').addClass('swiper-active-switch');
+            swiper.reInit();
+        }
+    });
+</script>
+</body>
+</html>

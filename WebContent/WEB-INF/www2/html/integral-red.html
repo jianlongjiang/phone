@@ -1,0 +1,31 @@
+ <header class="red_black">
+                        <a class="button leftButton backbtn" href="#team-manage" data-transition="fade">返回</a>
+                        <h1 style="font-size: 14px;padding-top: 2px;">钱包</h1>
+                        <h2>蜗牛巴巴安全支付</h2>
+                    </header>
+                    <div class="container">
+                        <h3>我的积分：<span class="score">1000</span></h3>
+                        <form class="friends-mobile	red-number" id="integral-red_form">
+                            <div class="input-group">
+                                <label>好友账号</label><input 	id="addMobile" type="text" placeholder="填写手机号"><a ahref="#" onclick="addMobileFun()" >+</a>
+                            </div>
+                            <div	class="mobileList">
+                            <div class="input-group">
+                                <label>好友账号</label><input type="text"	name="mobiles"	 value="18710803487" readOnly="true" ><a href="#" onclick="removeMobile(this)" >-</a>
+                            </div>
+                            </div>
+                        <!--  </form>	 -->
+                        <!-- <form class=""> -->
+                            <div class="input-group">
+                                <label>单个红包数</label><input type="text" name="jifen" placeholder="填写积分数">
+                            </div>
+                        </form>
+                       <!--  <h4 class="send_score">100积分</h4> -->
+                        <a   ahref="" class="submit-btn" data-transition="fade" onclick="show10()">塞进红包</a>
+                    </div>
+                    <div id="alert10" class="alert" style="display: none;" onclick="hide(10)">
+                        <div class="wrap">
+                            <p>积分红包已发送</p>
+                            <img src="image/team-red.png" width="70px">
+                        </div>
+                    </div>

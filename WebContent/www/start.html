@@ -1,0 +1,163 @@
+﻿<!DOCTYPE html>
+<!--HTML5 doctype-->
+<html>
+
+    <head>
+        <script>
+			(function() {
+				if ("-ms-user-select" in document.documentElement.style && navigator.userAgent.match(/IEMobile\/10\.0/)) {
+					var msViewportStyle = document.createElement("style");
+					msViewportStyle.appendChild(
+						document.createTextNode("@-ms-viewport{width:auto!important}")
+					);
+					document.getElementsByTagName("head")[0].appendChild(msViewportStyle);
+				}
+			})();
+		</script>
+        <title>App测试启动</title>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0">
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />    
+         
+		<script type="text/javascript" charset="utf-8" src="./appframework.js"></script>
+        <!-- include af.desktopBrowsers.js on desktop browsers only -->
+        <script>
+            if (!((window.DocumentTouch && document instanceof DocumentTouch) || 'ontouchstart' in window)) {
+                var script = document.createElement("script");
+                script.src = "js/af.desktopBrowsers.js";
+                var tag = $("head").append(script);
+                //$.os.desktop=true;
+            }
+          //  $.feat.nativeTouchScroll=true;          
+        </script> 
+         <script type="text/javascript" charset="utf-8" src="af.carousel_start.js"></script>       
+        
+        <script type="text/javascript">
+            var carouseltest;
+            function init_carouseltest() {
+                carouseltest=$("#carouseltest").carousel({
+                    pagingDiv: "carousel_dots",
+                    pagingCssName: "carousel_paging2",
+                    pagingCssNameSelected: "carousel_paging2_selected",
+                    preventDefaults:false,
+                    wrap:false //Set to false to disable the wrap around
+                });
+            }
+            window.addEventListener("load", init_carouseltest, false);
+            window.localStorage.setItem("HomeLogo","setted");
+        </script>
+         <style type="text/css">
+		 		*{
+					margin:0;
+					padding:0;
+				}
+		 		body{
+					height: 100% !important;
+                    width: 100% !important;
+				}
+				.con{
+					height: 100% !important;
+                    width: 100% !important;
+					
+				}
+                .carousel_paging2 {
+                    border-radius: 10px;
+                    background: #ccc;
+                    width: 10px;
+                    height: 10px;
+                    display:inline-block;
+                }
+                .carousel_paging2_selected {
+                    border-radius: 10px;
+                    
+                    background: #000;
+                    width: 10px;
+                    height: 10px;
+                    display:inline-block;
+                }
+        
+                .spacer {
+                    width: 10px;
+                    float: left;
+                }
+                .carousel_content {
+                    -webkit-transform: translate3d(0, 0, 0);
+                }
+                .carousel{
+                    display:block; 
+                    height: 100%;
+                    width: 100%;
+					
+					    bottom: 0;
+						left: 0;
+						position: absolute !important;
+						right: 0;
+						top: 0;
+                }
+				.carousel .bg3{
+					background:url(images/01.gif);
+					background-repeat: no-repeat;
+					background-position: center;
+					background-size: auto 100%;
+				}
+				.carousel .bg4{
+					background:url(images/02.jpg);
+					background-repeat: no-repeat;
+					background-position: center;
+					background-size: auto 100%;
+				}
+				.carousel .bg5{
+					background:url(images/03.jpg);
+					background-repeat: no-repeat;
+					background-position: center;
+					background-size: auto 100%;
+				}
+				#carousel_dots{
+					text-align:center; 
+					border:none;  
+					display:table; 
+					clear: both; 
+					position: absolute; 
+					bottom:0px; 
+					z-index: 200;
+					width:100%;
+				}
+				.ljty{
+					position:relative;
+					width:100%;
+					text-align:center;
+					height: 100%;
+				}
+				.ljty a{
+					bottom:40px;
+					position:absolute;					
+					text-align:center;
+					display:table;
+					width:100%;
+					
+				}
+        </style>
+</head>
+
+    <body>
+		 <!--首页-->
+		<div class="con">             
+            <div id="carouseltest" class="carousel"> 
+                <div class="bg3"></div>
+                <div class="bg4"></div>
+                <div class="bg5">
+                	<div class="ljty">
+                    	<a href="index.html" data-ignore="true"><img src="images/ljty.png" /></a>
+                    </div>
+                </div>
+            </div>
+            
+			<div id="carousel_dots">
+			</div>
+						   
+		</div>  
+		  
+    </body>
+</html>

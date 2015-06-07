@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.phone.cn.mapper.sys.SysConfigMapper" >
+  <resultMap id="BaseResultMap" type="com.phone.cn.entity.sys.SysConfig" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="config_name" property="configName" jdbcType="VARCHAR" />
+    <result column="config_value" property="configValue" jdbcType="VARCHAR" />
+    <result column="config_desc" property="configDesc" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, config_name, config_value, config_desc, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_config
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="query" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_config
+    where 1 = 1
+      <if test="configName != null and configName!=''" >
+        and config_name = #{configName,jdbcType=VARCHAR}
+      </if>
+      <if test="configValue != null" >
+        and config_value = #{configValue,jdbcType=VARCHAR}
+      </if>
+      <if test="configDesc != null" >
+        and config_desc = #{configDesc,jdbcType=VARCHAR}
+      </if>
+      <if test="updateTime != null" >
+        and update_time = #{updateTime,jdbcType=TIMESTAMP}
+      </if>
+  </select>
+  <delete id="deleteByPrimaryKey" >
+    delete from sys_config
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" >
+    insert into sys_config (id, config_name, config_value, 
+      config_desc, update_time)
+    values (#{id,jdbcType=INTEGER}, #{configName,jdbcType=VARCHAR}, #{configValue,jdbcType=VARCHAR}, 
+      #{configDesc,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" >
+    insert into sys_config
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="configName != null" >
+        config_name,
+      </if>
+      <if test="configValue != null" >
+        config_value,
+      </if>
+      <if test="configDesc != null" >
+        config_desc,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="configName != null" >
+        #{configName,jdbcType=VARCHAR},
+      </if>
+      <if test="configValue != null" >
+        #{configValue,jdbcType=VARCHAR},
+      </if>
+      <if test="configDesc != null" >
+        #{configDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" >
+    update sys_config
+    <set >
+      <if test="configName != null" >
+        config_name = #{configName,jdbcType=VARCHAR},
+      </if>
+      <if test="configValue != null" >
+        config_value = #{configValue,jdbcType=VARCHAR},
+      </if>
+      <if test="configDesc != null" >
+        config_desc = #{configDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" >
+    update sys_config
+    set config_name = #{configName,jdbcType=VARCHAR},
+      config_value = #{configValue,jdbcType=VARCHAR},
+      config_desc = #{configDesc,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

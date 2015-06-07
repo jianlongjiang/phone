@@ -1,0 +1,98 @@
+  <header>
+                        <h1>蜗牛巴巴</h1>
+                   <!--      <a href="#login" class="button">login</a>
+                        	<a  id="longtap" >longtap</a> -->
+                        <a href="#login"  id="to-user-center-btn"  class="button rightButton" data-transition="fade"><span class="icon user-ico"></span><span class="userName">昵称</span></a>
+                    </header>
+                    <div id="home_container">
+                        <div class="w-bg">
+                            <div class="device">
+                                <div id="swiper-container1" class="swiper-container" style="height:130px;over-flow:hidden;">
+                                    <div class="swiper-wrapper jjl_swiper-wrapper" style="height:130px;">
+                                        <div class="swiper-slide"  onclick="swiperClckFun(this)" ><img src="image/banner1-.jpg"></div>
+                                         <div class="swiper-slide" onclick="swiperClckFun(this)"  ><img src="image/banner2-.jpg"></div>
+                                          <div class="swiper-slide" onclick="swiperClckFun(this)"  ><img src="image/banner3-.jpg"></div>
+                                           <div class="swiper-slide" onclick="swiperClckFun(this)"  ><img src="image/banner4-.jpg"></div>
+                                            <div class="swiper-slide" onclick="swiperClckFun(this)"  ><img src="image/banner5-.jpg"></div>
+                                    </div>
+                                </div>
+                                <div id="pagination1" class="pagination"></div>
+                            </div>
+                            <div class="home-nav-container flexbox">
+                                <div class="home-nav-item flexbox-item">
+                                    <a href="#" data-transition="fade" onclick="signIn()"><img src="image/home-nav-qd.png"></a>
+                                    <a href="#" data-transition="fade" onclick="show(1)"><p>加油</p></a>
+                                </div>
+                                <div class="home-nav-item flexbox-item">
+                                    <a ahref="#comment" onclick="checkLoginTo('#comment')" data-transition="fade"><img src="image/home-nav-ly.png"></a>
+                                    <a ahref="#comment" onclick="checkLoginTo('comment')" data-transition="fade"><p>吐槽</p></a>
+                                </div>
+                                <div class="home-nav-item flexbox-item">
+                                    <a ahref="#query-ID" onclick="checkLoginTo('query-ID')"  data-transition="fade"><img src="image/home-nav-chm.png"></a>
+                                    <a ahref="#query-ID" onclick="checkLoginTo('query-ID')" data-transition="fade"><p>查号码</p></a>
+                                </div>
+                                <div class="home-nav-item flexbox-item">
+                                    <a ahref="#gold-snail" onclick="checkLoginTo('gold-snail')" data-transition="fade" data-load="into_inviteFriends"><img src="image/home-nav-gy.png"></a>
+                                    <a ahref="#gold-snail" onclick="checkLoginTo('gold-snail')" data-transition="fade" data-load="into_inviteFriends"><p>金蜗牛</p></a>
+                                </div>
+                            </div>
+                            <img src="image/cut-off.png" class="cut-off">
+                            <div class="home-nav-container flexbox">
+                                <div class="home-nav-item2 flexbox-item">
+                                    <a ahref="#dl-ID" onclick="checkLoginTo('dl-ID')" data-transition="fade"><img src="image/b1.png"></a>
+                                </div>
+                                <div class="home-nav-item2 flexbox-item">
+                                    <a ahref="#invite-friends" onclick="checkLoginTo('invite-friends')" data-transition="fade"><img src="image/b2.png"></a>
+                                </div>
+                                <div class="home-nav-item2 flexbox-item">
+                                    <a href="#news" data-transition="fade"><img src="image/b3.png"></a>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="title">新闻</p>
+                        <div class="news-item">
+                            <img src="image/news-title.png1" class="news-item-png">
+                            <p class="news-title"></p>
+                            <p class="news-date"></p>
+                            <p class="news-content"></p>
+                            <a href="#news-detail" data-transition="fade" id="new1"></a>
+                        </div>
+                        <div class="news-item">
+                            <img src="image/news-title.png1" class="news-item-png">
+                            <p class="news-title"></p>
+                            <p class="news-date"></p>
+                            <p class="news-content"></p>
+                            <a href="#news-detail" data-transition="fade"></a>
+                        </div>
+                        <div class="news-item">
+                            <img src="image/news-title.png1" class="news-item-png">
+                            <p class="news-title"></p>
+                            <p class="news-date"></p>
+                            <p class="news-content"></p>
+                            <a href="#news-detail" data-transition="fade"></a>
+                        </div>
+                        <div id="alert1" class="alert" style="display: none;">
+                            <div class="wrap">
+                                <p id="signIn">
+                                    欢迎回家！我们一直都在哦~
+                                    <br>
+                                    +100积分
+                                </p>
+                                <a class="" onclick="hide(1);">知道了</a>
+                            </div>
+                        </div>
+                    </div>
+                    <footer>
+                        <a href="#home"><img src="image/ft01.png" class="ft_img">首页</a>
+                        <a ></a>
+                        <a href="#news"><img src="image/ft2.png" class="ft_img">新闻</a>
+                        <a ahref="#user-center"  onclick="load_userCenter()" > <img src="image/ft3.png" class="ft_img">我的</a>
+                    </footer>
+                    <script>
+         
+             
+             $("#longtap").bind("longTap",function(){
+                 alert("I was a long tap");
+             })
+
+        </script>

@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.phone.cn.mapper.sys.StatisticsInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.phone.cn.entity.sys.StatisticsInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="download_amount" property="downloadAmount" jdbcType="INTEGER" />
+    <result column="regist_amount" property="registAmount" jdbcType="INTEGER" />
+    <result column="download_people" property="downloadPeople" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="create_user" property="createUser" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="update_user" property="updateUser" jdbcType="VARCHAR" />
+    <result column="vip_amount" property="vipAmount" jdbcType="INTEGER" />
+    <result column="login_amount" property="loginAmount" jdbcType="INTEGER" />
+    <result column="int_1" property="int1" jdbcType="INTEGER" />
+    <result column="int_2" property="int2" jdbcType="INTEGER" />
+    <result column="int_3" property="int3" jdbcType="INTEGER" />
+    <result column="int_4" property="int4" jdbcType="INTEGER" />
+    <result column="int_5" property="int5" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, download_amount, regist_amount, download_people, create_time, create_user, update_time, 
+    update_user, vip_amount, login_amount, int_1, int_2, int_3, int_4, int_5
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from statistics_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from statistics_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.phone.cn.entity.sys.StatisticsInfo" >
+    insert into statistics_info (id, download_amount, regist_amount, 
+      download_people, create_time, create_user, 
+      update_time, update_user, vip_amount, 
+      login_amount, int_1, int_2, 
+      int_3, int_4, int_5)
+    values (#{id,jdbcType=INTEGER}, #{downloadAmount,jdbcType=INTEGER}, #{registAmount,jdbcType=INTEGER}, 
+      #{downloadPeople,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=VARCHAR}, #{vipAmount,jdbcType=INTEGER}, 
+      #{loginAmount,jdbcType=INTEGER}, #{int1,jdbcType=INTEGER}, #{int2,jdbcType=INTEGER}, 
+      #{int3,jdbcType=INTEGER}, #{int4,jdbcType=INTEGER}, #{int5,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id" parameterType="com.phone.cn.entity.sys.StatisticsInfo" >
+    insert into statistics_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="downloadAmount != null" >
+        download_amount,
+      </if>
+      <if test="registAmount != null" >
+        regist_amount,
+      </if>
+      <if test="downloadPeople != null" >
+        download_people,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="createUser != null" >
+        create_user,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="updateUser != null" >
+        update_user,
+      </if>
+      <if test="vipAmount != null" >
+        vip_amount,
+      </if>
+      <if test="loginAmount != null" >
+        login_amount,
+      </if>
+      <if test="int1 != null" >
+        int_1,
+      </if>
+      <if test="int2 != null" >
+        int_2,
+      </if>
+      <if test="int3 != null" >
+        int_3,
+      </if>
+      <if test="int4 != null" >
+        int_4,
+      </if>
+      <if test="int5 != null" >
+        int_5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="downloadAmount != null" >
+        #{downloadAmount,jdbcType=INTEGER},
+      </if>
+      <if test="registAmount != null" >
+        #{registAmount,jdbcType=INTEGER},
+      </if>
+      <if test="downloadPeople != null" >
+        #{downloadPeople,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null" >
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null" >
+        #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="vipAmount != null" >
+        #{vipAmount,jdbcType=INTEGER},
+      </if>
+      <if test="loginAmount != null" >
+        #{loginAmount,jdbcType=INTEGER},
+      </if>
+      <if test="int1 != null" >
+        #{int1,jdbcType=INTEGER},
+      </if>
+      <if test="int2 != null" >
+        #{int2,jdbcType=INTEGER},
+      </if>
+      <if test="int3 != null" >
+        #{int3,jdbcType=INTEGER},
+      </if>
+      <if test="int4 != null" >
+        #{int4,jdbcType=INTEGER},
+      </if>
+      <if test="int5 != null" >
+        #{int5,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  
+  
+  <select id="query" resultMap="BaseResultMap"  >
+    select 
+    <include refid="Base_Column_List" />
+    from statistics_info
+    where 1=1
+    <if test="downloadAmount != null"> and
+        download_amount = #{downloadAmount,jdbcType=INTEGER}
+      </if>
+      <if test="registAmount != null"> and
+        regist_amount = #{registAmount,jdbcType=INTEGER}
+      </if>
+      <if test="downloadPeople != null"> and
+        download_people = #{downloadPeople,jdbcType=INTEGER}
+      </if>
+      <if test="createTime != null"> and
+        create_time = #{createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="createUser != null"> and
+        create_user = #{createUser,jdbcType=VARCHAR}
+      </if>
+      <if test="updateTime != null"> and
+        update_time = #{updateTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="updateUser != null"> and
+        update_user = #{updateUser,jdbcType=VARCHAR}
+      </if>
+      <if test="vipAmount != null"> and
+        vip_amount = #{vipAmount,jdbcType=INTEGER}
+      </if>
+      <if test="loginAmount != null"> and
+        login_amount = #{loginAmount,jdbcType=INTEGER}
+      </if>
+      <if test="int1 != null"> and
+        int_1 = #{int1,jdbcType=INTEGER}
+      </if>
+      <if test="int2 != null"> and
+        int_2 = #{int2,jdbcType=INTEGER}
+      </if>
+      <if test="int3 != null"> and
+        int_3 = #{int3,jdbcType=INTEGER}
+      </if>
+      <if test="int4 != null"> and
+        int_4 = #{int4,jdbcType=INTEGER}
+      </if>
+      <if test="int5 != null"> and
+        int_5 = #{int5,jdbcType=INTEGER}
+      </if>
+      <!-- === ===============================-->
+      <!-- === ===============================-->
+      <!-- === ===============================-->
+      <if test="startDate != null"> and
+        create_time &gt;= #{startDate}
+      </if>
+      <if test="endDate != null"> and
+        create_time &lt;  #{endDate}
+      </if>
+  </select>
+  
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.phone.cn.entity.sys.StatisticsInfo" >
+    update statistics_info
+    <set >
+      <if test="downloadAmount != null" >
+        download_amount = #{downloadAmount,jdbcType=INTEGER},
+      </if>
+      <if test="registAmount != null" >
+        regist_amount = #{registAmount,jdbcType=INTEGER},
+      </if>
+      <if test="downloadPeople != null" >
+        download_people = #{downloadPeople,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null" >
+        create_user = #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null" >
+        update_user = #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="vipAmount != null" >
+        vip_amount = #{vipAmount,jdbcType=INTEGER},
+      </if>
+      <if test="loginAmount != null" >
+        login_amount = #{loginAmount,jdbcType=INTEGER},
+      </if>
+      <if test="int1 != null" >
+        int_1 = #{int1,jdbcType=INTEGER},
+      </if>
+      <if test="int2 != null" >
+        int_2 = #{int2,jdbcType=INTEGER},
+      </if>
+      <if test="int3 != null" >
+        int_3 = #{int3,jdbcType=INTEGER},
+      </if>
+      <if test="int4 != null" >
+        int_4 = #{int4,jdbcType=INTEGER},
+      </if>
+      <if test="int5 != null" >
+        int_5 = #{int5,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.phone.cn.entity.sys.StatisticsInfo" >
+    update statistics_info
+    set download_amount = #{downloadAmount,jdbcType=INTEGER},
+      regist_amount = #{registAmount,jdbcType=INTEGER},
+      download_people = #{downloadPeople,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_user = #{createUser,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_user = #{updateUser,jdbcType=VARCHAR},
+      vip_amount = #{vipAmount,jdbcType=INTEGER},
+      login_amount = #{loginAmount,jdbcType=INTEGER},
+      int_1 = #{int1,jdbcType=INTEGER},
+      int_2 = #{int2,jdbcType=INTEGER},
+      int_3 = #{int3,jdbcType=INTEGER},
+      int_4 = #{int4,jdbcType=INTEGER},
+      int_5 = #{int5,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

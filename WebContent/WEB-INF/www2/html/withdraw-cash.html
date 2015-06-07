@@ -1,0 +1,21 @@
+ <header class="bg_black">
+                        <a class="button backButton"	data-transition="fade"   href="#my-red-one">取消</a>
+                        <h1>红包提现</h1>
+                     
+                        <h2 style="margin-top: 6px;">蜗牛巴巴安全支付</h2>
+                       
+                    </header>
+                    <form id="reflectMoneyForm">
+                        <div class="input-group">
+                        		
+                            <label for="test1">支付宝</label><input id="test1"   name="alipayAccount" readonly=true  type="text" placeholder="">
+                            <span>
+                            <label for="test2">金额(元)</label><input id="withdraw-cash_money"   name="money" type="text" placeholder="可提现余额为XXXX，请输入10元的整数">
+                            </span>
+                        </div>
+                    </form>
+                    <div class="container">
+                        <p>预计到账时间：<span class="revceiveTime">2015-04-22 23：00</span></p>
+                        <p>周一到周五为工作日，节假日稍有延迟</p>
+                        <a ahref="#withdraw-cash-details"  onclick="reflectMoneyFun('withdraw-cash-details')"  class="submit-btn" data-transition="fade">下一步</a>
+                    </div>

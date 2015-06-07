@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<!--HTML5 doctype-->
+<html>
+
+<head>
+
+    <title>App Framework Kitchen Sink</title>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="stylesheet" type="text/css" href="css/icons.css" />
+
+    <link rel="stylesheet" type="text/css" href="css/af.ui.css" />
+
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/ytn.js"></script>
+     <script type="text/javascript" charset="utf-8" src="js/jquery.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/fastclick.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/af.shim.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/af.ui.js"></script>
+
+
+    <script src="js/af.desktopBrowsers.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/af.actionsheet.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/af.animation.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/af.touchEvents.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/af.popup.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/af.drawer.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/af.toast.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/af.animateheader.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/af.splashscreen.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/af.swipereveal.js"></script>
+
+
+    <script language="JavaScript" src="js/validator.js" type="text/javascript"></script>
+    <script src="js/ftscroller.js"></script>
+    <script src="js/af.carousel.js"></script>
+    <script src="js/public.js"></script>
+    <script src="js/common.js"></script>
+
+    <script type="text/javascript">
+        $.afui.useOSThemes = false;
+        $.afui.autoLaunch = true; //By default, it is set to true and you're app will run right away.  We set it to false to show a splashscreen
+        /* This function runs when the content is loaded.*/
+        $(document).ready(function(){
+            setTimeout(function(){
+                $.afui.launch();
+            },1500);
+            var HomeLogo = window.localStorage.getItem("HomeLogo");
+            if (HomeLogo == null) {
+              window.location.href = "start.html";
+            }
+        });
+        $(function() {
+            FastClick.attach(document.body);
+            $('.backbtn').click(function(){
+                //alert('click');
+                $('.panel.active').removeClass('active');
+            });
+        });
+
+    </script>
+</head>
+
+
+<body class="ios7">
+    <div class="view" id="mainview">
+        <header>
+            <h1>title</h1>
+            <a href="#user-center" class="button rightButton" data-transition="fade" id="to-user-center-btn"><span class="icon user-ico"></span><span id="loginButoonMsg">个人中心</span></a>
+        </header>
+        <div class="pages">
+         <!--Tab View Pages-->
+            <div class="panel active" data-title="蜗牛巴巴" id="home" data-selected="true">
+                <div class="w-bg">
+                    <div class="home-banner">
+                        <div id="my_div_1" style="width:100%;height:100px;overflow:hidden">
+                           <div class="J_hp_first_news" onclick="$.afui.loadContent('#news-detail',false,false,'fade');"><img src="http://wnbb.hzlianhai.com/resources/admin/store/1503271631240a491400-0000-0500-0000-000000cd4a50.jpg" style="width:100%;height: 100%;"/></div>
+                           <div class="J_hp_first_news" onclick="$.afui.loadContent('#news-detail',false,false,'fade');"><img src="http://wnbb.hzlianhai.com/resources/admin/store/1503271631240a491400-0000-0500-0000-000000cd4a50.jpg" style="width:100%;height: 100%;"/></div>
+                           <div class="J_hp_first_news" onclick="$.afui.loadContent('#news-detail',false,false,'fade');"><img src="http://wnbb.hzlianhai.com/resources/admin/store/1503271631240a491400-0000-0500-0000-000000cd4a50.jpg" style="width:100%;height: 100%;"/></div>
+                           <div class="J_hp_first_news" onclick="$.afui.loadContent('#news-detail',false,false,'fade');"><img src="http://wnbb.hzlianhai.com/resources/admin/store/1503271631240a491400-0000-0500-0000-000000cd4a50.jpg" style="width:100%;height: 100%;"/></div>
+                           <div class="J_hp_first_news" onclick="$.afui.loadContent('#news-detail',false,false,'fade');"><img src="http://wnbb.hzlianhai.com/resources/admin/store/1503271631240a491400-0000-0500-0000-000000cd4a50.jpg" style="width:100%;height: 100%;"/></div>
+                        </div>
+                         <div id="carousel_dots" style="text-align: center; margin-left: auto; margin-right: auto; clear: both;position:relative;bottom:30px;z-index:200"></div>
+                    </div> 
+                    <div class="home-nav-container flexbox">
+                        <div class="home-nav-item flexbox-item">
+                            <a class="home-sign-in-btn"><img src="img/home-nav-qd.png"></a>
+                            <a class="home-sign-in-btn"><p>签到</p></a>
+                        </div>
+                        <div class="home-nav-item flexbox-item">
+                            <a  href="javascript:;"  onclick="clickPage('comment')"  data-transition="fade"><img src="img/home-nav-ly.png"></a>
+                            <a href="javascript:;"  onclick="clickPage('comment')"   data-transition="fade"><p>留言</p></a>
+                        </div>
+                        <div class="home-nav-item flexbox-item">
+                            <a href="javascript:;"  onclick="clickPage('query-ID')"   data-transition="fade"><img src="img/home-nav-chm.png"></a>
+                            <a href="javascript:;"  onclick="clickPage('query-ID')"  data-transition="fade"><p>查号码</p></a>
+                        </div>
+                        <div class="home-nav-item flexbox-item">
+                            <a href="#about" data-transition="fade"><img src="img/home-nav-gy.png"></a>
+                            <a href="#about" data-transition="fade"><p>关于</p></a>
+                        </div>
+                    </div>
+                    <img src="img/cut-off.png" class="cut-off">
+                    <div class="home-nav-container flexbox">
+                        <div class="home-nav-item2 flexbox-item">
+                            <a href="javascript:;"  onclick="clickPage('dl-ID')"  data-transition="fade"><img src="img/b1.png"></a>
+                        </div>
+                        <div class="home-nav-item2 flexbox-item" onclick="alert('邀请好友注册蜗牛巴巴，在邀请码栏内填写您的注册手机号，您与好友即可获得积分奖励。', function(){},'蜗牛巴巴','确定');">
+                            <a href="#" data-transition="fade"><img src="img/b2.png"></a>
+                        </div>
+                        <div class="home-nav-item2 flexbox-item">
+                            <a href="#news" data-transition="fade" class="to-news-center"><img src="img/b3.png"></a>
+                        </div>
+                    </div>
+                </div>
+                <p class="title">新闻</p>
+                <div class="news-item" id="home-news-1">
+                    <div class="news-item-png"></div>
+                    <p class="news-title"></p>
+                    <p class="news-date"></p>
+                    <p class="news-content"></p>
+                    <a href="#news-detail" data-transition="fade" id="new1"></a>
+                </div>
+                <div class="news-item" id="home-news-2">
+                    <div class="news-item-png"></div>
+                    <p class="news-title"></p>
+                    <p class="news-date"></p>
+                    <p class="news-content"></p>
+                    <a href="#news-detail" data-transition="fade"></a>
+                </div>
+                <div class="news-item" id="home-news-3">
+                    <div class="news-item-png"></div>
+                    <p class="news-title"></p>
+                    <p class="news-date"></p>
+                    <p class="news-content"></p>
+                    <a href="#news-detail" data-transition="fade"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="view" id="user-center-view">
+        <header>
+            <a class="button leftButton   backbtn" id="backButton" href="#home" data-transition="fade">返回</a>
+            <h1>title</h1>
+            <a onclick="weixinshare(this, '个人中心','http://wnbb.hzlianhai.com/memberindex/');" class="button rightButton J_weixin_share" data-value="" data-transition="fade" data-image=""><span class="icon share-ico"></span></a>
+        </header>
+        <div class="pages">
+         <!--Tab View Pages-->
+            <div class="panel w-bg" data-title="个人中心" id="user-center">
+                <div class="user-info-top">
+                    <img src="img/user-ava.jpg" class="user-ava J_userinfo_jpg">
+                    <p><span class="title gw">手机号</span><input type="text" id="mobile-number-input"></p>
+                    <p><span class="title gw">昵称</span><input type="text" id="nickname-input"></p>
+                    <div class="wrapper">
+                        <p><span class="title">级别</span><span id="rank-span"></span></p>
+                        <p><span class="title">经验</span><span id="exp-span"></span></p>
+                        <p><span class="title">微信</span><span id="weixin-span"></span></p>
+                        <p><span class="title">下载总量</span><span id="dl-amount-span"></span></p>
+                        <p><span class="title">积分</span><span id="integration-span"></span></p>
+                        <div class="flexbox info-btns">
+                            <div class="flexbox-item">
+                                <a href="#my-messages" data-transition="fade" class="info-btn" id="info-btn">我的消息</a>
+                            </div>
+                            <div class="flexbox-item">
+                                <a href="#modify_pwd" data-transition="fade" class="info-btn">修改密码</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="user-info-bottom">
+                    <p><span class="title">推荐人</span><span id="recommend-span"></span></p>
+                    <p><span class="title">注册时间</span><span id="reg-time-span"></span></p>
+                    <div class="flexbox info-btns">
+                        <div class="flexbox-item">
+                            <a href="#" class="jifen-btn" id="jifen-btn" data-transition="fade">积分红包</a>
+                        </div>
+                        <div class="flexbox-item"></div>
+                    </div>
+                    <p class="jifen-btn-show"></p>
+                    
+                    <table class="recommend-users">
+                        <tbody id="J_recommend_users">
+                            <tr>
+                                <th>手机号</th>
+                                <th>昵称</th>
+                                <th>级别</th>
+                                <th>积分红包</th>
+                            </tr>
+                         <!--    <tr>
+                                <td>15957192244</td>
+                                <td>沙发上</td>
+                                <td>蜗牛排长</td>
+                                <td><a onclick="redpack()">发红包</a></td>
+                            </tr>
+                            <tr>
+                                <td>15957192244</td>
+                                <td>沙发上</td>
+                                <td>蜗牛排长</td>
+                                <td><a>发红包</a></td>
+                            </tr>
+                            <tr>
+                                <td>15957192244</td>
+                                <td>沙发上</td>
+                                <td>蜗牛排长</td>
+                                <td><a>发红包</a></td>
+                            </tr> -->
+                        </tbody>
+                    </table>
+                </div>
+                <a class="tuichu" href="javascript:;" onclick="tuichu()" >退出</a>
+            </div>
+        </div>
+    </div>
+    <div class="view" id="nview">
+        <header>
+            <a class="button leftButton   backbtn" id="backButton" href="#home"  data-transition="fade">返回</a>
+            <h1>title</h1>
+        </header>
+        <div class="pages">
+         <!--Tab View Pages-->
+            <div class="panel w-bg" data-title="查询号码" id="query-ID">
+                <div class="container">
+                    <input type="text" class="query-ID-input" placeholder="输入要查询的号码">
+                    <a class="submit-btn" data-transition="fade">提交</a>
+                    <div class="query-result">
+                        <p><span class="icon user-ico2"></span><span class="title">昵称：</span><span class="res" id="res-nickname"></span></p>
+                        <p><span class="icon wechat-ico"></span><span class="title">微信号：</span><span class="res" id="res-weixin"></span></p>
+                        <p><span class="icon rank-ico"></span><span class="title">级别：</span><span class="res" id="res-rank"></span></p>
+                        <p><span class="icon date-ico"></span><span class="title">注册时间：</span><span class="res" id="res-reg-date"></span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="panel w-bg" data-title="下载号码" id="dl-ID">
+                <div class="container">
+                    <div class="wrapper flexbox">
+                        <div class="flexbox-item select-div">
+                            <select class="firstCateId" name="firstCateId">
+                                <option value=0>请选择</option>
+                            </select>
+                        </div>
+                        <div class="flexbox-item select-div">
+                            <select name="secondCateId">
+                                <option value=0>请选择</option>
+                            </select>
+                        </div>
+                    </div>
+                    <select name="num">
+                        <option value=100>100</option>
+                        <option value=200>200</option>
+                        <option value=300>300</option>
+                        <option value=400>400</option>
+                        <option value=500>500</option>
+                        <option value=600>600</option>
+                        <option value=700>700</option>
+                        <option value=800>800</option>
+                        <option value=900>900</option>
+                        <option value=1000>1000</option>
+                    </select>
+                    <a href="#" class="import-btn">导入通讯录</a>
+                    <p class="tip">蜗牛粑粑温馨提醒：积分不够怎么办？   通过邀请好友和签到可以加积分！</p>
+                </div>
+                <div id="importProgress-div">
+                    <div class="progress-div">
+                        <div class="progress-img">
+                            <img src="img/jindu-100.png">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel w-bg" data-title="关于" id="about" style="background:#eee;">
+                <div class="container about">
+                    <img src="img/about.png" class="about-logo">
+                    <p class="app-title">蜗牛巴巴</p>
+                    <p class="version">版本 v0.0.1</p>
+                    <a href="javascript:;" id="app_checkVersion"  class="about-btn">版本更新  <span id="app_newVersion"></span> </a>
+                    <a href="market://details?id=com.tencent.mm" class="about-btn">评价</a>
+                    <a href="#info" class="about-btn">关于我们</a>
+                    <a href="tel:4006255558" class="about-btn">联系我们</a>
+                </div>
+            </div>
+            <div class="panel w-bg" data-title="关于我们" id="info" style="background:#eee;">
+                <ul class="list">
+                    <li>蜗牛巴巴 www.woniubaba.com</li>
+                    <li>联系电话 4006255558</li>
+                    <li>人才招聘 zhaoping@woniubaba.com</li>
+                </ul>
+            </div>
+            <div class="panel w-bg" data-title="留言" id="comment">
+                <div class="container">
+                    <form id="comment-form">
+                        <input type="text" class="comment-title" placeholder="标题" name="title">
+                        <textarea class="comment-text" placeholder="内容" name="content"></textarea>
+                    </form>
+                    <a href="#" class="submit-btn">提交</a>
+                </div>
+            </div>
+            <div class="panel w-bg" data-title="登录" id="login">
+                <form id="login-form">
+                    <p><span class="icon mobile-ico"></span><input type="text" placeholder="手机号" name="account"></p>
+                    <p><span class="icon pw-ico"></span><input type="password" placeholder="密码" name="password"></p>
+                </form>
+                <div class="container">
+                    <a href="#" class="submit-btn">提交</a>
+                    <p class="reg-f"><a href="#reg" class="reg-now" data-transition="fade">立即注册</a><a href="#find_pwd" class="forgot-pw">忘记密码</a></p>
+                </div>
+            </div>
+            <div class="panel w-bg" data-title="注册" id="reg">
+                <div class="container">
+                    <form id="reg-form">
+                        <p class="reg-mobile-p"><span class="icon mobile-ico"></span><input type="text" placeholder="手机号" name="mobile"><a href="#" class="get-verification">获取验证码</a></p>
+                        <p><span class="icon verification-ico"></span><input type="text" placeholder="验证码" name="yzm"></p>
+                        <p><span class="icon user-ico2"></span><input type="text" placeholder="昵称" name="userName"></p>
+                        <p><span class="icon pw-ico"></span><input type="password" placeholder="密码" name="password"></p>
+                        <p><span class="icon pw-ico"></span><input type="password" placeholder="密码确认" class="re-password"></p>
+                        <p><span class="icon recommend-ico"></span><input type="text" placeholder="邀请人帐号" name="otherMobile"></p>
+                    </form>
+                </div>
+                <div class="container">
+                    <div class="wrapper flexbox">
+                        <div class="flexbox-item select-div">
+                            <select class="level1">
+                                <option value="0">请选择</option>
+                            </select>
+                        </div>
+                        <div class="flexbox-item select-div">
+                            <select name="cateIds">
+                                <option value="0">请选择</option>
+                            </select>
+                        </div>
+                    </div>
+                    <a href="#" class="reg-btn">注册</a>
+                </div>
+            </div>
+            <div class="panel w-bg" data-title="修改密码" id="modify_pwd">
+                <div class="container">
+                     <form id="modifyForm" name="modifyForm">
+                        <p><span class="icon verification-ico"></span><input type="password" placeholder="原密码" name="password">  </p>
+                        <p><span class="icon pw-ico"></span><input type="password" placeholder="密码" name="newPwd"></p>
+                        <p><span class="icon pw-ico"></span><input type="password" placeholder="密码确认" name="newPwdConfrim"  class="re-password"></p>
+                    </form>
+                </div>
+                <div class="container">
+                
+                    <a href="javascript:;"  onclick="modifyPwdFrom()" class="reg-btn">修改密码</a>
+                </div>
+            </div>
+            
+            
+              <div class="panel w-bg" data-title="找回密码" id="find_pwd">
+                <div class="container">
+                     <form id="findPwdForm" name="findPwdForm">
+                        <p><span class="icon verification-ico"></span><input type="text" placeholder="手机" name="mobileNo"> <a class="get-verification"  id="sendSmsCodeButton2"  href="javascript:;">获取验证码</a>    </p>
+                         <p><span class="icon verification-ico"></span><input type="text" placeholder="验证码" name="yzm">    </p>
+                        <p><span class="icon pw-ico"></span><input type="password" placeholder="密码" name="password"></p>
+                        <p><span class="icon pw-ico"></span><input type="password" placeholder="密码确认" name="passwordConfirm"  class="re-password"></p>
+                    </form>
+                </div>
+                <div class="container">
+                
+                    <a href="javascript:;"    class="reg-btn"  onclick="findPwdFormFun()" >找回密码</a>
+                </div>
+            </div>
+            
+            <div class="panel" data-title="新闻" id="news">
+                <img src="img/news-banner.jpg" class="news-banner">
+                <div class="news-nav w-bg">
+                    <div id="jtlg-pub-pic"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="view" id="news-view">
+        <header>
+            <a class="button leftButton   backbtn" id="backButton" href="#news" data-transition="fade">返回</a>
+            <h1>title</h1>
+        </header>
+        <div class="pages">
+         <!--Tab View Pages-->
+            <div class="panel" data-title="新闻详情" id="news-detail">
+                <div class="container w-bg">
+                    <p class="news-title" id="news-title-detail"></p>
+                    <p class="news-date">作者：<span id="news-author-detail"></span> <span id="news-date-detail"></span></p>
+                    <img src="" class="news-img">
+                    <p class="news-content" id="news-content-detail"></p>
+                    <p class="news-btns"><span class="icon up-ico"></span><span id="icon-up-num">0</span><span class="icon down-ico"></span><span id="icon-down-num">0</span><span onclick="weixinshare(this,'新闻详情','http://wnbb.hzlianhai.com/index/')" data-image="" data-value="" class="icon share-gray-ico J_weixin_share_member"></span></p>
+                </div>
+                <p class="title">新闻</p>
+                <div class="news-item" id="news-detail-rec-1">
+                    <div class="news-item-png"></div>
+                    <p class="news-title"></p>
+                    <p class="news-date"></p>
+                    <p class="news-content"></p>
+                    <a href="#news-detail" data-transition="fade"></a>
+                </div>
+                <div class="news-item" id="news-detail-rec-2">
+                    <div class="news-item-png"></div>
+                    <p class="news-title"></p>
+                    <p class="news-date"></p>
+                    <p class="news-content"></p>
+                    <a href="#news-detail" data-transition="fade"></a>
+                </div>
+                <div class="news-item" id="news-detail-rec-3">
+                    <div class="news-item-png"></div>
+                    <p class="news-title"></p>
+                    <p class="news-date"></p>
+                    <p class="news-content"></p>
+                    <a href="#news-detail" data-transition="fade"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="view" id="message-view">
+        <header>
+            <a class="button leftButton   backbtn" id="backButton" href="#user-center" data-transition="fade">返回</a>
+            <h1>title</h1>
+        </header>
+        <div class="pages">
+         <!--Tab View Pages-->
+            <div class="panel" data-title="我的消息" id="my-messages">
+                <div class="container">
+                    <!-- <div class="wrapper flexbox message-btns">
+                        <a href="#" class="flexbox-item message-btn" id="sys-message-btn">系统消息</a>
+                        <a href="#" class="flexbox-item active message-btn" id="user-message-btn">个人消息</a>
+                    </div> -->
+                    <div class="button-grouped" style="width:100%;">
+                        <a class="button" style="width: 50%;" id="sys-message-btn" onclick="loadMessage('user-message-div','system');" class="pressed">系统消息</a>
+                        <a class="button" style="width: 50%;" id="user-message-btn" onclick="loadMessage('sys-message-div','user');">个人消息</a>
+                    </div>
+                    <div class="messages" id="sys-message-div"></div>
+                    <div class="messages" id="user-message-div"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+
+</html>

@@ -1,0 +1,36 @@
+ <header class="bg_black">
+                        <a class="backButton button"  data-transition="fade"  href="#home">返回</a>
+                        <h1>查询号码</h1>
+                    </header>
+                    <div class="container">
+                        <input type="text" class="query-ID-input" id="query-ID_mobile" placeholder="输入要查询的号码">
+                        <a href="#" class="submit-btn" data-transition="fade" onclick="query_mobile()">点击查询</a>
+                        <!--  
+                        <a href="#" class="submit-btn" data-transition="fade" onclick="show(5)">点击查询</a>
+                        <a href="#query-gold-member" class="submit-btn" data-transition="fade" onclick="">点击查询</a>
+                        -->
+                        <div id="alert4" class="alert" style="display: none;">
+                            <div class="wrap">
+                                <p> 您的伙伴还没加入蜗牛巴巴哦~<br>
+                                    邀请他加入我们这个大家庭吧</p>
+                                <a href="#" class="first" onclick="hide(4)">取消</a>
+                                <a href="#invite-friends" onclick="hide(4)">邀请</a>
+                            </div>
+                        </div>
+                        <div id="alert5" class="alert" style="display: none;" onclick="hide(5)">
+                            <!--<div class="wrap">-->
+                            <div class="query-result">
+                                <h3>蜗牛巴巴成员</h3>
+                                <p class="first"><span class="title">ID号：</span><span class="res" id="res_id">小尼</span></p>
+                                <p><span class="title">手机号：</span><span class="res" id="res_mobile">12345678</span></p>
+                                <p><span class="title">微信号：</span><span class="res" id="res_weixin">蜗牛排长</span></p>
+                                <p><span class="title">创业宣言：</span><span class="res" id="res_xy"></span></p>
+                                <div style="float: right;">
+                                    <img src="image/query-snail.png" width="50px">
+                                    <p class="query-date"><span class="title">注册日期：</span><span class="res" id="res_createTime"></span></p>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                            <!--</div>-->
+                        </div>
+                    </div>

@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.phone.cn.mapper.sys.ResourcesMapper" >
+  <resultMap id="BaseResultMap"  type="com.phone.cn.entity.sys.Resources" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="create_user" property="createUser" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_user" property="updateUser" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="more1" property="more1" jdbcType="VARCHAR" />
+    <result column="more2" property="more2" jdbcType="VARCHAR" />
+    <result column="more3" property="more3" jdbcType="VARCHAR" />
+    <result column="int_1" property="int1" jdbcType="INTEGER" />
+    <result column="int_2" property="int2" jdbcType="INTEGER" />
+    <result column="uri" property="uri" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, create_user, create_time, update_user, update_time, more1, more2, more3, int_1, 
+    int_2, uri, description
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from resources
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from resources
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.phone.cn.entity.sys.Resources" >
+    insert into resources (id, create_user, create_time, 
+      update_user, update_time, more1, 
+      more2, more3, int_1, 
+      int_2, uri, description
+      )
+    values (#{id,jdbcType=INTEGER}, #{createUser,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateUser,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{more1,jdbcType=VARCHAR}, 
+      #{more2,jdbcType=VARCHAR}, #{more3,jdbcType=VARCHAR}, #{int1,jdbcType=INTEGER}, 
+      #{int2,jdbcType=INTEGER}, #{uri,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id" parameterType="com.phone.cn.entity.sys.Resources" >
+    insert into resources
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="createUser != null" >
+        create_user,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateUser != null" >
+        update_user,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="more1 != null" >
+        more1,
+      </if>
+      <if test="more2 != null" >
+        more2,
+      </if>
+      <if test="more3 != null" >
+        more3,
+      </if>
+      <if test="int1 != null" >
+        int_1,
+      </if>
+      <if test="int2 != null" >
+        int_2,
+      </if>
+      <if test="uri != null" >
+        uri,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="createUser != null" >
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null" >
+        #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="more1 != null" >
+        #{more1,jdbcType=VARCHAR},
+      </if>
+      <if test="more2 != null" >
+        #{more2,jdbcType=VARCHAR},
+      </if>
+      <if test="more3 != null" >
+        #{more3,jdbcType=VARCHAR},
+      </if>
+      <if test="int1 != null" >
+        #{int1,jdbcType=INTEGER},
+      </if>
+      <if test="int2 != null" >
+        #{int2,jdbcType=INTEGER},
+      </if>
+      <if test="uri != null" >
+        #{uri,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  
+  <select id="query" resultMap="BaseResultMap"  >
+    select 
+    <include refid="Base_Column_List" />
+    from resources
+    where 1=1
+    <if test="createUser != null"> and
+        create_user = #{createUser,jdbcType=VARCHAR}
+      </if>
+      <if test="createTime != null"> and
+        create_time = #{createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="updateUser != null"> and
+        update_user = #{updateUser,jdbcType=VARCHAR}
+      </if>
+      <if test="updateTime != null"> and
+        update_time = #{updateTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="more1 != null"> and
+        more1 = #{more1,jdbcType=VARCHAR}
+      </if>
+      <if test="more2 != null"> and
+        more2 = #{more2,jdbcType=VARCHAR}
+      </if>
+      <if test="more3 != null"> and
+        more3 = #{more3,jdbcType=VARCHAR}
+      </if>
+      <if test="int1 != null"> and
+        int_1 = #{int1,jdbcType=INTEGER}
+      </if>
+      <if test="int2 != null"> and
+        int_2 = #{int2,jdbcType=INTEGER}
+      </if>
+      <if test="uri != null"> and
+        uri = #{uri,jdbcType=VARCHAR}
+      </if>
+      <if test="description != null"> and
+        description = #{description,jdbcType=VARCHAR}
+      </if>
+  </select>
+  
+  
+   <select id="findByRoleId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+   SELECT   r.* from  resources r join  role_to_resources rtr  on r.id = rtr.resource_id  where  rtr.role_id =  #{roleId}
+
+  </select>
+  
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.phone.cn.entity.sys.Resources" >
+    update resources
+    <set >
+      <if test="createUser != null" >
+        create_user = #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null" >
+        update_user = #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="more1 != null" >
+        more1 = #{more1,jdbcType=VARCHAR},
+      </if>
+      <if test="more2 != null" >
+        more2 = #{more2,jdbcType=VARCHAR},
+      </if>
+      <if test="more3 != null" >
+        more3 = #{more3,jdbcType=VARCHAR},
+      </if>
+      <if test="int1 != null" >
+        int_1 = #{int1,jdbcType=INTEGER},
+      </if>
+      <if test="int2 != null" >
+        int_2 = #{int2,jdbcType=INTEGER},
+      </if>
+      <if test="uri != null" >
+        uri = #{uri,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.phone.cn.entity.sys.Resources" >
+    update resources
+    set create_user = #{createUser,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_user = #{updateUser,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      more1 = #{more1,jdbcType=VARCHAR},
+      more2 = #{more2,jdbcType=VARCHAR},
+      more3 = #{more3,jdbcType=VARCHAR},
+      int_1 = #{int1,jdbcType=INTEGER},
+      int_2 = #{int2,jdbcType=INTEGER},
+      uri = #{uri,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

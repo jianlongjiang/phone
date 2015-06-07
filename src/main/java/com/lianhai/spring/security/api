@@ -1,0 +1,13 @@
+1:角色 与资源 关系 变革,  刷新缓存..
+
+com.lianhai.spring.security.InvocationSecurityMetadataSourceService.loadResourceDefine()
+
+
+
+2:账号信息 获取.
+com.lianhai.spring.security.MyUserDetailsService
+
+
+3:  普通登入
+
+

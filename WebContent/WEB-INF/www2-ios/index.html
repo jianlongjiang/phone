@@ -1,0 +1,772 @@
+﻿<!DOCTYPE html>
+<!--HTML5 doctype-->
+<html>
+
+    <head>
+        <script>
+        (function() {
+    if ("-ms-user-select" in document.documentElement.style && navigator.userAgent.match(/IEMobile\/10\.0/)) {
+        var msViewportStyle = document.createElement("style");
+        msViewportStyle.appendChild(
+            document.createTextNode("@-ms-viewport{width:auto!important}")
+        );
+        document.getElementsByTagName("head")[0].appendChild(msViewportStyle);
+    }
+})();
+</script>
+        <title>App Framework Kitchen Sink</title>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0">
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <link rel="stylesheet" type="text/css" href="css/icons.css" />    
+ 
+       <!--   
+     <link rel="stylesheet" type="text/css" href="css/af.ui.css" title="default" />
+  -->
+      <link rel="stylesheet" type="text/css" href="css/main.css"  />
+      <link rel="stylesheet" type="text/css" href="css/appframework.css"  />
+      <link rel="stylesheet" type="text/css" href="css/lists.css"  />
+      <link rel="stylesheet" type="text/css" href="css/forms.css"  />
+      <link rel="stylesheet" type="text/css" href="css/buttons.css"  />        
+      <link rel="stylesheet" type="text/css" href="css/badges.css"  />        
+      <link rel="stylesheet" type="text/css" href="css/grid.css"  />
+
+      <link rel="stylesheet" type="text/css" href="css/android.css"  />
+      <link rel="stylesheet" type="text/css" href="css/win8.css"  />
+      <link rel="stylesheet" type="text/css" href="css/bb.css"  />
+      <link rel="stylesheet" type="text/css" href="css/ios.css"  />
+      <link rel="stylesheet" type="text/css" href="css/ios7.css"  />
+      <link rel="stylesheet" type="text/css" href="css/tizen.css"  />
+      <link rel="stylesheet" type="text/css" href="css/firefox.css"  />
+        
+      <link rel="stylesheet" type="text/css" href="plugins/css/af.actionsheet.css"  />
+      <link rel="stylesheet" type="text/css" href="plugins/css/af.popup.css"  />
+      <link rel="stylesheet" type="text/css" href="plugins/css/af.scroller.css"  />
+      <link rel="stylesheet" type="text/css" href="plugins/css/af.selectBox.css"  /> 
+      <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css"  />
+      <link rel="stylesheet" href="css/idangerous.swiper.css">
+      <link rel="stylesheet" type="text/css" href="css/style.css"  />
+      
+      <!-- <script type="text/javascript" charset="utf-8" src="js/jquery-2.1.3.min.js"></script> -->
+       
+      <script type="text/javascript" charset="utf-8" src="js/fastclick.js"></script>
+      <script type="text/javascript" charset="utf-8" src="./cordova.js"></script>
+        <!-- uncomment for intel.xdk apps 
+        <script type="text/javascript" charset="utf-8" src="intelxdk.js"></script>
+        <script type="text/javascript" charset="utf-8" src="xhr.js"></script>
+        -->
+        <script type="text/javascript" charset="utf-8" src="./appframework.js"></script>
+        <!-- include af.desktopBrowsers.js on desktop browsers only -->
+        <script>
+
+            function loadedPanel(what) {
+                //We are going to set the badge as the number of li elements inside the target
+                $.ui.updateBadge("#aflink", $("#af").find("li").length);
+            }
+
+
+            function unloadedPanel(what) {
+                console.log("unloaded " + what.id);
+            }
+
+            if (!((window.DocumentTouch && document instanceof DocumentTouch) || 'ontouchstart' in window)) {
+                var script = document.createElement("script");
+                script.src = "plugins/af.desktopBrowsers.js";
+                var tag = $("head").append(script);
+                //$.os.desktop=true;
+            }
+
+          //  $.feat.nativeTouchScroll=true;
+          
+        </script>        
+        <script type="text/javascript" charset="utf-8" src="./plugins/af.actionsheet.js"></script>
+        <script type="text/javascript" charset="utf-8" src="./plugins/af.css3animate.js"></script>
+        <script type="text/javascript" charset="utf-8" src="./plugins/af.passwordBox.js"></script>          
+        <script type="text/javascript" charset="utf-8" src="./plugins/af.scroller.js"></script>
+        <script type="text/javascript" charset="utf-8" src="./plugins/af.selectBox.js"></script>
+        <script type="text/javascript" charset="utf-8" src="./plugins/af.touchEvents.js"></script>
+        <script type="text/javascript" charset="utf-8" src="./plugins/af.touchLayer.js"></script>
+        <script type="text/javascript" charset="utf-8" src="./plugins/af.popup.js"></script>
+        <script type="text/javascript" charset="utf-8" src="./ui/appframework.ui.js"></script>
+
+        <script type="text/javascript" charset="utf-8" src="./js/af.carousel.js"></script>
+
+        <!-- <script type="text/javascript" charset="utf-8" src="./ui/transitions/all.js"></script> -->
+        <script type="text/javascript" charset="utf-8" src="./ui/transitions/fade.js"></script>
+        <script type="text/javascript" charset="utf-8" src="./ui/transitions/flip.js"></script>
+        <script type="text/javascript" charset="utf-8" src="./ui/transitions/pop.js"></script>
+        <script type="text/javascript" charset="utf-8" src="./ui/transitions/slide.js"></script>
+        <script type="text/javascript" charset="utf-8" src="./ui/transitions/slideDown.js"></script>
+        <script type="text/javascript" charset="utf-8" src="./ui/transitions/slideUp.js"></script>
+        <script type="text/javascript" charset="utf-8" src="./plugins/af.slidemenu.js"></script>
+        <script type="text/javascript" charset="utf-8" src="./plugins/af.8tiles.js"></script>
+      	<script language="JavaScript" src="js/plugins/validator.js" type="text/javascript"></script>
+      	
+      	<script type="text/javascript" src="js/jquery.cityselect.js"></script>
+      	
+        <script src="js/idangerous.swiper.js"></script>
+        <!-- <script src="js/drag.js"></script> -->
+        <script src="js/common.js"></script>
+        <script src="js/js.js"></script>
+
+		  <script src="js/base_common.js"></script>
+        <script src="js/jjl.js"></script>
+        <script src="js/wujie.js"></script>
+		<script src="js/pay.js"></script>
+
+        <script type="text/javascript">
+            $.ui.useOSThemes=false;
+            $.ui.overlayStatusbar=true;
+         //   $.ui.autoLaunch=false;
+            
+            var webRoot = "./";
+            $.ui.autoLaunch = false;
+            $.ui.openLinksNewTab = false;
+            $.ui.splitview=false;
+            
+
+            $(document).ready(function(){
+                //alert('documentready');
+             $.ui.launch();
+            });
+            
+            /* This code is used to run as soon as intel.xdk activates */
+            var onDeviceReady = function () {
+
+                $.ui.launch();
+                intel.xdk.device.setRotateOrientation("portrait");
+                intel.xdk.device.setAutoRotate(false);
+                webRoot = intel.xdk.webRoot + "";
+                //hide splash screen
+                intel.xdk.device.hideSplashScreen();
+                $.ui.blockPageScroll(); //block the page from scrolling at the header/footer
+            };
+            document.addEventListener("intel.xdk.device.ready", onDeviceReady, false);
+
+            function showHide(obj, objToHide) {
+                var el = $("#" + objToHide)[0];
+
+                if (obj.className == "expanded") {
+                    obj.className = "collapsed";
+                } else {
+                    obj.className = "expanded";
+                }
+                $(el).toggle();
+
+            }
+            
+            if ('addEventListener' in document) {
+                document.addEventListener('DOMContentLoaded', function() {
+                    FastClick.attach(document.body);
+                }, false);
+            }
+                      
+        </script>
+
+</head>
+
+    <body>
+        <div id="afui" class="ios7">
+            <!-- this is the splashscreen you see. -->
+            <div id="splashscreen" class='ui-loader heavy'>
+             	<div  style="  background-image: image/bg1.png; background-repeat: no-repeat;" >
+                	<img src="image/bg1.png"  style="width:100%; height:100%">
+                	</div>
+                	<!--                 蜗牛巴巴
+                <br>
+                <br>    <span class='ui-icon ui-icon-loading spin'></span>
+                <h1>app加载中</h1>
+                 -->
+            </div>
+            <div id="header">
+                                
+            </div>
+            
+            <div id="content">
+                <div  class="panel"  title='蜗牛巴巴' id="home"  data-defer="html/home.html" data-load="into_home" class="panel" style="padding:0;"  selected="true" data-unload="outhome">
+                  
+                </div>
+                
+      		
+             
+             
+                <!--个人中心-->
+                <div class="panel" title="我" id="user-center"	data-defer="html/user-center.html"   data-load="into_userCenter">
+                    
+                </div>
+                <div class="panel" title="微商资讯" id="news"  data-unload="leave_newsCenter" 	data-load="into_newsCenter" data-defer="html/news.html"  >
+                   
+                </div>
+                <div class="panel" title="消息" id="my-messages" data-load="into_myMessages"  data-defer="html/my-messages.html"  data-footer="common_footer">
+                    
+                </div>
+                <div class="panel" title="消息中心" id="chat"  data-load="into_chat" data-defer="html/chat.html"  data-footer="common_footer">
+                   
+                </div>
+                <div class="panel w-bg" title="团队管理" id="team-manage"   data-load="into_teamManager"  data-defer="html/team-manage.html"  data-footer="common_footer">
+                    
+                </div>
+                <div class="panel" title="积分红包" id="integral-red"  data-load="into_integralRed"  adata-unload="out_integralRed"  data-unload="out_integralRed"  data-defer="html/integral-red.html"  data-footer="common_footer">
+                   
+                </div>
+                <div class="panel w-bg" title="查询号码" id="query-ID"   data-unload="out_queryID"   data-defer="html/query-ID.html"   data-footer="common_footer">
+                   
+                </div>
+                <div class="panel w-bg" title="下载粉丝" id="dl-ID" data-load="panelload" data-defer="html/dl-ID.html"  data-footer="common_footer">
+                   
+                </div>
+                <div class="panel" title="关于蜗牛巴巴" id="about" data-footer="common_footer">
+                    <header class="bg_black">
+                        <a class="backButton button" href="#user-center">返回</a>
+                        <h1>关于蜗牛巴巴</h1>
+                    </header>
+                    <div class="container about">
+                        <img src="image/about.png" class="about-logo">
+                    </div>
+                    <ul class="list">
+                        <li><a href="#">为自己打分</a> </li>
+                        <li><a href="#">功能介绍</a> </li>
+                        <li><a href="#comment">联系我们</a> </li>
+                    </ul>
+                </div>
+                
+                <div class="panel w-bg" title="我有话对你说" id="comment" data-defer="html/comment.html"  data-footer="common_footer">
+                    
+                </div>
+                <div class="panel" title="成为金蜗牛" id="gold-snail" data-load="into_goldSnail"  data-defer="html/gold-snail.html" data-footer="common_footer">
+                    
+                </div>
+                <div class="panel" title="邀请好友" id="invite-friends" data-load="into_inviteFriends" data-defer="html/invite-friends.html"   data-footer="common_footer">
+                    
+                </div>
+                <div class="panel" title="登录" id="login" data-footer="common_footer">
+                    <header class="bg_black">
+                        <a class="button" href="#home">取消</a>
+                        <h1>蜗牛巴巴</h1>
+                    </header>
+                    <div class="container">
+                        <form id="login-form">
+                            <div class="input-group">
+                                <label>账号</label><input type="text"  name="account"  value="" placeholder="手机号">
+                                <label>密码</label><input type="password" name="password"  value="" placeholder="请填写密码">
+                            </div>
+                        </form>
+                        <a  ahref="#home" class="submit-btn">提交</a>
+                        <a href="#forget-password" class="forgot-pw">忘记密码</a>
+                        <div style="width: 90%;bottom: 30px;text-align: center;">
+                            <a href="#reg" class="reg">注册</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel" title="忘记密码" id="forget-password"  data-defer="html/forget-password.html"  data-footer="common_footer">
+                    
+                </div>
+                <div class="panel" title="注册" id="reg" data-footer="common_footer">
+                    <header class="bg_black">
+                        <a class="button" href="#login">取消</a>
+                        <h1>注册</h1>
+                    </header>
+                    <div class="container">
+                        <h3>请确认你的国家或地区并输入手机号</h3>
+                        <ul class="list">
+                            <li>
+                                <a>
+                                    <p>国家和地区</p>
+                                    <span class="af-badge">中国</span>
+                                </a>
+                            </li>
+                        </ul>
+                        <form>
+                            <div class="input-group">
+                                <label>+86</label>
+                                <input type="text"  name="mobile" placeholder="请填写手机号码">
+                            </div>
+                        </form>
+                        <a class="submit-btn" onclick="show9()"  ahref="#">注册</a>
+                        <p>轻触上面的“注册”按钮，即表示你同意<a href="#home">《蜗牛巴巴软件许可及服务协议》</a></p>
+                    </div>
+                    <div id="alert9" class="alert" style="display: none;">
+                        <div class="wrap">
+                            <p>
+                                <b>确认手机号码</b>
+                                <span>我们将发送验证码短信到这个号码</span>
+                                <span  id="mobileShow_9">+86&nbsp;888&nbsp;8888&nbsp;8888</span>
+                            </p>
+                            <a ahref="" class="first" onclick="hide(9)">取消</a>
+                            <a ahref="#login" class="" onclick="registSms(this, 'ver')">好</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel" title="填写验证码" id="ver" data-footer="common_footer">
+                    <header class="bg_black">
+                        <a class="button" href="#reg">取消</a>
+                        <h1>填写验证码</h1>
+                    </header>
+                    <div class="container">
+                        <p class="set">我们已发送<span>验证码短信</span>到这个号码</p>
+                        <p class="mobile-num">+86&nbsp;888&nbsp;8888&nbsp;8888</p>
+                        <form  id="res_valitor_from" >
+                        		 <input type="hidden"  name="mobile">
+                            <input type="text" placeholder="请输入验证码" name="yzm">
+                        </form>
+                        <p class="time">接受短信大约需要60秒</p>
+                        <a class="submit-btn" onclick="valitorSms('reg-password')"   ahref="#reg-password">提交</a>
+                    </div>
+                </div>
+                <div class="panel" title="注册密码" id="reg-password" data-footer="common_footer">
+                    <header class="bg_black">
+                        <a class="button" href="#ver">取消</a>
+                        <h1>填写推荐人</h1>
+                    </header>
+                    <div class="container">
+                        <form id="reg-password_from">
+                            <div class="input-group">
+                                <label>密码</label><input type="password"  name="password"  placeholder="请设定登录密码">
+                                <label>确认密码</label><input type="password"  name="passwordConfirm"  placeholder="请再输入一次">
+                            </div>
+                            <div class="input-group">
+                                <label>推荐人</label><input type="text"  name="otherMobile"  placeholder="请填写推荐人手机号，以获得推荐积分">
+                            </div>
+                        </form>
+                        <a class="submit-btn"   ahref="#login">注册</a>
+                    </div>
+                </div>
+                <!--钱包-->
+                <div class="panel b-bg" title="钱包" id="wallet"  data-load="into_wallet"   data-footer="common_footer">
+                    <header class="bg_black">
+                       <!--  <a class="button backButton"  href="javascript:$.ui.goBack();" ahref="#user-center"    >返回</a> -->
+                       <a class="button backButton"   href="#user-center"    >返回</a>
+                        <h1 style="   font-size: 14px;
+  padding-top: 2px;">钱包</h1>
+                        <h2>蜗牛巴巴安全支付</h2>
+                    </header>
+                    <a href="#my-red-one">
+                        <div class="bg_green">
+                            <img src="image/red.png">
+                            <p class="snail-red"   >蜗牛红包</p>
+                            <p class="price" >￥1000.00</p>
+                        </div>
+                    </a>
+                    <a href="#"  onclick="show12()">
+                        <div class="bg_red">
+                            <img src="image/alipay.png">
+                            <p><span>支付宝名称</span><span class="alipayRealName con ">杨幂</span></p>
+                            <p><span>支付宝账号</span><span class="alipayAccount con">999999999999999</span></p>
+                        </div>
+                    </a>
+                    <!-- 
+                    <ul class="list">
+                        <li>
+                            <a href="#">
+                                <input type="text" placeholder="输入兑换码兑换红包">
+                            </a>
+                        </li>
+                    </ul>
+                    
+                     
+                    <div id="alert12" class="alert" style="display: none;">
+                        <div class="wrap">
+                            <p>
+                                为保障你的数据安全，绑定支付宝时要验证密码<br>
+                                <input  id="modifyAliPayPwd" type="password">
+                            </p>
+                            <a ahref="#bound-alipay" class="first" onclick="hide12('bound-alipay')">确定</a>
+                            <a class="" onclick="hide(12);">取消</a>
+                        </div>
+                    </div>
+                    
+                     -->
+                </div>
+                <!--钱包-提现-->
+                <div class="panel" title="钱包提现" id="my-red-one" data-load="into_myRedOne"  data-footer="common_footer">
+                    <header class="bg_black">
+                        <a class="button backButton" href="#wallet">返回</a>
+                        <h1 style="font-size: 14px;padding-top: 2px;">钱包</h1>
+                        <h2>蜗牛巴巴安全支付</h2>
+                        <a class="button rightButton" href="#pay-details" data-transition="fade">收支明细</a>
+                    </header>
+                    <div class="container">
+                        <img src="image/red2.png">
+                        <p>我的红包</p>
+                        <p class="price">￥1000.00</p>
+                        <a class="submit-btn" href="#withdraw-cash">提现</a>
+                        <div class="bottom">
+                            <p class="problem">常见问题</p>
+                            <p class="service">本服务由蜗牛巴巴提供</p>
+                        </div>
+                    </div>
+                </div>
+                <!--钱包-绑定支付宝-->
+                <div class="panel" title="绑定支付宝" id="my-red-two" data-footer="common_footer">
+                    <header class="bg_black">
+                        <a class="button backButton" href="#wallet" data-transition="fade">返回</a>
+                        <h1>钱包</h1>
+                        <h2>蜗牛巴巴安全支付</h2>
+                        <a class="button rightButton" href="#pay-details" data-transition="fade">收支明细</a>
+                    </header>
+                    <div class="container">
+                        <img src="image/red.png">
+                        <p>我的红包</p>
+                        <p class="price">￥1000.00</p>
+                        <a class="submit-btn" href="#">绑定支付宝</a>
+                        <div class="bottom">
+                            <p class="problem">常见问题</p>
+                            <p class="service">本服务由蜗牛巴巴提供</p>
+                        </div>
+                    </div>
+                </div>
+                <!--红包提现-->
+                <div class="panel" title="红包提现" id="withdraw-cash"  data-defer="html/withdraw-cash.html"   data-load="into_withdrawCash"  data-footer="common_footer">
+                   
+                </div>
+                <!--提现详情-->
+                <div class="panel" title="提现详情"  data-defer="html/withdraw-cash-details.html"  id="withdraw-cash-details" data-footer="common_footer">
+                   
+                </div>
+                <!--支付明细-->
+                <div class="panel" title="支付明细" id="pay-details"  data-load="into_payDetail"  data-footer="common_footer">
+                    <header class="bg_black">
+                        <a class="button backButton" href="#my-red-one">返回</a>
+                        <h1>支付明细</h1>
+                    </header>
+                    
+                    <ul class="list">
+                        <li>
+                            <p>总共收入现金红包金额为<span  class="balance">￥100.00</span></p>
+                        </li>
+                     </ul>
+                     <ul class="list"   id="pay-details-list" >  
+                     <!-- 
+                        <li>
+                            <p>现金红包提现<span>-100.00</span></p>
+                            <b>2015-4-12 21:00</b>
+                        </li>
+                        <li>
+                            <p>赚到的现金红包<span>-100.00</span></p>
+                            <b>2015-4-12 21:00</b>
+                        </li>
+                        <li>
+                            <p>兑换码兑换红包<span>-100.00</span></p>
+                            <b>2015-4-12 21:00</b>
+                        </li>
+                         --> 
+                    </ul>
+                    <div  class="more"  onClick="into_payDetail(1)">  加载更多</div>
+                    <p>本服务由蜗牛巴巴提供</p>
+                </div>
+                <!--绑定支付宝-->
+                <div class="panel" title="绑定支付宝" id="bound-alipay"    data-footer="common_footer">
+                    <header class="bg_black">
+                        <a class="backButton button" href="#wallet">返回</a>
+                        <h1>绑定支付宝</h1>
+                        <!-- 
+                        <h2>蜗牛巴巴安全支付</h2>
+                         -->
+                        
+                        <a class="button rightButton" style="color:#07bf05;" onclick="bindApliPayFun('wallet')" ahref="#">保存</a>
+                    </header>
+                    <div class="formGroupHead">请绑定持本人支付宝</div>
+                    <form id="bound-alipay_from">
+                        <div class="input-group">
+                        		<label for="test3">手机号码</label><input id=""   readOnly=true  name="mobile"   type="text">
+                            <label for="test3">账户名称</label><input id="test3"  name="alipayRealName" type="text">
+                            <label for="test4">支付宝账号</label><input id="test4" name="alipayAccount" type="text">
+                        </div>
+                    </form>
+                    <div class="container">
+                        <a ahref="#wallet"  onclick="bindApliPayFun('wallet')"   class="submit-btn" data-transition="fade">提交绑定</a>
+                        <p>为了您的账户资金安全，只能绑定本人的支付宝</p>
+                    </div>
+                </div>
+                <!--修改密码-->
+                <div class="panel" title="修改密码" id="change-password" data-defer="html/change-password.html"     data-load="into_changePassword" data-footer="common_footer">
+                    
+                </div>
+                <!--点击查询-金蜗牛-->
+                <div class="panel black-bg" title="金蜗牛" id="query-gold-member" data-footer="common_footer">
+                    <header class="query-gold-member">
+                        <a class="button backButton" href="#query-ID">返回</a>
+                        <h1>金蜗牛</h1>
+                        <a ahref="#share"   data-value=""	onclick="weixinshare(this,'邀请好友','http://www.woniubaba.com/memberindex2/')"  class="button rightButton  friendId"><span class="icon share-ico-other"></span></a>
+                    </header>
+                    <img src="image/gold-member01.png" width="100%">
+                    <div style="position: relative;">
+                        <img src="image/gold-member02.png" width="100%">
+                        <div class="gold-member02">
+                            <p><span>证号：</span><span id="gold_fakeId">0</span></p>
+                            <p><span>手机号：</span><span id="gold_mobile">0</span></p>
+                            <p><span>微信号：</span><span id="gold_weixin">0</span></p>
+                            <p><span>团队人数：</span><span id="gold_group">0</span></p>
+                        </div>
+                    </div>
+                    <div style="position: relative;">
+                        <img src="image/gold-member03.png" width="100%">
+                        <div class="gold-member03">
+                            <p><span>创业宣言：</span><span id="gold_xy">给梦想一个机会，我为微商代言</span></p>
+                        </div>
+                    </div>
+                    <div style="position: relative">
+                        <img src="image/gold-member04.png" width="100%">
+                        <div class="gold-member04">
+                            <p><span>发证日期：</span><span id="gold_ct">2015-5-11</span></p>
+                        </div>
+                    </div>
+                </div>
+                <!--订单详情-->
+                <div class="panel" title="订单详情" id="order-details"  data-load="into_orderDetails"  data-unload="out_orderDetails"   data-footer="common_footer">
+                    <header class="bg-blue">
+                        <a class="button backButton" href="#home" data-transition="fade">返回</a>
+                        <h1>订单详情</h1>
+                    </header>
+                    <div class="container">
+                        <div class="wrap w-bg">
+                            <h3>订单号：<span id="order_show_orderNo">00000007  </span>  </h3>
+                            <img class="order-snail" src="image/order-snail.png" width="90px">
+                            <h4>金蜗牛会员年费</h4>
+                            <!-- 
+                            <a href="#" class="look">查看订单详情<span class="icon share-right-arrow"></span> </a>
+                             -->
+                            <div class="clear"></div>
+                        </div>
+                        <div class="wrap w-bg">
+                            <h3>基本信息</h3>
+                            <p><span class="tit">金&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;额：</span><span class="con"  >100</span></p>
+                            <p><span class="tit">创建时间：</span><span class="con"   id="pay_createTime">2015-4-30</span></p>
+                            <p><span class="tit">交易方式：</span><span class="con">通过平台保障线上交易</span></p>
+                            <p><span class="tit">备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：</span><span class="con">加入会员后，在个人中心填写详细的个人邮寄信息，方便后续邮寄资料和发票。</span></p>
+                        </div>
+                        <div class="wrap w-bg">
+                            <h3>交易情况</h3>
+                            <p style="display: inline-block"><span class="tit">交易状况：</span><span class="con"    >订单已生成</span></p>
+                            <a ahref="#" class="cancel"   onclick="cancelOrder('home')" >取消订单</a>
+                            <div class="clear"></div>
+                        </div>
+                        <a class="submit-btn" ahref="#order-details-next"  onclick="payMoney('order-details-next')" >提交订单 前往支付宝付款</a>
+                    </div>
+                </div>
+                <div class="panel" title="订单详情" id="order-details-next" data-footer="common_footer">
+                    <header class="bg-blue">
+                        <a class="button backButton" href="#query-ID" data-transition="fade">返回</a>
+                        <h1>订单详情</h1>
+                    </header>
+                    <div class="container">
+                        <h2>
+                            欢迎加入金蜗牛<br>
+                            给梦想一个机会
+                        </h2>
+                        <div class="wrap w-bg">
+                            <h3>订单号： <span  id="show_orderNo"> 00000007</span></h3>
+                            <img class="order-snail" src="image/order-snail.png" width="90px">
+                            <h4>金蜗牛会员年费</h4>
+                            <a href="#" class="look">查看订单详情<span class="icon share-right-arrow"></span> </a>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="wrap w-bg">
+                            <h3>基本信息</h3>
+                            <p><span class="tit">金&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;额：</span><span class="con">100</span></p>
+                            <p><span class="tit">创建时间：</span><span class="con" id="show_createTime" >2015-4-30</span></p>
+                            <p><span class="tit">交易方式：</span><span class="con">通过平台保障线上交易</span></p>
+                            <p><span class="tit">备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：</span><span class="con">加入会员后，在个人中心填写详细的个人邮寄信息，方便后续邮寄资料和发票。</span></p>
+                        </div>
+                        <div class="wrap w-bg">
+                            <h3>交易情况</h3>
+                            <p style="display: inline-block"><span class="tit">交易状况：</span><span class="con">订单已生成</span></p>
+                            <p style="display: inline-block"><span class="tit">交易完成时间：</span><span class="con" id="show_payTime">2015-4-30 23:20</span></p>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                </div>
+                <!--个人信息详情-->
+                <div class="panel" title="个人信息" id="user-information" data-load="into_userInformation"  data-footer="common_footer">
+                    <header class="bg_black">
+                        <a class="button backButton" href="#user-center" data-transition="fade">我</a>
+                        <h1>个人信息</h1>
+                    </header>
+                    <ul class="list">
+                        <li>
+                            <a href="#"   id="toBeVipA" >
+                                <img class="user-ava" src="image/user-ava.jpg">
+                                <p style="line-height: 68px;">金蜗牛会员</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="no-after">
+                                <p>手机号</p>
+                                <span class="mobile"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#weixin">
+                                <p>微信号</p>
+                                <span class="weixin"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#name">
+                                <p>昵称</p>
+                                <span class="user-name"> </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#address">
+                                <p>我的地址</p>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="list">
+                        <li>
+                            <a href="#sex">
+                                <p>性别</p>
+                                <span  class="sex">女</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#declaration">
+                                <p>创业宣言</p>
+                                <span class="xuanYan">给梦想一个机会</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="panel" title="微信号" id="weixin" data-footer="common_footer">
+                    <header class="bg_black">
+                        <a class="button" href="#user-information">取消</a>
+                        <h1>微信号</h1>
+                        <a class="button rightButton" ahref="#"  onclick="modifyWeiXinFun()"    style="color:#07bf05;">保存</a>
+                    </header>
+                    <form id="modifyWeiXinForm">
+                        <input id="weixin_id" type="text" placeholder="微信号"  name="weixin">
+                        <span class="af-badge br"  onclick="$('#weixin_id').val('')" >×</span>
+                    </form>
+                    <p>为保证账号安全，微信号只能修改3次</p>
+                </div>
+                <div class="panel" title="名字" id="name" data-footer="common_footer">
+                    <header class="bg_black">
+                        <a class="button" href="#user-information">取消</a>
+                        <h1>昵称</h1>
+                        <a class="button rightButton" onclick="modifyUserName()"  ahref="#" style="color:#07bf05;">保存</a>
+                    </header>
+                    <form>
+                        <input type="text" id="name_userName" placeholder="昵称" name="userName" >
+                        <span class="af-badge br"  onclick="$('#name_userName').val('');"  >×</span>
+                    </form>
+                </div>
+                
+                <div class="panel" title="修改地址" id="address"  data-load="into_address"   data-footer="common_footer">
+                    <header class="bg_black">
+                        <a class="button" href="#user-information">取消</a>
+                        <h1>修改地址</h1>
+                        <a class="button rightButton" onclick="modifyAddress()" ahref="#" style="color:#07bf05;">保存</a>
+                    </header>
+                    <form id="addressForm">
+                        <div class="input-group">
+                            <label for="frm_text1">收货人</label><input id="frm_text1" name="receiverName" type="text" placeholder="名字">
+                            <label for="frm_text2">手机号码</label><input id="frm_text2" name="mobile" type="text" placeholder="11位手机号码">
+                            <div id="citySelect">
+                            <label for="frm_text2_1">省份</label> <select id="frm_text2_1"	class="prov"   name="prov" ></select>
+                             <label for="frm_text2_2">城市</label> <select id="frm_text2_2"   class="city"  name="city" ></select>
+                              <label for="frm_text2_3">地区</label> <select id="frm_text2_3" class="dist"   name="dist" ></select>
+                            </div>
+                            <!-- 
+                            <label for="frm_text3">选择地区</label><input id="frm_text3" name="zone"  type="text" placeholder="地区信息">
+                             -->
+                            <label for="frm_text4">详细地址</label><textarea id="frm_text4"  name="address"  rows="2" placeholder="街道门牌信息"></textarea>
+                            <label for="frm_text5">邮政编码</label><input id="frm_text5" name="mailCode" type="text" placeholder="邮政编码">
+                        </div>
+                    </form>
+                </div>
+                <div class="panel" title="性别" id="sex" data-footer="common_footer">
+                    <header class="bg_black">
+                        <a class="button backButton" href="#user-information">个人信息</a>
+                        <h1>性别</h1>
+                    </header>
+                    <div class="input-group">
+                        <a ahref="#user-information" onclick="radioSexMan()">
+                            <span>男</span><img id="man" src="image/radio.png" style="display: none;">
+                        </a>
+                        <a ahref="#user-information" onclick="radioSexWoman()">
+                            <span>女</span><img id="woman" src="image/radio.png" style="display: block;">
+                        </a>
+                    </div>
+                </div>
+                <div class="panel" title="创业宣言" id="declaration" data-footer="common_footer">
+                    <header class="bg_black">
+                        <a class="button backButton" href="#user-information">个人信息</a>
+                        <h1>创业宣言</h1>
+                         <a class="button rightButton" onclick="modifyXunYanFun()" ahref="#" style="color:#07bf05;">保存</a>
+                    </header>
+                    <form>
+                        <textarea rows="2" class="xuanYan"  id="xuanYan"  name="xuanYan"></textarea>
+                        <p id="lastNum">30</p>
+                    </form>
+                </div>
+                
+                <div class="panel" title="微商资讯" id="news-detail"  data-defer="html/news-detail.html"  data-footer="common_footer" data-load="intoNewsDetail" data-unload="outNewsDetail">
+                    
+           		 </div>
+           		 
+           		 <div class="panel w-bg" title="分享" id="share" data-footer="common_footer">
+                    <header class="bg-blue">
+                        <a class="button backButton" href="#">返回</a>
+                        <h1>分享</h1>
+                    </header>
+                    <div class="gray-bg"></div>
+                    <h3>分享到</h3>
+                    <div class="home-nav-container flexbox">
+                        <div class="home-nav-item flexbox-item">
+                            <a href="#" data-transition="fade"><img src="image/share01.fw.png"></a>
+                            <a href="#" data-transition="fade"><p>微信好友</p></a>
+                        </div>
+                        <div class="home-nav-item flexbox-item">
+                            <a href="#comment" data-transition="fade"><img src="image/share02.fw.png"></a>
+                            <a href="#comment" data-transition="fade"><p>微信朋友圈</p></a>
+                        </div>
+                        <div class="home-nav-item flexbox-item">
+                            <a href="#query-ID" data-transition="fade"><img src="image/share03.fw.png"></a>
+                            <a href="#query-ID" data-transition="fade"><p>QQ好友</p></a>
+                        </div>
+                    </div>
+                    <div class="home-nav-container flexbox">
+                        <div class="home-nav-item flexbox-item">
+                            <a href="#" data-transition="fade"><img src="image/share04.fw.png"></a>
+                            <a href="#" data-transition="fade"><p>信息</p></a>
+                        </div>
+                        <div class="home-nav-item flexbox-item">
+                            <a href="#comment" data-transition="fade"><img src="image/share05.fw.png"></a>
+                            <a href="#comment" data-transition="fade"><p>电子邮件</p></a>
+                        </div>
+                        <div class="home-nav-item flexbox-item">
+                            <a href="#query-ID" data-transition="fade"><img src="image/share06.fw.png"></a>
+                            <a href="#query-ID" data-transition="fade"><p>新浪微博</p></a>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <a class="submit-btn" href="#news-detail">取消</a>
+                    </div>
+                </div>
+            </div>
+            <!-- ------------------------------------------ -->
+            <header id="common_header">
+                    <h1>蜗牛巴巴</h1>
+            </header>
+            <footer id='common_footer'>
+                <a href="#home"><img src="image/ft1.png" class="ft_img">首页</a>
+                <a ></a>
+                <a href="#news"><img src="image/ft2.png" class="ft_img">新闻</a>
+                <a ahref="#user-center"  onclick="load_userCenter()" ><img src="image/ft3.png" class="ft_img">我的</a>
+            </footer>
+            <!-- <footer id='common_footer'>
+                <a href="#order" id='navbar_order' class="pressed"><i class="myIcon cartPlus"></i>订单中心</a>
+                <a href="#proManager" id='navbar_basket'><i class="myIcon basket"></i>菜品管理</a>
+                <a href="#statics" id='navbar_static'><i class="myIcon static"></i>数据统计</a>
+                <a href="#userCenter" onclick="$('#orderTopBtn').hide();$('#common_header h1').text('个人中心');" id='navbar_uc'><i class="myIcon mine"></i>我的</a>
+            </footer> -->
+            
+        </div>
+		<script>
+           
+        </script>
+    </body>
+</html>

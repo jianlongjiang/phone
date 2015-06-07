@@ -1,0 +1,65 @@
+ <header class="bg_black">
+                        <a class="backButton button" href="#home">返回</a>
+                        <h1>下载粉丝</h1>
+                    </header>
+                    <div class="container">
+                        <div class="wrapper flexbox">
+                            <div class="flexbox-item select-div">
+                                <select class="firstCateId" >
+                                    <option value="volvo">列表项1</option>
+                                    <option value="saab">列表项2</option>
+                                </select>
+                            </div>
+                            <div class="flexbox-item select-div">
+                                <select name="secondCateId">
+                                    <option value="volvo">列表项1</option>
+                                    <option value="saab">列表项2</option>
+                                </select>
+                            </div>
+                        </div>
+                        <select name="num"  id="downNum" >
+                            <option value="">选择粉丝数</option>
+                            <option value="1">1人</option>
+                            <option value="10">10人</option>
+                            <option value="50">50人</option>
+                            <option value="100">100人</option>
+                        </select>
+                        <a href="#" class="import-btn" id="downLoad_fs" onclick="downLoad_fs()">导入粉丝</a>
+                        <!--  
+                        <a href="#" class="import-btn" onclick="show(7)">导入粉丝</a>
+                        <a href="#" class="import-btn" onclick="show(8)">导入粉丝</a>
+                        -->
+                        
+                        <p class="tip">
+                            温馨提示：(下载规则)<br>
+                            
+                            1、每下载一个粉丝扣除10个积分。<br>
+                            2、积分可通过邀请好友、签到、向伙伴索要以及成为金牌会员等方式获取。<br>
+                        </p>
+                        <div id="alert6" class="alert" style="display: none;">
+                            <div class="wrap">
+                                <p>
+                                    亲~您今天的下载的粉丝太多了哦~要注意休息，明天继续加油！
+                                </p>
+                                <a class="" onclick="hide(6);">好的</a>
+                            </div>
+                        </div>
+                        <div id="alert7" class="alert" style="display: none;">
+                            <div class="wrap">
+                                <p>
+                                    您的积分不足！可点击邀请好友获取积分。
+                                </p>
+                                <a href="#invite-friends" class="first" onclick="hide(7)">邀请好友</a>
+                                <a class="" onclick="hide(7);">取消</a>
+                            </div>
+                        </div>
+                        <div id="alert8" class="alert" style="display: none;">
+                            <div class="wrap">
+                                <p>
+                                    点击确定后即导入粉丝并扣除相应积分，现在导入？
+                                </p>
+                                <a href="#" class="first" onclick="hide(8)">取消</a>
+                                <a class="" onclick="hide(8);">确定</a>
+                            </div>
+                        </div>
+                    </div>

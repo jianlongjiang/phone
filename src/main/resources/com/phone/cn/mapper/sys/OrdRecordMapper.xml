@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.phone.cn.mapper.sys.OrdRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.phone.cn.entity.sys.OrdRecord" >
+    <id column="record_id" property="recordId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="trade_id" property="tradeId" jdbcType="INTEGER" />
+    <result column="trade_status" property="tradeStatus" jdbcType="VARCHAR" />
+    <result column="trade_type" property="tradeType" jdbcType="VARCHAR" />
+    <result column="remark_status" property="remarkStatus" jdbcType="VARCHAR" />
+    <result column="content_type" property="contentType" jdbcType="VARCHAR" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="create_ip" property="createIp" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="trade_count" property="tradeCount" jdbcType="DOUBLE" />
+    <result column="outtradeno" property="outtradeno" jdbcType="VARCHAR" />
+    <result column="tradeno" property="tradeno" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    record_id, user_id, user_name, trade_id, trade_status, trade_type, remark_status, 
+    content_type, content, create_ip, create_time, trade_count, outtradeno, tradeno
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from ord_record
+    where record_id = #{recordId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from ord_record
+    where record_id = #{recordId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.phone.cn.entity.sys.OrdRecord" >
+    insert into ord_record (record_id, user_id, user_name, 
+      trade_id, trade_status, trade_type, 
+      remark_status, content_type, content, 
+      create_ip, create_time, trade_count, 
+      outtradeno, tradeno)
+    values (#{recordId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, 
+      #{tradeId,jdbcType=INTEGER}, #{tradeStatus,jdbcType=VARCHAR}, #{tradeType,jdbcType=VARCHAR}, 
+      #{remarkStatus,jdbcType=VARCHAR}, #{contentType,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
+      #{createIp,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{tradeCount,jdbcType=DOUBLE}, 
+      #{outtradeno,jdbcType=VARCHAR}, #{tradeno,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective"	useGeneratedKeys="true" keyProperty="recordId"  parameterType="com.phone.cn.entity.sys.OrdRecord" >
+    insert into ord_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="recordId != null" >
+        record_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="tradeId != null" >
+        trade_id,
+      </if>
+      <if test="tradeStatus != null" >
+        trade_status,
+      </if>
+      <if test="tradeType != null" >
+        trade_type,
+      </if>
+      <if test="remarkStatus != null" >
+        remark_status,
+      </if>
+      <if test="contentType != null" >
+        content_type,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="createIp != null" >
+        create_ip,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="tradeCount != null" >
+        trade_count,
+      </if>
+      <if test="outtradeno != null" >
+        outtradeno,
+      </if>
+      <if test="tradeno != null" >
+        tradeno,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="recordId != null" >
+        #{recordId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeId != null" >
+        #{tradeId,jdbcType=INTEGER},
+      </if>
+      <if test="tradeStatus != null" >
+        #{tradeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeType != null" >
+        #{tradeType,jdbcType=VARCHAR},
+      </if>
+      <if test="remarkStatus != null" >
+        #{remarkStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="contentType != null" >
+        #{contentType,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="createIp != null" >
+        #{createIp,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tradeCount != null" >
+        #{tradeCount,jdbcType=DOUBLE},
+      </if>
+      <if test="outtradeno != null" >
+        #{outtradeno,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeno != null" >
+        #{tradeno,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  
+  <select id="query" resultMap="BaseResultMap"  >
+    select 
+    <include refid="Base_Column_List" />
+    from ord_record
+    where 1=1
+    		<if test="userId != null"> and
+        user_id = #{userId,jdbcType=INTEGER}
+      </if>
+      <if test="userName != null"> and
+        user_name = #{userName,jdbcType=VARCHAR}
+      </if>
+      <if test="tradeId != null"> and
+        trade_id = #{tradeId,jdbcType=INTEGER}
+      </if>
+      <if test="tradeStatus != null"> and
+        trade_status = #{tradeStatus,jdbcType=VARCHAR}
+      </if>
+      <if test="tradeType != null"> and
+        trade_type = #{tradeType,jdbcType=VARCHAR}
+      </if>
+      <if test="remarkStatus != null"> and
+        remark_status = #{remarkStatus,jdbcType=VARCHAR}
+      </if>
+      <if test="contentType != null"> and
+        content_type = #{contentType,jdbcType=VARCHAR}
+      </if>
+      <if test="content != null"> and
+        content = #{content,jdbcType=VARCHAR}
+      </if>
+      <if test="createIp != null"> and
+        create_ip = #{createIp,jdbcType=VARCHAR}
+      </if>
+      <if test="createTime != null"> and
+        create_time = #{createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="tradeCount != null"> and
+        trade_count = #{tradeCount,jdbcType=DOUBLE}
+      </if>
+      <if test="outtradeno != null"> and
+        outtradeno = #{outtradeno,jdbcType=VARCHAR}
+      </if>
+      <if test="tradeno != null"> and
+        tradeno = #{tradeno,jdbcType=VARCHAR}
+      </if>
+    
+  </select>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.phone.cn.entity.sys.OrdRecord" >
+    update ord_record
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeId != null" >
+        trade_id = #{tradeId,jdbcType=INTEGER},
+      </if>
+      <if test="tradeStatus != null" >
+        trade_status = #{tradeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeType != null" >
+        trade_type = #{tradeType,jdbcType=VARCHAR},
+      </if>
+      <if test="remarkStatus != null" >
+        remark_status = #{remarkStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="contentType != null" >
+        content_type = #{contentType,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="createIp != null" >
+        create_ip = #{createIp,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tradeCount != null" >
+        trade_count = #{tradeCount,jdbcType=DOUBLE},
+      </if>
+      <if test="outtradeno != null" >
+        outtradeno = #{outtradeno,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeno != null" >
+        tradeno = #{tradeno,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where record_id = #{recordId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.phone.cn.entity.sys.OrdRecord" >
+    update ord_record
+    set user_id = #{userId,jdbcType=INTEGER},
+      user_name = #{userName,jdbcType=VARCHAR},
+      trade_id = #{tradeId,jdbcType=INTEGER},
+      trade_status = #{tradeStatus,jdbcType=VARCHAR},
+      trade_type = #{tradeType,jdbcType=VARCHAR},
+      remark_status = #{remarkStatus,jdbcType=VARCHAR},
+      content_type = #{contentType,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      create_ip = #{createIp,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      trade_count = #{tradeCount,jdbcType=DOUBLE},
+      outtradeno = #{outtradeno,jdbcType=VARCHAR},
+      tradeno = #{tradeno,jdbcType=VARCHAR}
+    where record_id = #{recordId,jdbcType=INTEGER}
+  </update>
+</mapper>

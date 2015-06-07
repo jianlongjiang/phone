@@ -1,0 +1,51 @@
+<div class="panel y-scroll" title="" id="my-messages" data-load="into_myMessages1" data-defer="html/my-messages.html" data-footer="common_footer" data-title="消息" style="-webkit-overflow-scrolling: touch; display: block; -webkit-transform: none; -webkit-backface-visibility: hidden; -webkit-transition: none; transition: none; -webkit-transform-origin: 0% 0%; overflow: auto;">
+                    <div class="wrapper flexbox message-btns">
+<!--                         <a href="#pay-details" class="flexbox-item message-btn" id="sys-message-btn"><img src="image/cash-message.png" width="90px"> <span class="userRedUnreadCount" ></span>   </a>
+                        <a href="#" class="flexbox-item message-btn" id="user-message-btn"><img src="image/integral-message.png" width="90px"> <span  class="userScoreUnreadCount"></span> </a>
+                        <a href="#chat" class="flexbox-item message-btn" id=""><img src="image/system-message.png" width="90px">	 <span class="messageUnreadCount"></span> </a> -->
+                        
+                        <a ahref="#" class="flexbox-item message-btn" id="sys-message-btn" onclick="load_userRedMsg(0)"><img src="image/cash-message.png" width="90px">  <span id="my-messages_cashNum" class="userRedUnreadCount my-messages_num af-badge1"></span> </a>
+                        <a ahref="#" class="flexbox-item message-btn  active " onclick="load_userScoreMsg(0)" id="user-message-btn"><img src="image/integral-message.png" width="90px"> <span id="my-messages_userScoreNum" class="userScoreUnreadCount my-messages_num af-badge1"></span> </a>
+                        <a ahref="#chat" class="flexbox-item message-btn" id=""><img src="image/system-message.png" width="90px">  <span id="my-messages_msgNum" class="messageUnreadCount my-messages_num af-badge1"></span> </a>
+                    </div>
+                     
+                    <div class="messages" id="sys-message-div" afmoldstyle="block" style="display: none;">
+                        <div class="message-pic all">
+                            <img src="image/cash.png" height="70px">
+                            <p class="message-red">共收到的现金红包</p>
+                            <p class="message-price" id="msg_allRed">￥1000.00</p>
+                        </div>
+                        <div class="list" id="msg_red_list">
+                        <!-- 
+                        <div class="message w-bg">
+                            <p class="message-title"><span class="message-from">成功邀请18000000加入金蜗牛</span><span class="message-date">+100.00</span></p>
+                            <p class="message-content">2015-10-10 12:00</p>
+                        </div>
+                        <div class="message w-bg">
+                            <p class="message-title"><span class="message-from">成功邀请18000000加入金蜗牛</span><span class="message-date">+100.00</span></p>
+                            <p class="message-content">2015-10-10 12:00</p>
+                        </div>
+                        <div class="message w-bg">
+                            <p class="message-title"><span class="message-from">成功邀请18000000加入金蜗牛</span><span class="message-date">+100.00</span></p>
+                            <p class="message-content">2015-10-10 12:00</p>
+                        </div>
+                         -->
+                        </div>
+                        <div class="more" onclick="load_userRedMsg(1)">加载更多</div>
+                    </div>
+                    
+                    
+                   	 <div class="messages" id="user-message-div">
+                        <div class="message-pic all">
+                            <img src="image/integral.png" height="70px">
+                            <p class="message-red">共收到的积分红包</p>
+                            <p class="message-price">￥1000.00</p>
+                        </div>
+ 						
+                        <div class="list" style="min-height:200px">
+aaaa
+                        
+                  
+                                             <div class="message w-bg">																												        <p class="message-title"><span class="message-from"> 注册送积分</span><span class="message-date">3000035</span></p>                  <p class="message-content">2015-06-06 20:26:53</p>                                                                                        </div>          	<div class="message w-bg">																												        <p class="message-title"><span class="message-from"> 推荐积分</span><span class="message-date">44</span></p>                  <p class="message-content">2015-06-06 20:26:53</p>                                                                                        </div>          	<div class="message w-bg">																												        <p class="message-title"><span class="message-from"> 成为会员</span><span class="message-date">24</span></p>                  <p class="message-content">2015-06-06 20:28:13</p>                                                                                        </div>          	<div class="message w-bg">																												        <p class="message-title"><span class="message-from"> 邀请好友积分</span><span class="message-date">33</span></p>                  <p class="message-content">2015-06-06 21:36:01</p>                                                                                        </div>          	<div class="message w-bg">																												        <p class="message-title"><span class="message-from"> 好友成为会员</span><span class="message-date">13</span></p>                  <p class="message-content">2015-06-06 21:36:33</p>                                                                                        </div>          	<div class="message w-bg">																												        <p class="message-title"><span class="message-from"> 邀请好友积分</span><span class="message-date">33</span></p>                  <p class="message-content">2015-06-06 22:11:35</p>                                                                                        </div></div>
+                        <div class="more" onclick="load_userScoreMsg(1)">加载更多</div>
+                    </div></div>

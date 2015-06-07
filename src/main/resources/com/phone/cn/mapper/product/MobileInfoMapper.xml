@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.phone.cn.mapper.product.MobileInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.phone.cn.entity.product.MobileInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="cate_ids" property="cateIds" jdbcType="VARCHAR" />
+    <result column="mobile_from" property="mobileFrom" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="create_user" property="createUser" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="update_user" property="updateUser" jdbcType="VARCHAR" />
+    <result column="more1" property="more1" jdbcType="VARCHAR" />
+    <result column="more2" property="more2" jdbcType="VARCHAR" />
+    <result column="fake_id" property="fakeId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, mobile, cate_ids, mobile_from, create_time, create_user, update_time, update_user, 
+    more1, more2,fake_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from mobile_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  
+ 
+  <select id="loadCountByCateId"  resultType="java.lang.Integer">
+    select 
+    count(1)
+    from mobile_info
+    where cate_ids like concat('%,',#{secondCateIds},',%')  
+  </select>
+  
+  
+  <select id="getAllIds" resultType="java.lang.Integer" >
+    select id
+    from mobile_info where mobile_from = 'others';
+  </select>
+  <select id="getAlls" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from mobile_info where mobile_from = 'others';
+  </select>
+  
+  <select id="getUserMobileIds" resultType="java.lang.Integer" >
+    select id
+    from mobile_info where mobile_from = 'user';
+  </select>
+  <select id="getUserMobiles" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from mobile_info where mobile_from = 'user';
+  </select>
+  
+  
+  <select id="searchByIds" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from mobile_info where 1 = 1
+    <if test="ids!=null and ids.size!=0">
+    and id in
+    <foreach collection="ids" item="id" open="(" close=")" separator="," >
+      	 #{id, jdbcType=INTEGER}
+    </foreach>
+    </if>
+  </select>
+  
+  <select id="findByMobile" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from mobile_info
+    where mobile = #{mobile,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="query" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from mobile_info
+    where 1 = 1
+      <if test="mobile != null and mobile != ''" >
+        and mobile like concat("%",#{mobile,jdbcType=VARCHAR},"%") 
+      </if>
+      <if test="cateIds != null and cateIds != ''" >
+        and cate_ids like concat("%,",#{cateIds,jdbcType=VARCHAR},",%") 
+      </if>
+      <if test="mobileFrom != null" >
+        and mobile_from = #{mobileFrom,jdbcType=VARCHAR}
+      </if>
+      <if test="createTime != null" >
+        and create_time = #{createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="createUser != null" >
+        and create_user = #{createUser,jdbcType=VARCHAR}
+      </if>
+      <if test="updateTime != null" >
+        and update_time = #{updateTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="updateUser != null" >
+        and update_user = #{updateUser,jdbcType=VARCHAR}
+      </if>
+      <if test="more1 != null and more1 != ''" >
+        and more1 = #{more1,jdbcType=VARCHAR}
+      </if>
+      <if test="more2 != null" >
+        and more2 = #{more2,jdbcType=VARCHAR}
+      </if>
+      <if test="fakeId != null" >
+        and fake_id = #{fakeId,jdbcType=VARCHAR}
+      </if>
+  </select>
+  <delete id="deleteByPrimaryKey" >
+    delete from mobile_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" >
+    insert into mobile_info (id, mobile, cate_ids, 
+      mobile_from, create_time, create_user, 
+      update_time, update_user, more1, 
+      more2)
+    values (#{id,jdbcType=INTEGER}, #{mobile,jdbcType=VARCHAR}, #{cateIds,jdbcType=VARCHAR}, 
+      #{mobileFrom,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=VARCHAR}, #{more1,jdbcType=VARCHAR}, 
+      #{more2,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" >
+    insert into mobile_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="mobile != null" >
+        mobile,
+      </if>
+      <if test="cateIds != null" >
+        cate_ids,
+      </if>
+      <if test="mobileFrom != null" >
+        mobile_from,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="createUser != null" >
+        create_user,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="updateUser != null" >
+        update_user,
+      </if>
+      <if test="more1 != null" >
+        more1,
+      </if>
+      <if test="more2 != null" >
+        more2,
+      </if>
+      <if test="fakeId != null" >
+        fake_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="cateIds != null" >
+        #{cateIds,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileFrom != null" >
+        #{mobileFrom,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null" >
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null" >
+        #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="more1 != null" >
+        #{more1,jdbcType=VARCHAR},
+      </if>
+      <if test="more2 != null" >
+        #{more2,jdbcType=VARCHAR},
+      </if>
+      <if test="fakeId != null" >
+        #{fakeId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" >
+    update mobile_info
+    <set >
+      <if test="mobile != null" >
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="cateIds != null" >
+        cate_ids = #{cateIds,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileFrom != null" >
+        mobile_from = #{mobileFrom,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null" >
+        create_user = #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null" >
+        update_user = #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="more1 != null" >
+        more1 = #{more1,jdbcType=VARCHAR},
+      </if>
+      <if test="more2 != null" >
+        more2 = #{more2,jdbcType=VARCHAR},
+      </if>
+      <if test="fakeId != null" >
+        fake_id = #{fakeId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" >
+    update mobile_info
+    set mobile = #{mobile,jdbcType=VARCHAR},
+      cate_ids = #{cateIds,jdbcType=VARCHAR},
+      mobile_from = #{mobileFrom,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_user = #{createUser,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_user = #{updateUser,jdbcType=VARCHAR},
+      more1 = #{more1,jdbcType=VARCHAR},
+      more2 = #{more2,jdbcType=VARCHAR},
+      fake_id = #{fakeId,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

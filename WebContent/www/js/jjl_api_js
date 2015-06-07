@@ -1,0 +1,294 @@
+1:  注册发送验证吗?
+app/userinfo/sendSmsCode =======> 有
+  data: {
+                "mobile": mobile,
+            },
+            
+            
+            
+2:app/userinfo/valiatorSmsCode   ==== >  新增
+	data: {
+                "mobile": mobile,
+                "yzm": yzm
+            },
+            
+ 3:           
+ 	app/userinfo/register ===> 有
+ 	data: {
+                "mobile": mobile,
+                "yzm": yzm
+                userName :  昵称 为手机号码
+                password:  "密码"
+                "otherMobile":    推荐人手机
+            },
+ 	
+ 	
+ 	
+ 4:   登入:
+ app/userinfo/login ===> 有
+ data: {
+                "account": mobile,
+                password:  "密码"
+            },
+http://localhost:8080/app/userinfo/login?account=1&password=1
+ 	
+ 	
+ 5: 找回密码 手机验证码发送	
+   app/userinfo/sendSmsCode,========= 有
+            data: {
+                "mobile": mobile,
+                "type": "findPwd"
+            },
+            
+  5. 1
+  	app/userinfo/findPwd  ======> 有    
+data:{mobileNo, 
+yzm,
+password }     
+
+===============  首页
+6:
+app/newsinfo/hp ---------->   有
+
+
+6.1  个人中心
+	消息 未读数量   3 类消息 未读数量
+	......................
+	
+	app/userinfo/unreadCount ---------->  新------------------------>  相关逻辑  数据维护
+	
+	
+	6.1.1:  修改微信号.
+	app/userinfo/modifyAccount  --------------> 新
+	data:{
+		weixin 
+	}
+	
+	
+	
+	6.1.2 修改昵称
+	app/userinfo/modifyBaseInfo  ---------------> 新
+	data:{
+		userName   //  修改昵称 参数
+		sex:   //  男女.     1: 男,  0:gir
+	}
+	
+	
+   6.1.3.
+   	用户地址消息  加载
+   	app/userinfo/loadAddress -------------------> 新表
+	data:{
+		
+	}
+	
+	  6.1.3.
+   	用户地址消息 保存,   宣言消息
+   	app/userinfo/saveAddress  ---------------->  新表-->>     user_address
+	data:{
+		receiverName
+		zone
+		address
+		mailCode :  邮政编码
+		
+		xuan_yan :  宣言消息...   
+	}
+	
+	
+	  6.2.1 ( 红包信息, 与支付宝 信息 自行提取  )
+		绑定 支付宝..
+		
+		app/userinfo/bindAlipay   ----------------->  新表-->>     user_more    有无绑定验证
+		data:{
+		alipayAccount
+		 alipayRealName  
+		 }
+		 
+		 
+		  6.2.2 ( 红包信息, 与支付宝 信息 自行提取  )
+		  
+		  app/cashUserLog/reflectMoney   ----------------->  新表-->>     必须先绑定支付宝    red_pack_log
+		data:{
+			money:     为 负数
+		 }
+		 
+		 
+		   6.2.3 (  红包 list记录  )
+		  
+		  app/cashUserLog/reflectMoney   ----------------->  新表-->>    red_pack_log   整合  cus_user_log;
+		data:{
+			money:     为 负数
+		 }
+		 
+		 
+		 
+		 
+		 
+		 6.3:   修改:  密码   页面为   手机号码 改  原密码
+		 userinfo/modifyPwd        -------------------> 有
+		 data:{
+		 password",
+        newPwd",
+        }
+        
+        
+        
+        
+        团队管理
+        6.4.1   个人基本统计数据...         ========> new
+        app/userinfo/msgManager 
+        
+         
+          6.4.2   个人基本统计数据...   ===========>  new
+        app/userinfo/friends/list
+        {
+        		pageSize: 
+        		pageNo
+        }
+        
+        6.4.3   发送红包..   
+        app/userinfo/jifenhongbao  --------> 以前是 用户id.., 现在时手机号码s
+        data: {
+                        "mobiles": mobile,                  多个手机号码, 
+                        "jifen": parseInt(pay_jifen),
+                        "type" :  score / money.   
+                    },
+                    
+                    
+                    
+        
+        
+        6.5:  消息..--------------------------->    new
+        
+        
+        6.6 资讯详情页:
+        资讯list 页面
+        newsinfo/catelist
+        data {
+        		pageNo: 
+        }
+        
+        ===> 详情页
+        app/newsinfo/detail/{id}
+        
+        ====>  点赞/or 踩
+        
+        app/newsinfo/pointgood      ===========>  有
+        data{
+        		newsId
+        }
+        
+        app/newsinfo/pointbad				=========> 有
+        data{
+        		newsId
+        }
+        
+        
+        
+        
+        下载:
+        /=========  >  
+        mobilecate/loadByParent?parentId=0  
+        
+        一级 产品列表
+        2级产品列表, 更加 一级list
+        
+        实际下载
+         url: "mobileinfo/download", ------------------------------>  改动
+                                data: {
+                                    firstCateId: $("#dl-ID").find("select.firstCateId").children('option:selected').val(),
+                                    secondCateId: $("#dl-ID").find("select[name='secondCateId']").children('option:selected').val(),
+                                    num: $("#dl-ID").find("select[name='num']").children('option:selected').val()
+                             },
+        
+        
+        //  邀请好友................
+        
+        
+        
+     
+        
+        吐槽留言 // 单方面
+        吐槽: 
+        app/message/app/message
+        data{
+        		title, 
+        		content
+        }
+        
+        消息回复记录:====  消息:系统回复消息
+        
+        app/message/app/message/allinfo
+        data{
+        		pageNo
+        }
+        
+        
+        
+        
+        
+        查询号码:
+        app/userinfo/search/?mobile=??  ====>  有
+        
+        
+        
+        //  微商资讯:  新闻list
+        newsinfo/catelist/?pageNo=1 ;  
+        
+        关于:   静态页面...
+        
+        
+        成为:  金牌好友: 
+             1:调用一个借口 获取图片
+        app/sysConfig/image?id=13
+        
+        
+        ///
+        1:调用一个借口 获取图片
+        app/sysConfig/image?id=13
+        
+        获取数据
+        
+      app/userinfo/toBeVip  ---->新  支付宝流程, +  给 自己加积分, 和推荐者加积分
+        
+		  
+		  
+		 
+		
+		  
+	其他:==========  以下全有
+		版本检查更新
+	  url: "app/version/checkVersion", 
+        data: {
+            "version": version
+        },
+				
+				
+		====> 
+		退出:
+		app/userinfo/exit		
+	
+	
+		签到
+		app/userinfo/registration
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+   	
+   
+   
+	
+	
+ 
+
+
+
+

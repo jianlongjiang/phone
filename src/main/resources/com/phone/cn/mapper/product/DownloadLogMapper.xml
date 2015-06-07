@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.phone.cn.mapper.product.DownloadLogMapper" >
+  <resultMap id="BaseResultMap" type="com.phone.cn.entity.product.DownloadLog" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="mobilenum" property="mobilenum" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="create_user" property="createUser" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="update_user" property="updateUser" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.phone.cn.entity.product.DownloadLog" extends="BaseResultMap" >
+    <result column="down_ids_str" property="downIdsStr" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, user_id, mobilenum, create_time, create_user, update_time, update_user
+  </sql>
+  <sql id="Blob_Column_List" >
+    down_ids_str
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from download_log
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from download_log
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.phone.cn.entity.product.DownloadLog" >
+    insert into download_log (id, user_id, mobilenum, 
+      create_time, create_user, update_time, 
+      update_user, down_ids_str)
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{mobilenum,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{updateUser,jdbcType=VARCHAR}, #{downIdsStr,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id"  parameterType="com.phone.cn.entity.product.DownloadLog" >
+    insert into download_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="mobilenum != null" >
+        mobilenum,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="createUser != null" >
+        create_user,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="updateUser != null" >
+        update_user,
+      </if>
+      <if test="downIdsStr != null" >
+        down_ids_str,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="mobilenum != null" >
+        #{mobilenum,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null" >
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null" >
+        #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="downIdsStr != null" >
+        #{downIdsStr,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  
+  <select id="query" resultMap="ResultMapWithBLOBs"  >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from download_log
+    where 1=1
+    <if test="userId != null"> and
+        user_id = #{userId,jdbcType=INTEGER}
+      </if>
+      <if test="mobilenum != null"> and
+        mobilenum = #{mobilenum,jdbcType=INTEGER}
+      </if>
+      <if test="createTime != null"> and
+        create_time = #{createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="createUser != null"> and
+        create_user = #{createUser,jdbcType=VARCHAR}
+      </if>
+      <if test="updateTime != null"> and
+        update_time = #{updateTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="updateUser != null"> and
+        update_user = #{updateUser,jdbcType=VARCHAR}
+      </if>
+      <if test="downIdsStr != null"> and
+        down_ids_str = #{downIdsStr,jdbcType=LONGVARCHAR}
+      </if>
+  </select>
+  
+  
+  
+  
+  <select id="findByTime" resultMap="ResultMapWithBLOBs"  >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from download_log
+    where 1=1
+   	 <if test="startTime != null"> and
+        create_time  &gt;= #{startTime}
+      </if>
+      <if test="endTime != null"> and
+        create_time &lt; #{endTime}
+      </if>
+      
+  </select>
+  
+  
+  <select id="loadDayDownAmount"   resultType="java.lang.Integer" >
+    select  sum(mobilenum)  from  download_log  where to_days(create_time) = to_days( #{date} )
+  </select>
+  
+  <select id="loadDay_downloadPeople"   resultType="java.lang.Integer" >
+    select   count(distinct user_id )   from  download_log  where to_days(create_time) = to_days(#{date})
+  </select>
+  
+   <select id="loadDayDownAmountForUser"   resultType="java.lang.Integer" >
+    select   sum(mobilenum)   from  download_log  where user_id =#{userId}  and to_days(create_time) = to_days(#{date})
+  </select>
+  
+  <select id="loadDownAmountForUser"   resultType="java.lang.Integer" >
+    select   sum(mobilenum)   from  download_log  where user_id =#{userId}  
+  </select>
+  
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.phone.cn.entity.product.DownloadLog" >
+    update download_log
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="mobilenum != null" >
+        mobilenum = #{mobilenum,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null" >
+        create_user = #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null" >
+        update_user = #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="downIdsStr != null" >
+        down_ids_str = #{downIdsStr,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.phone.cn.entity.product.DownloadLog" >
+    update download_log
+    set user_id = #{userId,jdbcType=INTEGER},
+      mobilenum = #{mobilenum,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_user = #{createUser,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_user = #{updateUser,jdbcType=VARCHAR},
+      down_ids_str = #{downIdsStr,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.phone.cn.entity.product.DownloadLog" >
+    update download_log
+    set user_id = #{userId,jdbcType=INTEGER},
+      mobilenum = #{mobilenum,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_user = #{createUser,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_user = #{updateUser,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
