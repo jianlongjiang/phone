@@ -75,7 +75,7 @@
                                                     <a class="btn btn-xs btn-success" onclick="saveOne('${info_index}', this);">
                                                         <i class="icon-stop bigger-120"> 回复 </i>
                                                     </a>
-                                                    <a class="btn btn-xs btn-danger J_DeleteTr" data-src="${request.contextPath}/admin/message/delete/${info.id}">
+                                                    <a class="btn btn-xs btn-danger J_DeleteTr" data-value="${request.contextPath}/admin/message/delete/${info.id}">
                                                         <i class="icon-stop bigger-120">删除 </i>
                                                     </a>
                                                 </div>

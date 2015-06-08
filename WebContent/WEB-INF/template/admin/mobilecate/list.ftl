@@ -107,7 +107,7 @@
                                 </table>
                                 <div class="row">
                                 		<a  href="${request.contextPath}/resources/admin/store/手机号码导入模板.xlsx">导入模板</a>
-                                		  <form id="upForm"  method="post" enctype="multipart/form-data"  action="${request.contextPath}/admin/mobileinfo/uploadMember"> 
+                                    <form id="upForm"  method="post" enctype="multipart/form-data"  action="${request.contextPath}/admin/mobileinfo/uploadMember"> 
                                 		<input type="file" id="J_member" name="exl"   />
                                     <div class="col-xs-6">
                                         <button type="button" class="btn btn-info" onclick="ajaxFileUpload();">

@@ -58,7 +58,7 @@
                 <i class="icon-search align-top"></i>导出
             </button>
             <br>
-                                          填写你要批量删除的编号，每个编号都要换行。
+                                          填写你要批量失败的编号，每个编号都要换行。
             <br>
             <div class="form-group" style="margin-bottom: 10px;">
                 <textarea style="width: 600px;height: 100px;" id="ids" name="ids"></textarea>     
@@ -123,7 +123,7 @@
                                              </td>
                                             <td>  
                                             	<#if info.doStatus?? &&  info.doStatus=='3'>  
-                                             	<button class="btn btn-xs btn-success "  data-value="${request.contextPath}/admin/cashUserLog/save?id=${info.id}&doStatus=2" >
+                                             	<button class="btn btn-xs btn-success tiKuan"  data-value="${request.contextPath}/admin/cashUserLog/save?id=${info.id}&doStatus=2" >
                                                     <i class="icon-stop bigger-120">&nbsp;提款</i>   
 												</button>			
 												<#elseif info.doStatus?? &&  info.doStatus=='2'>

@@ -42,7 +42,7 @@ public class URLUtils {
 	 */
 	public static double getRedPackCount(Integer id){
 		UserInfo userInfo = userInfoService.findOne(id);
-		double sum = userInfo.getReflectRed()+userInfo.getBalance();
+		double sum = userInfo.getBalance()-userInfo.getReflectRed();
 		return sum;
 	}
 	/**
