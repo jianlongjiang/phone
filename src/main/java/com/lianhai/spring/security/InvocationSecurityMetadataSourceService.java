@@ -117,6 +117,7 @@ public class InvocationSecurityMetadataSourceService implements FilterInvocation
 		while (ite.hasNext()) {
 			String resURL = ite.next();
 			RequestMatcher requestMatcher = new AntPathRequestMatcher(resURL);
+			logger.debug("==============> spring security: "+ resURL); //$NON-NLS-1$
 			if (requestMatcher.matches(fi.getHttpRequest())) {
 				logger.info("===================   访问的url  和收保护的index  >"+ resURL);
 				Collection<ConfigAttribute> returnCollection = resourceMap.get(resURL);
@@ -126,6 +127,7 @@ public class InvocationSecurityMetadataSourceService implements FilterInvocation
 //				return returnCollection;
 				
 				allows.addAll(returnCollection);
+				
 			}
 //			return  allows;
 			// if (urlMatcher.pathMatchesUrl(url, resURL)) {

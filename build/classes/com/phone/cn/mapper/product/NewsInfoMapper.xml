@@ -1,0 +1,446 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.phone.cn.mapper.product.NewsInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.phone.cn.entity.product.NewsInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="author" property="author" jdbcType="VARCHAR" />
+    <result column="image" property="image" jdbcType="VARCHAR" />
+    <result column="cate_id" property="cateId" jdbcType="INTEGER" />
+    <result column="cate_name" property="cateName" jdbcType="VARCHAR" />
+    <result column="point_good_count" property="pointGoodCount" jdbcType="INTEGER" />
+    <result column="point_bad_count" property="pointBadCount" jdbcType="INTEGER" />
+    <result column="news_places" property="newsPlaces" jdbcType="VARCHAR" />
+    <result column="order_by" property="orderBy" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="create_user" property="createUser" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="update_user" property="updateUser" jdbcType="VARCHAR" />
+    <result column="more1" property="more1" jdbcType="VARCHAR" />
+    <result column="more2" property="more2" jdbcType="VARCHAR" />
+    <result column="isrec" property="isrec" jdbcType="TINYINT" />
+    <result column="is_audit" property="isAudit" jdbcType="TINYINT" />
+    <result column="manager_id" property="managerId" jdbcType="INTEGER" />
+    <result column="top_status" property="topStatus" jdbcType="TINYINT" />
+    <result column="top_image" property="topImage" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.phone.cn.entity.product.NewsInfo" extends="BaseResultMap" >
+    <result column="news_desc" property="newsDesc" jdbcType="LONGVARCHAR" />
+    <result column="summary" property="summary" jdbcType="LONGVARCHAR" />
+    <result column="audit_desc" property="auditDesc" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, title, author, image, cate_id, cate_name, point_good_count, point_bad_count, 
+    news_places, order_by, create_time, create_user, update_time, update_user, more1, 
+    more2, isrec, is_audit, manager_id, top_status, top_image
+  </sql>
+  <sql id="Blob_Column_List" >
+    news_desc, summary, audit_desc
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from news_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from news_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.phone.cn.entity.product.NewsInfo" >
+    insert into news_info (id, title, author, 
+      image, cate_id, cate_name, 
+      point_good_count, point_bad_count, news_places, 
+      order_by, create_time, create_user, 
+      update_time, update_user, more1, 
+      more2, isrec, is_audit, 
+      manager_id, top_status, top_image, 
+      news_desc, summary, audit_desc
+      )
+    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR}, 
+      #{image,jdbcType=VARCHAR}, #{cateId,jdbcType=INTEGER}, #{cateName,jdbcType=VARCHAR}, 
+      #{pointGoodCount,jdbcType=INTEGER}, #{pointBadCount,jdbcType=INTEGER}, #{newsPlaces,jdbcType=VARCHAR}, 
+      #{orderBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=VARCHAR}, #{more1,jdbcType=VARCHAR}, 
+      #{more2,jdbcType=VARCHAR}, #{isrec,jdbcType=TINYINT}, #{isAudit,jdbcType=TINYINT}, 
+      #{managerId,jdbcType=INTEGER}, #{topStatus,jdbcType=TINYINT}, #{topImage,jdbcType=VARCHAR}, 
+      #{newsDesc,jdbcType=LONGVARCHAR}, #{summary,jdbcType=LONGVARCHAR}, #{auditDesc,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.phone.cn.entity.product.NewsInfo" >
+    insert into news_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="author != null" >
+        author,
+      </if>
+      <if test="image != null" >
+        image,
+      </if>
+      <if test="cateId != null" >
+        cate_id,
+      </if>
+      <if test="cateName != null" >
+        cate_name,
+      </if>
+      <if test="pointGoodCount != null" >
+        point_good_count,
+      </if>
+      <if test="pointBadCount != null" >
+        point_bad_count,
+      </if>
+      <if test="newsPlaces != null" >
+        news_places,
+      </if>
+      <if test="orderBy != null" >
+        order_by,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="createUser != null" >
+        create_user,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="updateUser != null" >
+        update_user,
+      </if>
+      <if test="more1 != null" >
+        more1,
+      </if>
+      <if test="more2 != null" >
+        more2,
+      </if>
+      <if test="isrec != null" >
+        isrec,
+      </if>
+      <if test="isAudit != null" >
+        is_audit,
+      </if>
+      <if test="managerId != null" >
+        manager_id,
+      </if>
+      <if test="topStatus != null" >
+        top_status,
+      </if>
+      <if test="topImage != null" >
+        top_image,
+      </if>
+      <if test="newsDesc != null" >
+        news_desc,
+      </if>
+      <if test="summary != null" >
+        summary,
+      </if>
+      <if test="auditDesc != null" >
+        audit_desc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null" >
+        #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null" >
+        #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="cateId != null" >
+        #{cateId,jdbcType=INTEGER},
+      </if>
+      <if test="cateName != null" >
+        #{cateName,jdbcType=VARCHAR},
+      </if>
+      <if test="pointGoodCount != null" >
+        #{pointGoodCount,jdbcType=INTEGER},
+      </if>
+      <if test="pointBadCount != null" >
+        #{pointBadCount,jdbcType=INTEGER},
+      </if>
+      <if test="newsPlaces != null" >
+        #{newsPlaces,jdbcType=VARCHAR},
+      </if>
+      <if test="orderBy != null" >
+        #{orderBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null" >
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null" >
+        #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="more1 != null" >
+        #{more1,jdbcType=VARCHAR},
+      </if>
+      <if test="more2 != null" >
+        #{more2,jdbcType=VARCHAR},
+      </if>
+      <if test="isrec != null" >
+        #{isrec,jdbcType=TINYINT},
+      </if>
+      <if test="isAudit != null" >
+        #{isAudit,jdbcType=TINYINT},
+      </if>
+      <if test="managerId != null" >
+        #{managerId,jdbcType=INTEGER},
+      </if>
+      <if test="topStatus != null" >
+        #{topStatus,jdbcType=TINYINT},
+      </if>
+      <if test="topImage != null" >
+        #{topImage,jdbcType=VARCHAR},
+      </if>
+      <if test="newsDesc != null" >
+        #{newsDesc,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="summary != null" >
+        #{summary,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="auditDesc != null" >
+        #{auditDesc,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="query" resultMap="ResultMapWithBLOBs" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from news_info
+    where 1=1
+    <if test="title != null and title != '' "> and
+        title = #{title,jdbcType=VARCHAR}
+      </if>
+      <if test="author != null"> and
+        author = #{author,jdbcType=VARCHAR}
+      </if>
+      <if test="image != null"> and
+        image = #{image,jdbcType=VARCHAR}
+      </if>
+      <if test="cateId != null and cateId != '' "> and
+        cate_id = #{cateId,jdbcType=INTEGER}
+      </if>
+      <if test="cateName != null"> and
+        cate_name = #{cateName,jdbcType=VARCHAR}
+      </if>
+      <if test="pointGoodCount != null"> and
+        point_good_count = #{pointGoodCount,jdbcType=INTEGER}
+      </if>
+      <if test="pointBadCount != null"> and
+        point_bad_count = #{pointBadCount,jdbcType=INTEGER}
+      </if>
+      <if test="newsPlaces != null"> and
+        news_places = #{newsPlaces,jdbcType=VARCHAR}
+      </if>
+      <if test="orderBy != null"> and
+        order_by = #{orderBy,jdbcType=VARCHAR}
+      </if>
+      <if test="createTime != null"> and
+        create_time = #{createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="createUser != null"> and
+        create_user = #{createUser,jdbcType=VARCHAR}
+      </if>
+      <if test="updateTime != null "> and
+        update_time = #{updateTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="updateUser != null"> and
+        update_user = #{updateUser,jdbcType=VARCHAR}
+      </if>
+      <if test="more1 != null"> and
+        more1 = #{more1,jdbcType=VARCHAR}
+      </if>
+      <if test="more2 != null"> and
+        more2 = #{more2,jdbcType=VARCHAR}
+      </if>
+      <if test="isrec != null"> and
+        isrec = #{isrec,jdbcType=TINYINT}
+      </if>
+      <if test="isAudit != null"> and
+        is_audit = #{isAudit,jdbcType=TINYINT}
+      </if>
+      <if test="managerId != null"> and
+        manager_id = #{managerId,jdbcType=INTEGER}
+      </if>
+      <if test="topStatus != null"> and
+        top_status = #{topStatus,jdbcType=TINYINT}
+      </if>
+      <if test="topImage != null"> and
+        top_image = #{topImage,jdbcType=VARCHAR}
+      </if>
+      <if test="newsDesc != null"> and
+        news_desc = #{newsDesc,jdbcType=LONGVARCHAR}
+      </if>
+      <if test="summary != null"> and
+        summary = #{summary,jdbcType=LONGVARCHAR}
+      </if>
+      <if test="auditDesc != null"> and
+        audit_desc = #{auditDesc,jdbcType=LONGVARCHAR}
+      </if>
+      
+      <!-- === ===============================-->
+      <!-- === ===============================-->
+      <!-- === ===============================-->
+      <if test="startDate != null"> and
+        update_time &gt;= #{startDate}
+      </if>
+      <if test="endDate != null"> and
+        update_time &lt;  #{endDate}
+      </if>
+  </select>
+  
+  <select id="findByCateId" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from news_info
+    where cate_id = #{cateId,jdbcType=INTEGER}
+  </select>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.phone.cn.entity.product.NewsInfo" >
+    update news_info
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null" >
+        author = #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null" >
+        image = #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="cateId != null" >
+        cate_id = #{cateId,jdbcType=INTEGER},
+      </if>
+      <if test="cateName != null" >
+        cate_name = #{cateName,jdbcType=VARCHAR},
+      </if>
+      <if test="pointGoodCount != null" >
+        point_good_count = #{pointGoodCount,jdbcType=INTEGER},
+      </if>
+      <if test="pointBadCount != null" >
+        point_bad_count = #{pointBadCount,jdbcType=INTEGER},
+      </if>
+      <if test="newsPlaces != null" >
+        news_places = #{newsPlaces,jdbcType=VARCHAR},
+      </if>
+      <if test="orderBy != null" >
+        order_by = #{orderBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null" >
+        create_user = #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null" >
+        update_user = #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="more1 != null" >
+        more1 = #{more1,jdbcType=VARCHAR},
+      </if>
+      <if test="more2 != null" >
+        more2 = #{more2,jdbcType=VARCHAR},
+      </if>
+      <if test="isrec != null" >
+        isrec = #{isrec,jdbcType=TINYINT},
+      </if>
+      <if test="isAudit != null" >
+        is_audit = #{isAudit,jdbcType=TINYINT},
+      </if>
+      <if test="managerId != null" >
+        manager_id = #{managerId,jdbcType=INTEGER},
+      </if>
+      <if test="topStatus != null" >
+        top_status = #{topStatus,jdbcType=TINYINT},
+      </if>
+      <if test="topImage != null" >
+        top_image = #{topImage,jdbcType=VARCHAR},
+      </if>
+      <if test="newsDesc != null" >
+        news_desc = #{newsDesc,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="summary != null" >
+        summary = #{summary,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="auditDesc != null" >
+        audit_desc = #{auditDesc,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.phone.cn.entity.product.NewsInfo" >
+    update news_info
+    set title = #{title,jdbcType=VARCHAR},
+      author = #{author,jdbcType=VARCHAR},
+      image = #{image,jdbcType=VARCHAR},
+      cate_id = #{cateId,jdbcType=INTEGER},
+      cate_name = #{cateName,jdbcType=VARCHAR},
+      point_good_count = #{pointGoodCount,jdbcType=INTEGER},
+      point_bad_count = #{pointBadCount,jdbcType=INTEGER},
+      news_places = #{newsPlaces,jdbcType=VARCHAR},
+      order_by = #{orderBy,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_user = #{createUser,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_user = #{updateUser,jdbcType=VARCHAR},
+      more1 = #{more1,jdbcType=VARCHAR},
+      more2 = #{more2,jdbcType=VARCHAR},
+      isrec = #{isrec,jdbcType=TINYINT},
+      is_audit = #{isAudit,jdbcType=TINYINT},
+      manager_id = #{managerId,jdbcType=INTEGER},
+      top_status = #{topStatus,jdbcType=TINYINT},
+      top_image = #{topImage,jdbcType=VARCHAR},
+      news_desc = #{newsDesc,jdbcType=LONGVARCHAR},
+      summary = #{summary,jdbcType=LONGVARCHAR},
+      audit_desc = #{auditDesc,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.phone.cn.entity.product.NewsInfo" >
+    update news_info
+    set title = #{title,jdbcType=VARCHAR},
+      author = #{author,jdbcType=VARCHAR},
+      image = #{image,jdbcType=VARCHAR},
+      cate_id = #{cateId,jdbcType=INTEGER},
+      cate_name = #{cateName,jdbcType=VARCHAR},
+      point_good_count = #{pointGoodCount,jdbcType=INTEGER},
+      point_bad_count = #{pointBadCount,jdbcType=INTEGER},
+      news_places = #{newsPlaces,jdbcType=VARCHAR},
+      order_by = #{orderBy,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_user = #{createUser,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_user = #{updateUser,jdbcType=VARCHAR},
+      more1 = #{more1,jdbcType=VARCHAR},
+      more2 = #{more2,jdbcType=VARCHAR},
+      isrec = #{isrec,jdbcType=TINYINT},
+      is_audit = #{isAudit,jdbcType=TINYINT},
+      manager_id = #{managerId,jdbcType=INTEGER},
+      top_status = #{topStatus,jdbcType=TINYINT},
+      top_image = #{topImage,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

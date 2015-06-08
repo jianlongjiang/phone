@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.phone.cn.mapper.member.UserMoreMapper" >
+  <resultMap id="BaseResultMap" type="com.phone.cn.entity.member.UserMore" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="create_user" property="createUser" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_user" property="updateUser" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="prov" property="prov" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="dist" property="dist" jdbcType="VARCHAR" />
+    <result column="int_1" property="int1" jdbcType="INTEGER" />
+    <result column="int_2" property="int2" jdbcType="INTEGER" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="receiver_name" property="receiverName" jdbcType="VARCHAR" />
+    <result column="zone" property="zone" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="mail_code" property="mailCode" jdbcType="VARCHAR" />
+    <result column="xuan_yan" property="xuanYan" jdbcType="VARCHAR" />
+    
+    <result column="alipay_account" property="alipayAccount" jdbcType="VARCHAR" />
+    <result column="alipay_real_name" property="alipayRealName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, create_user, create_time, update_user, update_time, prov, city, dist, int_1, 
+    int_2, mobile, receiver_name, zone, address, mail_code, xuan_yan, alipay_account, 
+    alipay_real_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_more
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user_more
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.phone.cn.entity.member.UserMore" >
+    insert into user_more (id, create_user, create_time, 
+      update_user, update_time, prov, 
+      city, dist, int_1, 
+      int_2, mobile, receiver_name, 
+      zone, address, mail_code, 
+      xuan_yan, alipay_account, 
+      alipay_real_name)
+    values (#{id,jdbcType=INTEGER}, #{createUser,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateUser,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{prov,jdbcType=VARCHAR}, 
+      #{city,jdbcType=VARCHAR}, #{dist,jdbcType=VARCHAR}, #{int1,jdbcType=INTEGER}, 
+      #{int2,jdbcType=INTEGER}, #{mobile,jdbcType=VARCHAR}, #{receiverName,jdbcType=VARCHAR}, 
+      #{zone,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{mailCode,jdbcType=VARCHAR}, 
+      #{xuanYan,jdbcType=VARCHAR}, #{alipayAccount,jdbcType=VARCHAR}, 
+      #{alipayRealName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id" parameterType="com.phone.cn.entity.member.UserMore" >
+    insert into user_more
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="createUser != null" >
+        create_user,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateUser != null" >
+        update_user,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="prov != null" >
+        prov,
+      </if>
+      <if test="city != null" >
+        city,
+      </if>
+      <if test="dist != null" >
+        dist,
+      </if>
+      <if test="int1 != null" >
+        int_1,
+      </if>
+      <if test="int2 != null" >
+        int_2,
+      </if>
+      <if test="mobile != null" >
+        mobile,
+      </if>
+      <if test="receiverName != null" >
+        receiver_name,
+      </if>
+      <if test="zone != null" >
+        zone,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="mailCode != null" >
+        mail_code,
+      </if>
+      <if test="xuanYan != null" >
+        xuan_yan,
+      </if>
+      
+      <if test="alipayAccount != null" >
+        alipay_account,
+      </if>
+      <if test="alipayRealName != null" >
+        alipay_real_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="createUser != null" >
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null" >
+        #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="prov != null" >
+        #{prov,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="dist != null" >
+        #{dist,jdbcType=VARCHAR},
+      </if>
+      <if test="int1 != null" >
+        #{int1,jdbcType=INTEGER},
+      </if>
+      <if test="int2 != null" >
+        #{int2,jdbcType=INTEGER},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverName != null" >
+        #{receiverName,jdbcType=VARCHAR},
+      </if>
+      <if test="zone != null" >
+        #{zone,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="mailCode != null" >
+        #{mailCode,jdbcType=VARCHAR},
+      </if>
+      <if test="xuanYan != null" >
+        #{xuanYan,jdbcType=VARCHAR},
+      </if>
+    
+      <if test="alipayAccount != null" >
+        #{alipayAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="alipayRealName != null" >
+        #{alipayRealName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  
+  <select id="query" resultMap="BaseResultMap"  >
+    select 
+    <include refid="Base_Column_List" />
+    from user_more
+    where 1=1
+    <if test="createUser != null"> and
+        create_user = #{createUser,jdbcType=VARCHAR}
+      </if>
+      <if test="createTime != null"> and
+        create_time = #{createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="updateUser != null"> and
+        update_user = #{updateUser,jdbcType=VARCHAR}
+      </if>
+      <if test="updateTime != null"> and
+        update_time = #{updateTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="prov != null"> and
+        prov = #{prov,jdbcType=VARCHAR}
+      </if>
+      <if test="city != null"> and
+        city = #{city,jdbcType=VARCHAR}
+      </if>
+      <if test="dist != null"> and
+        dist = #{dist,jdbcType=VARCHAR}
+      </if>
+      <if test="int1 != null"> and
+        int_1 = #{int1,jdbcType=INTEGER}
+      </if>
+      <if test="int2 != null"> and
+        int_2 = #{int2,jdbcType=INTEGER}
+      </if>
+      <if test="mobile != null"> and
+        mobile = #{mobile,jdbcType=VARCHAR}
+      </if>
+      <if test="receiverName != null"> and
+        receiver_name = #{receiverName,jdbcType=VARCHAR}
+      </if>
+      <if test="zone != null"> and
+        zone = #{zone,jdbcType=VARCHAR}
+      </if>
+      <if test="address != null"> and
+        address = #{address,jdbcType=VARCHAR}
+      </if>
+      <if test="mailCode != null"> and
+        mail_code = #{mailCode,jdbcType=VARCHAR}
+      </if>
+      <if test="xuanYan != null"> and
+        xuan_yan = #{xuanYan,jdbcType=VARCHAR}
+      </if>
+     
+      <if test="alipayAccount != null"> and
+        alipay_account = #{alipayAccount,jdbcType=VARCHAR}
+      </if>
+      <if test="alipayRealName != null"> and
+        alipay_real_name = #{alipayRealName,jdbcType=VARCHAR}
+      </if>
+  </select>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.phone.cn.entity.member.UserMore" >
+    update user_more
+    <set >
+      <if test="createUser != null" >
+        create_user = #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null" >
+        update_user = #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="prov != null" >
+        prov = #{prov,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="dist != null" >
+        dist = #{dist,jdbcType=VARCHAR},
+      </if>
+      <if test="int1 != null" >
+        int_1 = #{int1,jdbcType=INTEGER},
+      </if>
+      <if test="int2 != null" >
+        int_2 = #{int2,jdbcType=INTEGER},
+      </if>
+      <if test="mobile != null" >
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverName != null" >
+        receiver_name = #{receiverName,jdbcType=VARCHAR},
+      </if>
+      <if test="zone != null" >
+        zone = #{zone,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="mailCode != null" >
+        mail_code = #{mailCode,jdbcType=VARCHAR},
+      </if>
+      <if test="xuanYan != null" >
+        xuan_yan = #{xuanYan,jdbcType=VARCHAR},
+      </if>
+     
+      <if test="alipayAccount != null" >
+        alipay_account = #{alipayAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="alipayRealName != null" >
+        alipay_real_name = #{alipayRealName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.phone.cn.entity.member.UserMore" >
+    update user_more
+    set create_user = #{createUser,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_user = #{updateUser,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      prov = #{prov,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      dist = #{dist,jdbcType=VARCHAR},
+      int_1 = #{int1,jdbcType=INTEGER},
+      int_2 = #{int2,jdbcType=INTEGER},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      receiver_name = #{receiverName,jdbcType=VARCHAR},
+      zone = #{zone,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      mail_code = #{mailCode,jdbcType=VARCHAR},
+      xuan_yan = #{xuanYan,jdbcType=VARCHAR},
+      alipay_account = #{alipayAccount,jdbcType=VARCHAR},
+      alipay_real_name = #{alipayRealName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
