@@ -787,6 +787,7 @@ public class UserInfoAppAction extends BaseCRUDController<UserInfoBean, UserInfo
 		UserMore userMore = new UserMore();
 		Integer groupNum = 0;
 		if (userInfo != null) {
+			userInfoService.findMobileIntegrationModify(userInfo);
 			userMore = userMoreService.findOne(userInfo.getId());
 			groupNum = URLUtils.loadUserGroupMount(userInfo.getId());
 		}

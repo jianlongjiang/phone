@@ -368,4 +368,13 @@ public class UserInfoService extends BaseService<UserInfo, Integer> {
 			m.setIsVip(false);
 		}
 	}
+	
+	//查询手机号积分维护
+	public void findMobileIntegrationModify(UserInfo userInfo){
+		SysConfig num = sysConfigService.findOne(SysConfigEnum.search_msg_mobile.getValue());
+		logger.debug(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>查询扣除积分="+num.getConfigValue());
+		Integer newIntegration = userInfo.getIntegration()-Integer.parseInt(num.getConfigValue());
+		userInfo.setIntegration(newIntegration);
+		mapper.updateByPrimaryKeySelective(userInfo);
+	}
 }
