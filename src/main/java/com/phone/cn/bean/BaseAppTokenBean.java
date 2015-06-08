@@ -49,7 +49,6 @@ public class BaseAppTokenBean {
 	}
 
 	public UserInfo getAppUser() {
-
 		if (isTest) {
 			UserInfo userInfo = new UserInfo();
 			userInfo.setId(userId);

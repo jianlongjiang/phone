@@ -14,14 +14,17 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.googlecode.ehcache.annotations.Cacheable;
 import com.phone.cn.bean.product.MobileInfoBean;
+import com.phone.cn.conf.enums.MobileInfoFromEnum;
 import com.phone.cn.entity.member.UserInfo;
 import com.phone.cn.entity.product.CateInfo;
 import com.phone.cn.entity.product.DownloadLog;
 import com.phone.cn.entity.product.MobileInfo;
+import com.phone.cn.entity.sys.MobileDownLog;
 import com.phone.cn.entity.sys.SysConfig;
 import com.phone.cn.mapper.product.MobileInfoMapper;
 import com.phone.cn.service.BaseService;
 import com.phone.cn.service.member.UserInfoService;
+import com.phone.cn.service.sys.MobileDownLogService;
 
 /**
  * @author zgdcool
@@ -41,6 +44,9 @@ public class MobileService extends BaseService<MobileInfo, Integer> {
 	
 	@Autowired
 	private  CateInfoService cateInfoService;
+	
+	@Autowired
+	private MobileDownLogService mobileDownLogService;
 
 	@Cacheable(cacheName = "day_cache_key")
 	public List<Integer> allOtherIds() {
@@ -59,8 +65,86 @@ public class MobileService extends BaseService<MobileInfo, Integer> {
 		return mapper.searchByIds(ids);
 	}
 
+	
+	public List<MobileInfo> getMobiles(UserInfo userInfo, Integer num, List<String> downMobiles, List<MobileInfo> mustDowns, List<MobileInfo> vipMobileInfos,
+			List<MobileInfo> normalpMobileInfos, List<MobileInfo> otherMobiles, SysConfig s) {
+		List<MobileInfo> needDownMobiles = new ArrayList<MobileInfo>();
+		
+		num = needDowns(num, needDownMobiles, downMobiles, mustDowns);
+		num = needDowns(num, needDownMobiles, downMobiles, vipMobileInfos);
+		num = needDowns(num, needDownMobiles, downMobiles, normalpMobileInfos);
+		num = needDowns(num, needDownMobiles, downMobiles, otherMobiles);
+		
+		
+		// 积分操作	
+				userInfoService.addIntegration(userInfo, "下载", "下载手机号码", - needDownMobiles.size() * Integer.parseInt(s.getConfigValue()), true);
+				//user.setIntegration(user.getIntegration() - list.size() * Integer.parseInt(s.getConfigValue()));
+				int  mobileAcount = userInfo.getDownloadMobileAmount() == null ? 0 : userInfo.getDownloadMobileAmount();
+				userInfo.setDownloadMobileAmount(mobileAcount + needDownMobiles.size());
+//				String[] mobiles = null;
+//				String  backMobiles = StringUtils.isBlank(userInfo.getDownloadMobile() )? "":userInfo.getDownloadMobile() ;
+				StringBuffer stringBuffer = new StringBuffer();
+				boolean isFirst = true;
+				for (MobileInfo mobileInfo : needDownMobiles) {
+					if(isFirst) {
+						stringBuffer.append(mobileInfo.getMobile());
+						isFirst = false;
+					}else {
+						stringBuffer.append(",").append(mobileInfo.getMobile());
+					}
+				}
+//				String downIds = stringBuffer.toString();
+//				if(downIds.startsWith(",")) downIds = downIds.substring(1);
+//				userInfo.setDownloadMobile(downIds);
+				userInfoService.isSave(userInfo);
+				if(needDownMobiles.size() >= 0){
+					DownloadLog log = new DownloadLog();
+					log.setCreateTime(new Date());
+					log.setUpdateTime(new Date());
+					log.setUserId(userInfo.getId());
+					log.setMobilenum(needDownMobiles.size());
+					downloadLogService.isSave(log);
+					
+					
+					MobileDownLog  mobileDownLog = new MobileDownLog();
+					mobileDownLog.setCreateTime(new Date());
+					mobileDownLog.setUpdateTime(new Date());
+					mobileDownLog.setUserId(userInfo.getId());
+					mobileDownLog.setAmount(needDownMobiles.size());
+					mobileDownLog.setMobiles(stringBuffer.toString());
+					mobileDownLogService.save(mobileDownLog);
+					
+					// 用户数据维护
+//					downloadMobileAmount
+					userInfo.setDownloadMobileAmount(userInfo.getDownloadMobileAmount() + needDownMobiles.size());
+					userInfoService.save(userInfo);
+					
+				}
+				return needDownMobiles;
+	}
+	
+	
+	
+	private Integer needDowns(Integer num, List<MobileInfo> needDownMobiles, List<String> downMobiles, List<MobileInfo> goDowns) {
+		for (int i = 0; i < goDowns.size() && num > 0; i++) {
+			MobileInfo goInfo = goDowns.get(i);
+			boolean  needDown = true;
+			for (String downMobile : downMobiles) {
+				if(StringUtils.equals(downMobile, goInfo.getMobile())){
+					needDown = false;
+					break;
+				}
+			}
+			if(needDown){
+				needDownMobiles.add(goInfo);
+				num --;
+			}
+		}
+		return num;
+	}
+
 	@Transactional
-	public List<MobileInfo> getMobiles(UserInfo userInfo, Integer num, String[] mobileids,
+	public List<MobileInfo> getMobiles1(UserInfo userInfo, Integer num, String[] mobileids,
 			List<MobileInfo> mustDowns, List<Integer> allOtherIdsCopy, List<Integer> allUserMobileIdsCopy,
 			 SysConfig s) {
 		
@@ -126,7 +210,7 @@ public class MobileService extends BaseService<MobileInfo, Integer> {
 		int  mobileAcount = userInfo.getDownloadMobileAmount() == null ? 0 : userInfo.getDownloadMobileAmount();
 		userInfo.setDownloadMobileAmount(mobileAcount + list.size());
 //		String[] mobiles = null;
-		String  backMobiles = StringUtils.isBlank(userInfo.getDownloadMobile() )? "":userInfo.getDownloadMobile() ;
+		String  backMobiles = null ;// StringUtils.isBlank(userInfo.getDownloadMobile() )? "":userInfo.getDownloadMobile() ;
 		StringBuffer stringBuffer = new StringBuffer();
 		for (MobileInfo mobileInfo : list) {
 			stringBuffer.append(",").append(mobileInfo.getId());
@@ -134,7 +218,7 @@ public class MobileService extends BaseService<MobileInfo, Integer> {
 		stringBuffer.insert(0, backMobiles);
 		String downIds = stringBuffer.toString();
 		if(downIds.startsWith(",")) downIds = downIds.substring(1);
-		userInfo.setDownloadMobile(downIds);
+//		userInfo.setDownloadMobile(downIds);
 		userInfoService.isSave(userInfo);
 		if(list.size() >= 0){
 			DownloadLog log = new DownloadLog();
@@ -190,23 +274,23 @@ public class MobileService extends BaseService<MobileInfo, Integer> {
 	 * @param secondCateId
 	 * @return
 	 */
-	public List<Integer> doFilter(List<MobileInfo> list, Integer firstCateId,
+	public List<MobileInfo> doFilter(List<MobileInfo> list, Integer firstCateId,
 			Integer secondCateId) {
 		List<CateInfo> cateInfos = null;
 		if(firstCateId !=null && secondCateId == null){
 			  cateInfos = cateInfoService.queryByParentId(firstCateId);
 		}
 		
-		List<Integer> ids = new ArrayList<Integer>();
+		List<MobileInfo> ids = new ArrayList<MobileInfo>();
 		for (MobileInfo mobileInfo : list) {
 			if (firstCateId == null && secondCateId == null) { // 1级也没选择
-				ids.add(mobileInfo.getId());
+				ids.add(mobileInfo);
 			} else if (secondCateId != null) { // 选择了2级
 				String cateIdsStr = String.valueOf(mobileInfo.getCateIds());
 				if (StringUtils.isNotEmpty(cateIdsStr)) {
 					String[] cateIds = cateIdsStr.split(",");
 					if (Arrays.asList(cateIds).contains(String.valueOf(secondCateId))) {
-						ids.add(mobileInfo.getId());
+						ids.add(mobileInfo);
 					}
 				}
 			} else { //
@@ -216,7 +300,7 @@ public class MobileService extends BaseService<MobileInfo, Integer> {
 					
 					for (CateInfo cateInfo : cateInfos) {
 						if (Arrays.asList(cateIds).contains(String.valueOf(cateInfo.getId()))) {
-							ids.add(mobileInfo.getId());
+							ids.add(mobileInfo);
 						}
 					}
 				}
@@ -232,8 +316,23 @@ public class MobileService extends BaseService<MobileInfo, Integer> {
 		return mapper.loadCountByCateId(mobileInfoBean);
 	}
 	
-	public MobileInfo findByMobile (String mobile){
-		return mapper.findByMobile(mobile);
+	public MobileInfo findByMobile (String mobile, MobileInfoFromEnum mobileInfoFromEnum){
+		MobileInfoBean bean =new MobileInfoBean();
+		bean.setMobile(mobile);
+		bean.setMobileFrom(mobileInfoFromEnum.getValue());
+		return selectOneByExample(bean);
+//		return mapper.findByMobile(mobile);
 	}
+	
+	@Override
+	public MobileInfo save(MobileInfo m) {
+		return super.save(m);
+	}
+
+	public List<MobileInfo> userMobileInfos( boolean  isVip) {
+		return mapper.userMobileInfos(isVip);
+	}
+
+
 
 }

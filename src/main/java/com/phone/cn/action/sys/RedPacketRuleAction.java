@@ -1,5 +1,9 @@
 package com.phone.cn.action.sys;
 
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,4 +24,19 @@ public class RedPacketRuleAction extends BaseCRUDController<RedPacketRuleBean, R
 		return super.list(bean, model, pageNo);
 	}
 
+	
+	@Override
+	public Map<String, Object> save(RedPacketRule m, HttpServletRequest request) {
+		if(m.getStart() == null || m.getEnd() == null ){
+			return fail("规则不对");
+		}
+		if(m.getStart()  <=0 || m.getEnd() <=0 ){
+			return fail("红包值必须大于0");
+		}
+		if( m.getStart().intValue() > m.getEnd().intValue()  ){
+			return fail("红包值有问题");
+		}
+		
+		return super.save(m, request);
+	}
 }

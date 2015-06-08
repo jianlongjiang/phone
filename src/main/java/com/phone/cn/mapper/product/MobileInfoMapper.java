@@ -34,4 +34,6 @@ public interface MobileInfoMapper extends BaseMapper<MobileInfo, Integer>{
 
 	 // select count(1)   from  xx  where  cate_ids  like '%aa%;'
 	Integer loadCountByCateId(MobileInfoBean mobileInfoBean);
+
+	List<MobileInfo> userMobileInfos(boolean isVip);
 }

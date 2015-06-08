@@ -314,13 +314,13 @@ public class UserInfo extends BaseEntity<Integer> {
 		this.isVip = isVip;
 	}
 
-	public String getDownloadMobile() {
-		return downloadMobile;
-	}
-
-	public void setDownloadMobile(String downloadMobile) {
-		this.downloadMobile = downloadMobile == null ? null : downloadMobile.trim();
-	}
+//	public String getDownloadMobile() {
+//		return downloadMobile;
+//	}
+//
+//	public void setDownloadMobile(String downloadMobile) {
+//		this.downloadMobile = downloadMobile == null ? null : downloadMobile.trim();
+//	}
 
 	public Date getVipTime() {
 		return vipTime;

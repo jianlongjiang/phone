@@ -7,9 +7,12 @@
 		<commentGenerator>
 			<property name="suppressAllComments" value="true" />
 		</commentGenerator>
-		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+	<!-- <jdbcConnection driverClass="com.mysql.jdbc.Driver"
 			connectionURL="jdbc:mysql://121.41.108.136/phone" userId="root"
-			password="WNzO1CMmoo" />
+			password="WNzO1CMmoo" /> -->
+			 <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://121.40.215.96/phone" userId="root"
+			password="Zgd_352067912F_d" />
 		<javaModelGenerator targetPackage="com.phone.cn.entity"
 			targetProject="phone/src/main/java">
 			<!-- <property name="rootClass" value="com.phone.cn.entity.BaseEntity"/>
@@ -62,15 +65,21 @@
 		 -->
 		 
 		 
-		 <table tableName="ord_record" modelType="flat" domainObjectName="sys.OrdRecord"
+		<!--  <table tableName="ord_record" modelType="flat" domainObjectName="sys.OrdRecord"
 			enableInsert="true" enableSelectByPrimaryKey="true"
 			enableSelectByExample="false" enableUpdateByPrimaryKey="true"
 			enableDeleteByPrimaryKey="true" enableDeleteByExample="false"
 			enableCountByExample="false" enableUpdateByExample="false"
 			escapeWildcards="true">
-		</table> 
+		</table>  -->
 		
-		
+		<table tableName="mobile_down_log" modelType="flat" domainObjectName="sys.MobileDownLog"
+			enableInsert="true" enableSelectByPrimaryKey="true"
+			enableSelectByExample="false" enableUpdateByPrimaryKey="true"
+			enableDeleteByPrimaryKey="true" enableDeleteByExample="false"
+			enableCountByExample="false" enableUpdateByExample="false"
+			escapeWildcards="true">
+		</table>  
 		
 		
 	</context>

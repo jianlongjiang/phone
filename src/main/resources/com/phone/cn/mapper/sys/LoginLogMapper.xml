@@ -97,7 +97,7 @@
   
   
    <select id="loadDay_loginAmount"   resultType="java.lang.Integer" >
-    select  count(distinct user_id) from login_log where   to_days(create_time) = to_days( #{date} )
+    select  count(distinct user_id) from login_log where   to_days(login_time) = to_days( #{date} )
   </select>
   
 </mapper>

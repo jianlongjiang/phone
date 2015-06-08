@@ -34,9 +34,13 @@ public class RedPacketRuleService extends BaseService<RedPacketRule, Integer>{
 		userRedCount = userRedCount == null? 0: userRedCount;
 		int index = userRedCount%rules.size();
 		RedPacketRule rule = rules.get(index);
-		int  money = random.nextInt(rule.getEnd() - rule.getStart()) + rule.getStart();
+		int  chaJu = Math.abs(rule.getEnd() - rule.getStart());
+		int money = rule.getStart();
+		if(chaJu != 0){
+			money =random.nextInt(chaJu) + rule.getStart();
+		}
 		userInfo.setRedPackCount(userRedCount+1); 
-		userInfoService.addMoney(userInfo, CashUserLogActionEnum.SYS.getValue(), from.getMobile()+"推荐奖励",(double) money, false, null);
+		userInfoService.addMoney(userInfo, CashUserLogActionEnum.SYS.getValue(), from.showName()+"推荐奖励",(double) money, false, null);
 		
 		return  money;
 	}
@@ -49,8 +53,7 @@ public class RedPacketRuleService extends BaseService<RedPacketRule, Integer>{
 //		RedPacketRule rule = rules.get(index);
 //		int  money = random.nextInt(rule.getEnd() - rule.getStart()) + rule.getStart();
 //		userInfo.setRedPackCount(userRedCount+1); 
-		userInfoService.addMoney(userInfo, CashUserLogActionEnum.SYS.getValue(), from.getMobile()+"团队奖励",(double) groupMoney*0.1, false, null);
-		
+		userInfoService.addMoney(userInfo, CashUserLogActionEnum.SYS.getValue(), from.showName()+"团队奖励",(double) groupMoney*0.1, false, null);
 //		return  money;
 	}
 	

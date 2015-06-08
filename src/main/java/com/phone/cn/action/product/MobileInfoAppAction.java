@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,11 +14,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.phone.cn.bean.BaseAppTokenBean;
 import com.phone.cn.bean.ResultBean;
 import com.phone.cn.bean.product.MobileInfoBean;
+import com.phone.cn.conf.enums.MobileInfoFromEnum;
 import com.phone.cn.entity.member.UserInfo;
 import com.phone.cn.entity.product.MobileInfo;
 import com.phone.cn.entity.sys.SysConfig;
+import com.phone.cn.service.member.UserInfoService;
 import com.phone.cn.service.product.DownloadLogService;
 import com.phone.cn.service.product.MobileService;
+import com.phone.cn.service.sys.MobileDownLogService;
 import com.phone.cn.service.sys.SysConfigService;
 import com.phone.cn.utils.JsonMapper;
 import com.phone.cn.web.action.BaseCRUDController;
@@ -45,6 +47,11 @@ public class MobileInfoAppAction extends BaseCRUDController<MobileInfoBean, Mobi
 	@Autowired
 	DownloadLogService  downloadLogService;
 	
+	@Autowired
+	MobileDownLogService 	mobileDownLogService;
+	
+	@Autowired
+	private UserInfoService userInfoService;
 	
 	@ResponseBody
 	@RequestMapping(value="detail/{id}")
@@ -71,15 +78,17 @@ public class MobileInfoAppAction extends BaseCRUDController<MobileInfoBean, Mobi
 			b.setMessage("对不起，积分不足！");
 			return JsonMapper.beanToMap(b);
 		}
-		String downloadmobile = user.getDownloadMobile();
-		String[] mobileids = null;
-		if(StringUtils.isNotEmpty(downloadmobile)){
-			mobileids = downloadmobile.split(",");
-		}
+		
+//		String downloadmobile = user.getDownloadMobile();
+		List<String> downMobiles = mobileDownLogService.loadDownMobiles(user);;
+//		if(StringUtils.isNotEmpty(downloadmobile)){
+//			mobileids = downloadmobile.split(",");
+//		}
 		
 		// 必备手机号码下载
 		MobileInfoBean mobileInfoBean = new MobileInfoBean();
 		mobileInfoBean.setMore1("y");
+		mobileInfoBean.setMobileFrom(MobileInfoFromEnum.ADMIN.getValue());
 		List<MobileInfo> mustDowns = mobileService.queryAll(mobileInfoBean);
 		
 		
@@ -88,11 +97,14 @@ public class MobileInfoAppAction extends BaseCRUDController<MobileInfoBean, Mobi
 //		List<Integer> allOtherIds = mobileService.allOtherIds();
 		// 导入的手机号码
 		List<MobileInfo> allOthers = mobileService.allOthers();
-		List<Integer> allOtherIds  = mobileService.doFilter(allOthers , firstCateId, secondCateId);
+		List<MobileInfo> otherMobiles  = mobileService.doFilter(allOthers , firstCateId, secondCateId);
 //		List<Integer> allUserMobileIds = mobileService.allUserMobileIds();
 //		用户注册的手机号码
-		List<MobileInfo> allUserMobiles = mobileService.allUserMobiles();
-		List<Integer> allUserMobileIds = mobileService.doFilter(allUserMobiles , firstCateId, secondCateId);
+//		List<MobileInfo> allUserMobiles = mobileService.allUserMobiles();
+//		List<Integer> allUserMobileIds = mobileService.doFilter(allUserMobiles , firstCateId, secondCateId);
+		List<MobileInfo> vipMobileInfos = mobileService.userMobileInfos(true);
+		List<MobileInfo> normalpMobileInfos = mobileService.userMobileInfos(false);
+		
 		Integer  dayDown_last = downloadLogService.loadDayDownAmount(  user, new Date());
 		Integer  dayDownLimit = sysConfigService.loadDownLimit(user);
 		dayDown_last = dayDown_last==null?0:dayDown_last;
@@ -105,6 +117,6 @@ public class MobileInfoAppAction extends BaseCRUDController<MobileInfoBean, Mobi
 			return  fail("今日下载已达到上限");
 		}
 		
-		return suc(mobileService.getMobiles(user, num, mobileids,mustDowns,  allOtherIds, allUserMobileIds, s));
+		return suc(mobileService.getMobiles(user, num, downMobiles,mustDowns,  vipMobileInfos, normalpMobileInfos,otherMobiles, s));
 	}
 }

@@ -19,6 +19,7 @@ import com.phone.cn.bean.member.UserInfoBean;
 import com.phone.cn.entity.member.UserInfo;
 import com.phone.cn.entity.sys.Role;
 import com.phone.cn.service.member.UserInfoService;
+import com.phone.cn.service.sys.MobileDownLogService;
 import com.phone.cn.service.sys.RoleService;
 
 /**
@@ -32,6 +33,8 @@ public class URLUtils {
 	static RoleService roleService = SpringContextHolder.getBean(RoleService.class);
 	
 	static UserInfoService userInfoService = SpringContextHolder.getBean(UserInfoService.class);
+	
+	static  MobileDownLogService mobileDownLogService = SpringContextHolder.getBean(MobileDownLogService.class);
 	
 	/**
 	 * 得到的红包金额
@@ -48,12 +51,14 @@ public class URLUtils {
 	 * @return
 	 */
 	public static Integer searchDownloadAmount(String mobile){
-		Integer downloadAmount = 0;
-		UserInfo userInfo = userInfoService.findByMobile(mobile);
-		if (userInfo!=null) {
-			downloadAmount=userInfo.getDownloadMobileAmount();
-		}
-		return downloadAmount;	
+//		Integer downloadAmount = 0;
+//		UserInfo userInfo = userInfoService.findByMobile(mobile);
+//		if (userInfo!=null) {
+//			downloadAmount=userInfo.getDownloadMobileAmount();
+//		}
+//		return downloadAmount;	
+		
+		return mobileDownLogService.loadMobileDownCount(mobile);
 	}
 	/**
 	 * 手机号码搜索用户姓名  searchMobileName

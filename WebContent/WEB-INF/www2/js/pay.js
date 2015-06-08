@@ -40,45 +40,46 @@ function cancelOrder(to){
 	});
 }
 
+var  isTestPay = false;
 
 function	payMoney(to){
-//	appAjax({
-//		type : "POST",
-//		url: "app/ordRecord/orderGenerate",
-//		//data:{"proids":ArraytoString(proids),"counts":ArraytoString(counts),"shopid":shop.id,"orderFrom":orderFrom,"deliveryDate":deliveryDate,"giftid":giftid,"recId":recId},
-//		success : function(data) {
-//			if (data.isSuccess) {
-//				
-//				if(res.orderFrom == "alipay"){
-//					alipay(res.orderCode,res.payment,res.payment,res.payment);//调用支付宝
-//				}else if(res.orderFrom == "weixing"){
-//					
-//				}else{
-//					loadDetailOrder('orderDetail',res.id);
-//				}
-//			} else {
-//				alert(data.message);
-//			}
-//		},
-//		dataType : "json"
-//	});
-	var  out_trade_no =  orderRecod.outtradeno;
-	var 	subject = orderRecod.outtradeno;;
-	var bodtxt = orderRecod.outtradeno;;
-	var total_fee = orderRecod.tradeCount;
-	//total_fee  = 0.01;
-	 var url = BASE_URL+"/ordernotifyurl";
-	 
-     window.plugins.Pgalipay.alipay(out_trade_no,subject,bodtxt,total_fee,url,
-                                    function(success) {
-//                                    var element = document.getElementById('alipaytxt');
-//                                    element.innerHTML = "支付结果2:"+success;
-    	 
-    	 
-    	 resultString(success);
-                                    }, function(fail) {
-                                    			alert("encoding failed: " + fail);
-       }); 
+
+	if(isTestPay){
+		appAjax({
+			type : "POST",
+			url: "test_alipay",
+			data:{"out_trade_no":orderRecod.outtradeno},
+			success : function(data) {
+				if (data.isSuccess) {
+					alert("测试支付成功");
+					d = {"resultStatus":9000};
+					resultString(d);
+				} else {
+					alert(data.message);
+				}
+			},
+			dataType : "json"
+		});
+	}else {
+		var  out_trade_no =  orderRecod.outtradeno;
+		var 	subject = orderRecod.outtradeno;;
+		var bodtxt = orderRecod.outtradeno;;
+		var total_fee = orderRecod.tradeCount;
+		total_fee  = 0.01;
+		 var url = BASE_URL+"/ordernotifyurl";
+		 
+	     window.plugins.Pgalipay.alipay(out_trade_no,subject,bodtxt,total_fee,url,
+	                                    function(success) {
+//	                                    var element = document.getElementById('alipaytxt');
+//	                                    element.innerHTML = "支付结果2:"+success;
+	    	 
+	    	 
+	    	 resultString(success);
+	                                    }, function(fail) {
+	                                    			alert("encoding failed: " + fail);
+	       }); 
+	}
+	
 	
 }   
 

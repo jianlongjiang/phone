@@ -428,7 +428,7 @@ function  into_chat(isMore){
 	} else {
 		isMore = false;
 		pageNo = 1;
-		$.ui.scrollToTop("chat");
+//		$.ui.scrollToTop("chat");
 		$(".more").html("加载更多");
 	}
 	
@@ -882,7 +882,7 @@ function into_payDetail(isMore) {
 	} else {
 		isMore = false;
 		pageNo = 1;
-		$.ui.scrollToTop("pay-details");
+//		$.ui.scrollToTop("pay-details");
 		$(".more").html("加载更多");
 	}
 	var userInfo = get("userInfo");
@@ -1475,7 +1475,7 @@ function load_userScoreMsg(isMore) {
 	if (isMore==1 ){
 		isMore = true;
 	}else {
-		$.ui.scrollToTop("my-messages");
+//		$.ui.scrollToTop("my-messages");
 		isMore = false;
 		pageNo = 1;
 		$(".more").html("加载更多");
@@ -1533,7 +1533,7 @@ function load_userRedMsg(isMore) {
 	}else {
 		isMore = false;
 		pageNo = 1;
-		$.ui.scrollToTop("my-messages");
+//		$.ui.scrollToTop("my-messages");
 		$(".more").html("加载更多");
 	}
 	appAjax({

@@ -119,7 +119,7 @@ function RedPacketRuleSave(index){
  		    	 alert("保存成功");
  		    	 location.href = "${request.contextPath}/admin/RedPacketRule/list/p1";
  		     }else{
- 		    	bootbox.alert("保存失败");
+ 		    	bootbox.alert(data.msg);
  		     }
  		   },
  		   dataType: "json"

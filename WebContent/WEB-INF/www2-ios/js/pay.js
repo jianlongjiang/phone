@@ -43,41 +43,47 @@ function cancelOrder(to){
 
 
 
+var  isTestPay = false;
 
 function	payMoney(to){
-//	appAjax({
-//		type : "POST",
-//		url: "test_alipay",
-//		data:{"out_trade_no":orderRecod.outtradeno},
-//		success : function(data) {
-//			if (data.isSuccess) {
-//				alert("测试支付成功");
-//				d = {"resultStatus":9000};
-//				resultString(d);
-//			} else {
-//				alert(data.message);
-//			}
-//		},
-//		dataType : "json"
-//	});
+	if(isTestPay){
+		appAjax({
+			type : "POST",
+			url: "test_alipay",
+			data:{"out_trade_no":orderRecod.outtradeno},
+			success : function(data) {
+				if (data.isSuccess) {
+					alert("测试支付成功");
+					d = {"resultStatus":9000};
+					resultString(d);
+				} else {
+					alert(data.message);
+				}
+			},
+			dataType : "json"
+		});
+	}else {
+		var  out_trade_no =  orderRecod.outtradeno;
+		var 	subject = orderRecod.outtradeno;;
+		var bodtxt = orderRecod.outtradeno;;
+		var total_fee = orderRecod.tradeCount;
+		alert(total_fee);
+		total_fee  = 0.01;  //  正式测试的
+//		total_fee = 100;
+		 var url = BASE_URL+"/ordernotifyurl";
+		 
+	     window.plugins.Pgalipay.alipay(out_trade_no,subject,bodtxt,total_fee,url,
+	                                    function(success) {
+	    	 						resultString(success);
+	                                    }, function(fail) {
+	                                    			alert("encoding failed: " + fail);
+	       }); 
+	}
+
 	
 	
 	
-	var  out_trade_no =  orderRecod.outtradeno;
-	var 	subject = orderRecod.outtradeno;;
-	var bodtxt = orderRecod.outtradeno;;
-	var total_fee = orderRecod.tradeCount;
-	alert(total_fee);
-	total_fee  = 0.01;  //  正式测试的
-	total_fee = 100;
-	 var url = BASE_URL+"/ordernotifyurl";
-	 
-     window.plugins.Pgalipay.alipay(out_trade_no,subject,bodtxt,total_fee,url,
-                                    function(success) {
-    	 						resultString(success);
-                                    }, function(fail) {
-                                    			alert("encoding failed: " + fail);
-       }); 
+
 	
 }   
 

@@ -55,6 +55,13 @@
   </select>
   
   
+  
+   <select id="userMobileInfos" resultMap="BaseResultMap" >
+    select  m.* from mobile_info m join  user_info u
+	on  (m.mobile_from = 'user'  and u.is_vip = #{isVip}  )
+  </select>
+  
+  
   <select id="searchByIds" resultMap="BaseResultMap" >
     select 
     <include refid="Base_Column_List" />

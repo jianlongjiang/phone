@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.phone.cn.bean.member.UserInfoBean;
 import com.phone.cn.conf.enums.CashUserLogActionEnum;
+import com.phone.cn.conf.enums.MobileInfoFromEnum;
 import com.phone.cn.conf.enums.SysConfigEnum;
 import com.phone.cn.entity.member.CashUserLog;
 import com.phone.cn.entity.member.UserInfo;
@@ -207,9 +208,12 @@ public class UserInfoService extends BaseService<UserInfo, Integer> {
 //		}
 		if (userInfo.getInviteesId() != null) {
 			UserInfo inviteeUser = super.findOne(userInfo.getInviteesId());
-			if (inviteeUser != null && inviteeUser.getIsVip() != null && inviteeUser.getIsVip()) {
+			
+			if (inviteeUser != null){ // 推荐人拿积分
 				SysConfig otherConfig = sysConfigService.findOne(SysConfigEnum.be_vip_other.getValue());
 				addIntegration(inviteeUser, null, "好友成为会员", Integer.parseInt(otherConfig.getConfigValue()), Boolean.FALSE);
+			}
+			if (inviteeUser != null && inviteeUser.getIsVip() != null && inviteeUser.getIsVip()) {
 				// 对建人, vip人数
 				Integer count = inviteeUser.getInviteFriendVipAmount();
 				count = count == null ? 0 : count;
@@ -218,21 +222,12 @@ public class UserInfoService extends BaseService<UserInfo, Integer> {
 				// 待写, 1: 当前用户第几次拿红包, 红包规则
 				int  groupMoney = redPacketRuleService.sendRedPack(inviteeUser, userInfo);
 				save(inviteeUser);
-
 				UserInfo secondnviteeUser = super.findOne(inviteeUser.getInviteesId());
 				if (secondnviteeUser != null && secondnviteeUser.getIsVip() != null && secondnviteeUser.getIsVip()) {
-					otherConfig = sysConfigService.findOne(SysConfigEnum.be_vip_other.getValue());
-					addIntegration(secondnviteeUser, null, "团队成员晋升为金蜗牛", Integer.parseInt(otherConfig.getConfigValue()), Boolean.FALSE);
-					// 对建人, vip人数
-					// Integer count = inviteeUser.getInviteFriendVipAmount();
-					// count = count == null ? 0 : count;
-					// inviteeUser.setInviteFriendVipAmount(count + 1);
 					// 推荐人 发送红包
 					// 待写, 1: 当前用户第几次拿红包, 红包规则
-//					redPacketRuleService.sendRedPack(secondnviteeUser, userInfo);
 					redPacketRuleService.sendGroupRedPack(secondnviteeUser, userInfo, groupMoney);
 					save(secondnviteeUser);
-
 				}
 
 			}
@@ -328,10 +323,10 @@ public class UserInfoService extends BaseService<UserInfo, Integer> {
 	}
 
 	// 添加伪ID
-	public String addFakeId(UserInfo u) {
+	public String addFakeId(UserInfo u, MobileInfoFromEnum mobileInfoFromEnum) {
 		logger.debug("==========================>添加伪ID ");
 		String fakeID = "";
-		MobileInfo mobileInfo = mobileService.findByMobile(u.getMobile());
+		MobileInfo mobileInfo = mobileService.findByMobile(u.getMobile(),mobileInfoFromEnum);
 		if (mobileInfo != null) {
 			fakeID = mobileInfo.getFakeId();
 		} else {

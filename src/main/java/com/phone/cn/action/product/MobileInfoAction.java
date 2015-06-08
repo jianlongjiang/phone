@@ -33,6 +33,7 @@ import com.github.miemiedev.mybatis.paginator.domain.PageList;
 import com.phone.cn.bean.ResultBean;
 import com.phone.cn.bean.product.CateInfoBean;
 import com.phone.cn.bean.product.MobileInfoBean;
+import com.phone.cn.conf.enums.MobileInfoFromEnum;
 import com.phone.cn.entity.product.CateInfo;
 import com.phone.cn.entity.product.MobileInfo;
 import com.phone.cn.service.product.CateInfoService;
@@ -102,6 +103,9 @@ public class MobileInfoAction extends BaseCRUDController<MobileInfoBean, MobileI
 				//	return importExl(model);
 //					workBook = WorkbookFactory.create(fi.getInputStream());
 				}
+				if(workBook == null){
+					return fail("文件格式不对, 非exal");
+				}
 				@SuppressWarnings("unused")
 				FormulaEvaluator formulaEvaluator = workBook.getCreationHelper()
 						.createFormulaEvaluator();
@@ -112,21 +116,21 @@ public class MobileInfoAction extends BaseCRUDController<MobileInfoBean, MobileI
 					Row row = sheet.getRow(j);
 					mobile.setMobile(getValue(getStringCellValue(row, 0)));
 					logger.debug("=========================>"+getValue(getStringCellValue(row, 0)));
-					if(mobileService.findByMobile(mobile.getMobile())!=null){
+					if(mobileService.findByMobile(mobile.getMobile(), MobileInfoFromEnum.UPLOAD_IMPORT)!=null){
 						logger.debug("=========================>电话号码已存在");
 						continue;
 					}
 					String cateIds = getValue(getStringCellValue(row, 1));
 					if(cateIds == null) cateIds = "1";
-					mobile.setMobileFrom("others");
+					mobile.setMobileFrom(MobileInfoFromEnum.UPLOAD_IMPORT.getValue());
 					mobile.setCateIds(cateIds);
 //					System.out.println(mobile.getMobile()  +"---"+ cateIds);
 //					baseService.save(mobile);
 					//添加伪ID
 					if (mobileService.isSave(mobile)) {	
 						logger.debug("电话号码="+mobile);
-						mobile = mobileService.findByMobile(mobile.getMobile());
-						logger.debug("mobile="+mobile);
+//						mobile = mobileService.findByMobile(mobile.getMobile());
+//						logger.debug("mobile="+mobile);
 						Integer fakeID = 400000000+mobile.getId();
 						mobile.setFakeId("w"+fakeID);
 						mobileService.save(mobile);
@@ -158,6 +162,7 @@ public class MobileInfoAction extends BaseCRUDController<MobileInfoBean, MobileI
 		}
 		bean.setPageNo(pageNo);
 		bean.setPageSize(10);
+		bean.setMobileFrom(MobileInfoFromEnum.ADMIN.getValue());
 		//bean.setMore1("y");
 		model.addAttribute("bean",bean);
 		PageList<MobileInfo> infos = mobileService.queryAllWithPage(bean, bean.toPageBounds());
@@ -176,12 +181,12 @@ public class MobileInfoAction extends BaseCRUDController<MobileInfoBean, MobileI
 	@RequestMapping("bibeiAddMobile")
 	@ResponseBody
 	public Map<String, Object> bibeiAddMobile(MobileInfo m, HttpServletRequest request) {
-		if (mobileService.findByMobile(m.getMobile())==null) {
+		if (mobileService.findByMobile(m.getMobile(), MobileInfoFromEnum.ADMIN)==null) {
 			m.setMore1("n");
-			m.setMobileFrom("others");
+			m.setMobileFrom(MobileInfoFromEnum.ADMIN.getValue());
 			if(mobileService.isSave(m)){
-				m = mobileService.findByMobile(m.getMobile());
-				logger.debug("--------------------->mobile="+m.getMobile());
+//				m = mobileService.findByMobile(m.getMobile());
+//				logger.debug("--------------------->mobile="+m.getMobile());
 				Integer fakeID = 400000000+m.getId();
 				m.setFakeId("w"+fakeID);
 				mobileService.save(m);

@@ -35,6 +35,7 @@ import com.phone.cn.bean.product.MobileInfoBean;
 import com.phone.cn.bean.sys.MessageBean;
 import com.phone.cn.conf.AppConfig;
 import com.phone.cn.conf.DataConfig;
+import com.phone.cn.conf.enums.MobileInfoFromEnum;
 import com.phone.cn.constant.ErrorCodeConstant;
 import com.phone.cn.entity.member.UserInfo;
 import com.phone.cn.entity.member.UserMore;
@@ -362,7 +363,7 @@ public class UserInfoAppAction extends BaseCRUDController<UserInfoBean, UserInfo
 		userInfoService.addIntegration(memberInfo, null, "注册送积分", Integer.parseInt(sysConfigService.findOne(8).getConfigValue()), Boolean.FALSE);
 		memberInfo = userInfoService.findByMobile(memberInfo.getMobile());
 		// 添加伪Id
-		String fakeId = userInfoService.addFakeId(memberInfo);
+		String fakeId = userInfoService.addFakeId(memberInfo, MobileInfoFromEnum.USER);
 		Random r = new Random();
 		memberInfo.setMore2(AppConfig.getCountryMobileNo(r.nextInt(5)));
 		if(StringUtils.equals(otherMobile, memberInfo.getMobile())){
@@ -391,11 +392,11 @@ public class UserInfoAppAction extends BaseCRUDController<UserInfoBean, UserInfo
 		MobileInfoBean mobileInfoBean = new MobileInfoBean();
 		mobileInfoBean.setMobile(memberInfo.getMobile());
 
-		MobileInfo mobileInfo = mobileService.findByMobile(memberInfo.getMobile());
+		MobileInfo mobileInfo = mobileService.findByMobile(memberInfo.getMobile(), MobileInfoFromEnum.USER);
 		if (mobileInfo == null) {
 			mobileInfo = new MobileInfo();
 			mobileInfo.setMobile(memberInfo.getMobile());
-			mobileInfo.setMobileFrom("user");
+			mobileInfo.setMobileFrom(MobileInfoFromEnum.USER.getValue());
 			mobileInfo.setFakeId(fakeId);
 			mobileService.save(mobileInfo);
 		}

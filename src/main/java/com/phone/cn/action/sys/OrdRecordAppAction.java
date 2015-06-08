@@ -43,6 +43,9 @@ public class OrdRecordAppAction extends BaseAppController<OrdRecordBean, OrdReco
 	public   Object  orderGenerate(BaseAppTokenBean baseApp){
 		UserInfo  userInfo = baseApp.getAppUser();
 		
+		if(userInfo.getIsVip()){
+			return fail("已经是金蜗牛!");
+		}
 		OrdRecordBean bean = new OrdRecordBean();
 		bean.setUserId(userInfo.getId());
 		bean.setTradeType(OrdRecord.TradeTypeEnum.no_pay.getValue());
