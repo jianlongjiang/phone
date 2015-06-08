@@ -131,7 +131,7 @@
       #{updateTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=VARCHAR}, #{more1,jdbcType=VARCHAR}, 
       #{more2,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="compId">
+  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id">
     insert into mobile_info
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
