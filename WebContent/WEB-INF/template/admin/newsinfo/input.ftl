@@ -24,7 +24,7 @@
                 <!-- PAGE CONTENT BEGINS -->
                 <div class="row">
                     <div class="col-xs-12">
-                        <form class="form-horizontal" role="form" id="saveForm" action="${request.contextPath}/admin/newsinfo/save/">
+                        <form class="form-horizontal" role="form" id="saveForm" action="">
                         <input name="id" value="${(info.id)}" type="hidden">
                             <div class="form-group ">
                                 <label class="col-sm-2 control-label"> <span class="red">*</span> 标题：</label>
@@ -72,7 +72,8 @@
                             </div>
 
                             <div class="space-4"></div>
-
+                            
+                            
                             <div class="form-group ">
                                 <label class="col-sm-2 control-label"> <span class="red">*</span> 内容：</label>
                                 <input type="hidden" name="newsDesc" id="newsDesc" value='${(info.newsDesc)!""}' />
@@ -160,7 +161,7 @@
 
                             <div class="clearfix">
                                 <div class="col-sm-offset-1 col-sm-10">
-                                    <button class="btn btn-info" type="button" id="save" urlkey="${request.contextPath}/admin/newsinfo/list/p1/">
+                                    <button class="btn btn-info" type="button" onclick="updateMsg('${request.contextPath}/admin/newsinfo/save/','${request.contextPath}/admin/newsinfo/list/p1')">
                                         <i class="icon-ok bigger-110"></i>
                                         提交
                                     </button>
@@ -303,6 +304,7 @@ function  loadEditorMsg(){
  	}
  function getContent() {
    $("#newsDesc").attr("value", UE.getEditor('editor').getContent());
+   //alert(UE.getEditor('editor').getContent());
    $("#xinwenForm").submit();
    return false;
  }
@@ -311,6 +313,10 @@ function  loadEditorMsg(){
    setContent();
  });
  
+function updateMsg(url, toUrl) {
+	$("#newsDesc").attr("value", UE.getEditor('editor').getContent());
+    save(url, toUrl);
+}
 
  </script>
  <#include "../common/footer.ftl">

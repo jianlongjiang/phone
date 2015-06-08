@@ -80,6 +80,9 @@ public class MobileInfoAction extends BaseCRUDController<MobileInfoBean, MobileI
 	@RequestMapping("uploadMember")
 	public Object uploadMember(Model model, HttpServletRequest request)
 			throws InvalidFormatException, IOException, FileUploadException {
+		
+		//logger.debug("class.getProtectionDomain()="+class.getProtectionDomain());
+		//ZipPackagePropertiesMarshaller z =null;
 		String fielName = null;
 		DiskFileItemFactory factory = new DiskFileItemFactory();
 		factory.setSizeThreshold(4096); // 设置缓冲区大小，这里是4kb
@@ -94,6 +97,7 @@ public class MobileInfoAction extends BaseCRUDController<MobileInfoBean, MobileI
 			FileItem fi = (FileItem) i.next();
 			if (!fi.isFormField()) {
 				fielName = fi.getName();
+				logger.debug(">>>>>>>>>>>>>>>>>>>>>>>>>>fileName="+fielName);
 				Workbook workBook = null;
 				if (fielName.endsWith("xls")) {
 					workBook = new HSSFWorkbook(fi.getInputStream());
@@ -116,14 +120,19 @@ public class MobileInfoAction extends BaseCRUDController<MobileInfoBean, MobileI
 					Row row = sheet.getRow(j);
 					mobile.setMobile(getValue(getStringCellValue(row, 0)));
 					logger.debug("=========================>"+getValue(getStringCellValue(row, 0)));
-					if(mobileService.findByMobile(mobile.getMobile(), MobileInfoFromEnum.UPLOAD_IMPORT)!=null){
+					MobileInfo m = mobileService.findByMobile(mobile.getMobile(), MobileInfoFromEnum.UPLOAD_IMPORT);
+					if(m != null){
+						m.setCateIds(m.getCateIds()+getValue(getStringCellValue(row, 1))+",");
 						logger.debug("=========================>电话号码已存在");
 						continue;
 					}
 					String cateIds = getValue(getStringCellValue(row, 1));
-					if(cateIds == null) cateIds = "1";
+					logger.debug(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>cateIds"+cateIds);
+					if(cateIds == null){
+						cateIds = ",1,";
+					} 
 					mobile.setMobileFrom(MobileInfoFromEnum.UPLOAD_IMPORT.getValue());
-					mobile.setCateIds(cateIds);
+					mobile.setCateIds(","+cateIds+",");
 //					System.out.println(mobile.getMobile()  +"---"+ cateIds);
 //					baseService.save(mobile);
 					//添加伪ID

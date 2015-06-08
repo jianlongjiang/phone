@@ -2,7 +2,7 @@ package com.phone.cn.conf.enums;
 
 public enum SysConfigEnum {
 
-	//search_msg_code(9,"查询一次扣除积分")
+	search_msg_mobile(9,"查询一次扣除积分"),
 	user_tuijian(10,"推荐获得奖励积分"),
 	register_user_score(11,"注册用户获得奖励积分"),
 	add_friend_image(12,"邀请好友图片"),
