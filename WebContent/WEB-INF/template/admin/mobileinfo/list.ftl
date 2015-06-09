@@ -19,13 +19,15 @@
             <form class="form-inline">
                 <div class="form-group">
                     <select class="input-large" name="cateIds">
-                        <option value="">&nbsp;全部</option>
+                        <option value="">&nbsp;全部(手机分类查询)</option>
                         <#if cateInfos?has_content>
                         <#list cateInfos as info>
                         <option <#if bean.cateIds?? && bean.cateIds="${info.id}">selected</#if> value="${info.id}" >${info.cateName}</option>
                         </#list>
                         </#if>
                     </select>
+                    <label>手机号码：</label>
+                    <input class="input-large" type="text" value="${bean.mobile}" name="mobile">
                 </div>
                 <button class="btn btn-sm btn-primary">
                     <i class="icon-search align-top"></i>搜索

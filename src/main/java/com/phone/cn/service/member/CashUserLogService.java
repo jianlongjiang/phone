@@ -116,7 +116,7 @@ public class CashUserLogService extends BaseService<CashUserLog, java.lang.Integ
 			logger.debug("---------------------->s="+s);
 //			Integer i = Integer.parseInt(s);
 //			System.out.println(i);
-			CashUserLog c = mapper.selectByPrimaryKey(Integer.valueOf(s));
+			CashUserLog c = mapper.selectByPrimaryKey(Integer.parseInt(s));
 			if (c!=null) {
 				if(StringUtils.equals(c.getDoStatus(), "2") ){
 					c.setDoStatus("0");
