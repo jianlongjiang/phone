@@ -43,7 +43,7 @@ function cancelOrder(to){
 
 
 
-var  isTestPay = false;
+var  isTestPay = true;
 
 function	payMoney(to){
 	if(isTestPay){
@@ -68,7 +68,7 @@ function	payMoney(to){
 		var bodtxt = orderRecod.outtradeno;;
 		var total_fee = orderRecod.tradeCount;
 		alert(total_fee);
-		total_fee  = 0.01;  //  正式测试的
+//		total_fee  = 0.01;  //  正式测试的
 //		total_fee = 100;
 		 var url = BASE_URL+"/ordernotifyurl";
 		 

@@ -27,8 +27,9 @@
                                 	<input type="hidden" value="${info.id}" name="id"/>
                                     <input type="text" id="form-field-1"  value="${info.configValue}" name="configValue" class="col-xs-12 col-sm-12 J_Price">
                                 </div>
+                                 ${info.configDesc}
                             </div>
-                            ${info.configDesc}
+                           
                             <div class="space-4"></div>
                             </#list>
                     		</#if>

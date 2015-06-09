@@ -204,6 +204,19 @@ function weixinshare(event, title, url) {
           url: url + id
       }, WeChat.Scene.timeline, function() {
           console.log("分享成功！");
+      	if(title=="邀请好友"){
+	  		appAjax({
+	  			type : "POST",
+	  			url : "app/shareLog/shareFirend",
+//	  			data : {
+//	  				"mobile" : mobile,
+//	  			},
+	  			success : function(data) {
+	  			
+	  			}
+	  		});
+	  	}
+
       }, function(reason) {
           // 分享失败
          // alert("分享失败");
@@ -1310,6 +1323,12 @@ function into_teamManager() {
 				var html = "";
 				friends
 						.forEach(function(friend) {
+							
+							var imgStr = "user-snail.png";
+							if(friend.isVip){
+								imgStr = "user-gold-snail.png";
+							}
+							
 							html = html
 									+ '	<tr	onclick="choseFriend('
 									+ friend.id
@@ -1319,7 +1338,7 @@ function into_teamManager() {
 									+ friend.id
 									+ '" name="mobiles"  value="'
 									+ friend.mobile
-									+ '" >   <img src="image/user-ava.jpg" width="30px">    '
+									+ '" >   <img src="image/'+imgStr+'" width="30px">    '
 									+ '        </td>                                                                  '
 									+ '        <td ><a href="tel:'+friend.mobile+'">'
 									+ friend.mobile

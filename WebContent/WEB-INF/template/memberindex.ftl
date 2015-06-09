@@ -39,7 +39,11 @@
                 </li>
             </ul>
         </div>
-        <a class="download">
+        <#if ios>
+        		<a class="download">
+        <#else>
+        		<a class="download" href="${request.contextPath}/resources/admin/store/MainActivity-release.apk">
+        </#if>
             <img src="${request.contextPath}/resources/new/img/logo.png" />
             <div class="btn">去下载</div>
         </a>

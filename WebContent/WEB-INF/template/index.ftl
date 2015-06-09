@@ -29,10 +29,17 @@
             </div>
         </div>
      <div class="con-cor">
+     <#if ios>
      <a class="download">
             <img src="${request.contextPath}/resources/new/img/logo.png" />
             <div class="btn">去下载</div>
         </a>
+     <#else>
+     	<a class="download" href="${request.contextPath}/resources/admin/store/MainActivity-release.apk">
+            <img src="${request.contextPath}/resources/new/img/logo.png" />
+            <div class="btn">去下载</div>
+        </a>
+     </#if>   
      </div>
 <!--        end container-->
        </div>        

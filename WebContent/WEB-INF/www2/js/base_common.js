@@ -151,8 +151,8 @@ function  alert(msg,b){
 	
 }
 //$.ui.popup=alert;
-//var base_url_base = "http://www.woniubaba.com";
-var base_url_base = "http://192.168.1.110:8080";
+var base_url_base = "http://www.woniubaba.com";
+//var base_url_base = "http://192.168.1.23:8080";
 var BASE_URL = base_url_base;
 //BASE_URL = base_url_base = "http://192.168.1.110:8080";
 var BASE_IMAGE = BASE_URL + "/resources/admin/store/";

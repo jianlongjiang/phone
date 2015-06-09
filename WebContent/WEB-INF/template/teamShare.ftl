@@ -11,7 +11,7 @@
     <div id="content">
         <div class="panel w-bg" id="team-manage">
             <div class="flexbox team-btn">							
-                <a href="#" class="flexbox-item right-line"><img src="${request.contextPath}/resources/image/team-hand.png" height="50px"><p>推荐人</p><p>${allInviteesCount!''} </p></a>
+                <a href="#" class="flexbox-item right-line"><img src="${request.contextPath}/resources/image/team-hand.png" height="50px"><p>推荐人</p><p>${inviteesNo!''} </p></a>
                 <a href="#" class="flexbox-item right-line"><img src="${request.contextPath}/resources/image/team-downarrow.png" height="50px"><p>下载数量</p><p>${downCount!''}</p></a>
                 <a href="#" class="flexbox-item"><img src="${request.contextPath}/resources/image/team-red.png" height="50px"><p>积分数</p><p>${allScore!''}</p></a>
             </div>
@@ -61,7 +61,11 @@
                 <#list friends as friend>
                 <tr>
                     <td>
-                        <input type="radio"><img src="image/user-ava.jpg" width="30px">
+                    		<#if friend.isVip>
+                        <input type="radio"><img src="image/user-gold-snail.png" width="30px">
+                        <#else>
+                        	<input type="radio"><img src="image/user-snail.png" width="30px">
+                        </#if>
                     </td>
                     <td>${friend.mobile} </td>
                     <td>${(friend.userName)!''} </td>
