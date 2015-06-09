@@ -71,7 +71,7 @@
 			enableDeleteByPrimaryKey="true" enableDeleteByExample="false"
 			enableCountByExample="false" enableUpdateByExample="false"
 			escapeWildcards="true">
-		</table>  -->
+		</table>  
 		
 		<table tableName="mobile_down_log" modelType="flat" domainObjectName="sys.MobileDownLog"
 			enableInsert="true" enableSelectByPrimaryKey="true"
@@ -80,7 +80,16 @@
 			enableCountByExample="false" enableUpdateByExample="false"
 			escapeWildcards="true">
 		</table>  
+		-->
 		
+		
+		<table tableName="share_log" modelType="flat" domainObjectName="sys.ShareLog"
+			enableInsert="true" enableSelectByPrimaryKey="true"
+			enableSelectByExample="false" enableUpdateByPrimaryKey="true"
+			enableDeleteByPrimaryKey="true" enableDeleteByExample="false"
+			enableCountByExample="false" enableUpdateByExample="false"
+			escapeWildcards="true">
+		</table>  
 		
 	</context>
 </generatorConfiguration>
