@@ -13,6 +13,8 @@ public interface CashUserLogMapper extends BaseMapper<CashUserLog, Integer>{
 	int insertSelective(CashUserLog record);
 
 	CashUserLog selectByPrimaryKey(Integer id);
+	
+	CashUserLog selectByMobile(String mobile);
 
 	int updateByPrimaryKeySelective(CashUserLog record);
 

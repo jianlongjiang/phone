@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.phone.cn.bean.product.MobileInfoBean;
 import com.phone.cn.entity.product.MobileInfo;
 import com.phone.cn.mapper.BaseMapper;
 
@@ -33,7 +32,7 @@ public interface MobileInfoMapper extends BaseMapper<MobileInfo, Integer>{
 	 List<MobileInfo> getUserMobiles();
 
 	 // select count(1)   from  xx  where  cate_ids  like '%aa%;'
-	Integer loadCountByCateId(MobileInfoBean mobileInfoBean);
+	Integer loadCountByCateId(String cateIds);
 
 	List<MobileInfo> userMobileInfos(boolean isVip);
 }

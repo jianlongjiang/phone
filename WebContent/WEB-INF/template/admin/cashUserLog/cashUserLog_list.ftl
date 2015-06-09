@@ -58,7 +58,7 @@
                 <i class="icon-search align-top"></i>导出
             </button>
             <br>
-                                          填写你要批量失败的编号，每个编号都要换行。
+                                          填写你要批量失败的，每个手机号码都要换行。(要复制到TXT文本，再粘贴到文本框。)
             <br>
             <div class="form-group" style="margin-bottom: 10px;">
                 <textarea style="width: 600px;height: 100px;" id="ids" name="ids"></textarea>     

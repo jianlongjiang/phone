@@ -204,6 +204,13 @@
      user_id = #{userId,jdbcType=INTEGER}  and cash > 0  and to_days(create_time) = to_days(now())
   </select>
   
+  <select id="selectByMobile" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from cash_user_log
+    where mobile = #{mobile,jdbcType=VARCHAR}
+  </select>
+  
   
   <select id="query" resultMap="BaseResultMap"  >
     select 
