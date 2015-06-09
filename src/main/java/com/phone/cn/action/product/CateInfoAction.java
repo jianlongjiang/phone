@@ -71,8 +71,8 @@ public class CateInfoAction extends BaseCRUDController<CateInfoBean, CateInfo, I
     	}
     	bean.setPageNo(pageNo);
     	bean.setCateLevel(1);
-		List<CateInfo> beans =cateInfoService.queryAllWithPage(bean, bean.toPageBounds());
-		List<CateInfoDto> cateInfoDtos = new ArrayList<CateInfoDto>();
+		List<CateInfo> beans =cateInfoService.queryAll(bean);//查询一级分类
+		List<CateInfoDto> cateInfoDtos = new ArrayList<CateInfoDto>();//创建一级分类model
 		
 		for (CateInfo info : beans) {
             CateInfoDto dto = new CateInfoDto();
@@ -86,7 +86,7 @@ public class CateInfoAction extends BaseCRUDController<CateInfoBean, CateInfo, I
 			if(CollectionUtils.isNotEmpty(secondCates)) {
 				// 用户的导入量
 				for (CateInfo secondCateInfo : secondCates) {
-					  count = mobileService.loadCountByCateId(secondCateInfo.getId());
+					  count = count + mobileService.loadCountByCateId(secondCateInfo.getId());
 				}	
 			}
 			dto.setTwoCateSize(secondCates.size());
@@ -111,17 +111,14 @@ public class CateInfoAction extends BaseCRUDController<CateInfoBean, CateInfo, I
 	@RequestMapping("twoList/p{pageNo}")
 	public String twoList(CateInfoBean bean, Model model,@PathVariable Integer pageNo){
 		bean.setCateLevel(2);
-		List<CateInfo> beans =cateInfoService.queryAllWithPage(bean, bean.toPageBounds());
+		List<CateInfo> beans =cateInfoService.queryAll(bean);
 		List<CateInfoDto> cateInfoDtos = new ArrayList<CateInfoDto>();
 		for (CateInfo cateInfo : beans) {
 			CateInfoDto dto = new CateInfoDto();
 			dto.setId(cateInfo.getId());
 			dto.setCateName(cateInfo.getCateName());
-			Integer count = 0 ;
-			if (CollectionUtils.isEmpty(beans)) {
-				//用户导入数查询
-				count = mobileService.loadCountByCateId(cateInfo.getId());
-			}
+			//用户导入数查询
+			Integer count =  mobileService.loadCountByCateId(cateInfo.getId());
 			dto.setUserSize(count);
 			cateInfoDtos.add(dto);
 		}

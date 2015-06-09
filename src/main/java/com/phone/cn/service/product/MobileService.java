@@ -311,9 +311,9 @@ public class MobileService extends BaseService<MobileInfo, Integer> {
 	}
 
 	public Integer loadCountByCateId(Integer cateId) {	
-		MobileInfoBean mobileInfoBean = new MobileInfoBean();
-		mobileInfoBean.setSecondCateIds(","+cateId+",");
-		return mapper.loadCountByCateId(mobileInfoBean);
+		Integer num = mapper.loadCountByCateId(String.valueOf(cateId));
+		logger.debug(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>二级分类大小="+num);
+		return num;
 	}
 	
 	public MobileInfo findByMobile (String mobile, MobileInfoFromEnum mobileInfoFromEnum){
