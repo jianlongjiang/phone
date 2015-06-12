@@ -85,7 +85,7 @@
                 
 
                 <li>
-                  <a href="${request.contextPath}/admin/manager/toModifyPwd/">
+                  <a href="${request.contextPath}/admin/manager/toModifyPwd">
                     <i class="icon-user"></i>
                     修改密码
                   </a>
@@ -128,7 +128,7 @@
             <ul class="submenu">
             		<#if ((adminUser.toUrlMap['手机分类'])!0) ==1 >
                 <li <#if (request.requestUri?index_of('admin/mobilecate/oneList') gt -1)> class="active"</#if>>
-                    <a href="${request.contextPath}/admin/mobilecate/oneList/p1/">
+                    <a href="${request.contextPath}/admin/mobilecate/oneList/p1">
                         <i class="icon-double-angle-right"></i>
                         手机分类
                     </a>
@@ -136,7 +136,7 @@
                 </#if>
                 	<#if  ((adminUser.toUrlMap['手机号码'])!0) ==1>
                 <li <#if (request.requestUri?index_of('admin/mobileinfo/list') gt -1)> class="active"</#if>>
-                    <a href="${request.contextPath}/admin/mobileinfo/list/p1/">
+                    <a href="${request.contextPath}/admin/mobileinfo/list/p1">
                         <i class="icon-double-angle-right"></i>
                         号码列表
                     </a>
@@ -148,7 +148,7 @@
         
        	<#if  ((adminUser.toUrlMap['用户列表'])!0) ==1>
         <li <#if (request.requestUri?index_of('admin/member/') gt -1)> class="active"</#if>>
-            <a href="${request.contextPath}/admin/member/list/p1/">
+            <a href="${request.contextPath}/admin/member/list/p1">
                 <i class="icon-text-width"></i>
                 <span class="menu-text"> 用户列表 </span>
             </a>
@@ -168,7 +168,7 @@
             <ul class="submenu">
             	<#if  ((adminUser.toUrlMap['经验规则设置'])!0) ==1>
                 <li <#if (request.requestUri?index_of('admin/config/experience') gt -1)> class="active"</#if>>
-                    <a href="${request.contextPath}/admin/config/experience/">
+                    <a href="${request.contextPath}/admin/config/experience">
                         <i class="icon-double-angle-right"></i>
                         经验规则设置
                     </a>
@@ -177,7 +177,7 @@
                 
                 	<#if  ((adminUser.toUrlMap['等级设置'])!0) ==1>
                 <li <#if (request.requestUri?index_of('admin/userlevel') gt -1)> class="active"</#if>>
-                    <a href="${request.contextPath}/admin/userlevel/list/p1/">
+                    <a href="${request.contextPath}/admin/userlevel/list/p1">
                         <i class="icon-double-angle-right"></i>
                         等级设置
                     </a>
@@ -189,7 +189,7 @@
         
         	<#if  ((adminUser.toUrlMap['积分规则设置'])!0) ==1>
         <li <#if (request.requestUri?index_of('admin/config/integral') gt -1)> class="active"</#if>>
-            <a href="${request.contextPath}/admin/config/integral/">
+            <a href="${request.contextPath}/admin/config/integral">
                 <i class="icon-list"></i>
                 <span class="menu-text"> 积分规则设置 </span>
             </a>
@@ -219,7 +219,7 @@
             <ul class="submenu">
             			<#if  ((adminUser.toUrlMap['新闻列表'])!0) ==1>
                 <li <#if (request.requestUri?index_of('admin/newsinfo/list/') gt -1)> class="active"</#if>>
-                    <a href="${request.contextPath}/admin/newsinfo/list/p1/">
+                    <a href="${request.contextPath}/admin/newsinfo/list/p1">
                         <i class="icon-double-angle-right"></i>
                         新闻列表
                     </a>
@@ -228,7 +228,7 @@
                 
                 	<#if  ((adminUser.toUrlMap['新闻类别'])!0) ==1>
                 <li <#if (request.requestUri?index_of('admin/newscate') gt -1)> class="active"</#if>>
-                    <a href="${request.contextPath}/admin/newscate/list/p1/">
+                    <a href="${request.contextPath}/admin/newscate/list/p1">
                         <i class="icon-double-angle-right"></i>
                         分类
                     </a>
@@ -249,7 +249,7 @@
         
         	<#if  ((adminUser.toUrlMap['留言管理'])!0) ==1>
         <li <#if (request.requestUri?index_of('admin/message') gt -1)> class="active"</#if>>
-            <a href="${request.contextPath}/admin/message/list/p1/">
+            <a href="${request.contextPath}/admin/message/list/p1">
                 <i class="icon-shopping-cart"></i>
                 <span class="menu-text"> 回复留言 </span>
             </a>
@@ -369,7 +369,7 @@
             <ul class="submenu">
             		<#if ((adminUser.toUrlMap['蜗牛巴巴统计页面'])!0) ==1 >
                 <li <#if (request.requestUri?index_of('admin/statistics/list') gt -1)> class="active"</#if>>
-                    <a href="${request.contextPath}/admin/statistics/list/p1/">
+                    <a href="${request.contextPath}/admin/statistics/list/p1">
                         <i class="icon-double-angle-right"></i>
                         蜗牛巴巴统计页面
                     </a>
@@ -377,7 +377,7 @@
                 </#if>
                 	<#if  ((adminUser.toUrlMap['蜗牛巴巴会员统计页面'])!0) ==1>
                 <li <#if (request.requestUri?index_of('admin/statistics/vipList') gt -1)> class="active"</#if>>
-                    <a href="${request.contextPath}/admin/statistics/vipList/p1/">
+                    <a href="${request.contextPath}/admin/statistics/vipList/p1">
                         <i class="icon-double-angle-right"></i>
                         蜗牛巴巴会员统计页面
                     </a>
@@ -390,7 +390,7 @@
        
         <#if  ((adminUser.toUrlMap['必备下载号码'])!0) ==1>
         <li <#if (request.requestUri?index_of('admin/mobileinfo/bibeiList/p') gt -1)> class="active"</#if>>
-            <a href="${request.contextPath}/admin/mobileinfo/bibeiList/p1/" >
+            <a href="${request.contextPath}/admin/mobileinfo/bibeiList/p1" >
                 <i class="icon-list-alt"></i>
                 <span class="menu-text"> 必备下载号码 </span>
             </a>

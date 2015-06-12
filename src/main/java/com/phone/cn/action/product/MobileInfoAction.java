@@ -16,6 +16,7 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.FormulaEvaluator;
 import org.apache.poi.ss.usermodel.Row;
@@ -115,16 +116,31 @@ public class MobileInfoAction extends BaseCRUDController<MobileInfoBean, MobileI
 						.createFormulaEvaluator();
 				Sheet sheet = workBook.getSheetAt(0);
 				System.out.println(sheet.getLastRowNum());
-				for (int j = 1; j < sheet.getLastRowNum() ; j++) {
+				for (int j = 1; j <= sheet.getLastRowNum() ; j++) {
 					MobileInfo mobile = new MobileInfo();
 					Row row = sheet.getRow(j);
 					mobile.setMobile(getValue(getStringCellValue(row, 0)));
 					logger.debug("=========================>"+getValue(getStringCellValue(row, 0)));
 					MobileInfo m = mobileService.findByMobile(mobile.getMobile(), MobileInfoFromEnum.UPLOAD_IMPORT);
 					if(m != null){
-						m.setCateIds(m.getCateIds()+getValue(getStringCellValue(row, 1))+",");
-						logger.debug("=========================>电话号码已存在");
-						continue;
+							String [] strs = m.getCateIds().split(",");
+							String id = getValue(getStringCellValue(row, 1));
+							boolean cateidsFlag = false;
+							for (String string : strs) {
+								if (StringUtils.equals(string,id)) {
+									cateidsFlag = true;
+									break;
+								}
+							}
+							if (cateidsFlag == false) {
+								m.setCateIds(m.getCateIds()+getValue(getStringCellValue(row, 1))+",");
+								mobileService.save(m);
+							}else{
+								logger.debug("=========================>电话号码的分类已经存在！");
+							}
+							
+							logger.debug("=========================>电话号码已存在");
+							continue;
 					}
 					String cateIds = getValue(getStringCellValue(row, 1));
 					logger.debug(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>cateIds"+cateIds);

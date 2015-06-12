@@ -36,6 +36,7 @@ import com.phone.cn.bean.sys.MessageBean;
 import com.phone.cn.conf.AppConfig;
 import com.phone.cn.conf.DataConfig;
 import com.phone.cn.conf.enums.MobileInfoFromEnum;
+import com.phone.cn.conf.enums.SysConfigEnum;
 import com.phone.cn.constant.ErrorCodeConstant;
 import com.phone.cn.entity.member.UserInfo;
 import com.phone.cn.entity.member.UserMore;
@@ -53,7 +54,6 @@ import com.phone.cn.service.sys.SysConfigService;
 import com.phone.cn.service.sys.UserScoreLogService;
 import com.phone.cn.utils.JsonMapper;
 import com.phone.cn.utils.PasswordUtils;
-import com.phone.cn.utils.URLUtils;
 import com.phone.cn.web.MySessionContext;
 import com.phone.cn.web.action.BaseCRUDController;
 import com.phone.cn.web.interceptor.AppUserLogin;
@@ -66,6 +66,7 @@ import com.phone.cn.web.interceptor.AppUserLogin;
 @Controller
 @RequestMapping(value = "app/userinfo")
 @Transactional
+//app/userinfo/findMobile
 public class UserInfoAppAction extends BaseCRUDController<UserInfoBean, UserInfo, Integer> {
 
 	@Autowired
@@ -181,9 +182,9 @@ public class UserInfoAppAction extends BaseCRUDController<UserInfoBean, UserInfo
 	public Map<String, Object> search(BaseAppTokenBean baseApp, @RequestParam String mobile) {
 		UserInfo user = baseApp.getAppUser();
 		if (user != null) {
-			Integer s = Integer.parseInt(sysConfigService.findOne(9).getConfigValue());
-			if (user.getIntegration() != null && user.getIntegration().intValue() > s.intValue()) {
-				userInfoService.addIntegration(user, null, "查询消耗", s, Boolean.TRUE);
+			Integer s = Integer.parseInt(sysConfigService.findOne(SysConfigEnum.search_msg_mobile.getValue()).getConfigValue());
+			if (user.getIntegration() != null && user.getIntegration().intValue() > Math.abs(s.intValue())) {
+				userInfoService.addIntegration(user, null, "查询消耗", -Math.abs(s.intValue()), Boolean.TRUE);
 			} else {
 				return fail("积分不足!");
 			}
@@ -194,7 +195,7 @@ public class UserInfoAppAction extends BaseCRUDController<UserInfoBean, UserInfo
 	}
 
 	/**
-	 * 签到
+	 * 签到, 积分 + 经验
 	 * 
 	 * @return
 	 */
@@ -209,14 +210,14 @@ public class UserInfoAppAction extends BaseCRUDController<UserInfoBean, UserInfo
 				return fail("今天已经签到！");
 			}
 			registrationService.sign(user);
-			String jy = sysConfigService.findOne(1).getConfigValue();
+			String jy = sysConfigService.findOne(SysConfigEnum.day_sign_jy.getValue()).getConfigValue();
 			logger.debug("经验----------->" + jy);
 			if (user.getExperience() != null) {
-				user.setExperience(user.getExperience() + Integer.parseInt(sysConfigService.findOne(1).getConfigValue()));
+				user.setExperience(user.getExperience() + Integer.parseInt(sysConfigService.findOne(SysConfigEnum.day_sign_jy.getValue()).getConfigValue()));
 			} else {
-				user.setExperience(Integer.parseInt(sysConfigService.findOne(1).getConfigValue()));
+				user.setExperience(Integer.parseInt(sysConfigService.findOne(SysConfigEnum.day_sign_jy.getValue()).getConfigValue()));
 			}
-			userInfoService.addIntegration(user, null, "签到", Integer.parseInt(sysConfigService.findOne(5).getConfigValue()), Boolean.TRUE);
+			userInfoService.addIntegration(user, null, "签到", Math.abs(Integer.parseInt(sysConfigService.findOne(SysConfigEnum.day_sign_score.getValue()).getConfigValue())), Boolean.TRUE);
 			userInfoService.isSave(user);
 			return suc(user.getIntegration());
 		} else {
@@ -357,10 +358,10 @@ public class UserInfoAppAction extends BaseCRUDController<UserInfoBean, UserInfo
 			return fail(ErrorCodeConstant.ACCOUNT_EMAILL_MOBILE_EXIST_CODE, ErrorCodeConstant.ACCOUNT_EMAILL_MOBILE_EXIST_MSG);
 		}
 		memberInfo.setPassword(PasswordUtils.encrypt(memberInfo.getPassword()));
-		memberInfo.setExperience(Integer.parseInt(sysConfigService.findOne(3).getConfigValue()));
+		memberInfo.setExperience(Integer.parseInt(sysConfigService.findOne(SysConfigEnum.register_jy.getValue()).getConfigValue()));
 		userInfoService.save(memberInfo);
 		// 注册送积分
-		userInfoService.addIntegration(memberInfo, null, "注册送积分", Integer.parseInt(sysConfigService.findOne(8).getConfigValue()), Boolean.FALSE);
+		userInfoService.addIntegration(memberInfo, null, "注册送积分", Math.abs(Integer.parseInt(sysConfigService.findOne(SysConfigEnum.register_score.getValue()).getConfigValue())), Boolean.FALSE);
 		memberInfo = userInfoService.findByMobile(memberInfo.getMobile());
 		// 添加伪Id
 		String fakeId = userInfoService.addFakeId(memberInfo, MobileInfoFromEnum.USER);
@@ -373,13 +374,17 @@ public class UserInfoAppAction extends BaseCRUDController<UserInfoBean, UserInfo
 		if (StringUtils.isNotEmpty(otherMobile)) {
 			UserInfo u = userInfoService.findByMobile(otherMobile);
 			if (u != null) {
-				u.setExperience(u.getExperience() + Integer.parseInt(sysConfigService.findOne(2).getConfigValue()));
+				u.setExperience(u.getExperience() + Integer.parseInt(sysConfigService.findOne( SysConfigEnum.ask_friend_suc_jy.getValue()).getConfigValue()));
 				Integer count = u.getInviteFriendAmount();
 				count = count == null ? 0 : count;
 				u.setInviteFriendAmount(count + 1);
-
-				userInfoService.addIntegration(u, null, "邀请好友积分", Integer.parseInt(sysConfigService.findOne(6).getConfigValue()), Boolean.FALSE);
-				userInfoService.addIntegration(memberInfo, null, "推荐积分", Integer.parseInt(sysConfigService.findOne(7).getConfigValue()),
+				if(u.getIsVip()){
+					userInfoService.addIntegration(u, null, "成功邀请好友,金蜗牛额外加成", Integer.parseInt(sysConfigService.findOne(SysConfigEnum.user_tuijian.getValue()).getConfigValue()), Boolean.FALSE);
+				}
+				userInfoService.addIntegration(u, null, "成功邀请好友", Integer.parseInt(sysConfigService.findOne(SysConfigEnum.register_and_tuijian_other.getValue()).getConfigValue()),
+						Boolean.FALSE);
+				
+				userInfoService.addIntegration(memberInfo, null, "推荐积分", Integer.parseInt(sysConfigService.findOne(SysConfigEnum.register_and_tuijian_own.getValue()).getConfigValue()),
 						Boolean.FALSE);
 				memberInfo.setInviteesId(u.getId());
 				userInfoService.save(u);
@@ -779,26 +784,34 @@ public class UserInfoAppAction extends BaseCRUDController<UserInfoBean, UserInfo
 	}
 
 	// 电话号码查询
-	@RequestMapping("findMobile")
-	@ResponseBody
-	@AppUserLogin
-	public Object findMobile(String mobile) {
-		UserInfo userInfo = userInfoService.findByMobile(mobile);
-		UserMore userMore = new UserMore();
-		Integer groupNum = 0;
-		if (userInfo != null) {
-			userInfoService.findMobileIntegrationModify(userInfo);
-			userMore = userMoreService.findOne(userInfo.getId());
-			groupNum = URLUtils.loadUserGroupMount(userInfo.getId());
-		}
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("userInfo", userInfo);
-		map.put("userMore", userMore);
-		map.put("groupNum", groupNum);
-		// logger.debug("groupNum------------------------->"+URLUtils.loadUserGroupMount(userInfo.getId())
-		// );
-
-		return suc(map);
-	}
+//	@RequestMapping("findMobile")
+//	@ResponseBody
+//	@AppUserLogin
+//	public Object findMobile(BaseAppTokenBean baseApp, String mobile) {
+//		UserInfo appUser = baseApp.getAppUser();
+//		Integer s = Integer.parseInt(sysConfigService.findOne(SysConfigEnum.search_msg_mobile.getValue()).getConfigValue());
+//		if (appUser.getIntegration() != null && appUser.getIntegration().intValue() > s.intValue()) {
+//			userInfoService.addIntegration(appUser, null, "查询消耗", s, Boolean.TRUE);
+//		} else {
+//			return fail("积分不足!");
+//		}
+//		
+//		UserInfo userInfo = userInfoService.findByMobile(mobile);
+//		UserMore userMore = new UserMore();
+//		Integer groupNum = 0;
+//		if (userInfo != null) {
+////			userInfoService.findMobileIntegrationModify(userInfo);
+//			userMore = userMoreService.findOne(userInfo.getId());
+//			groupNum = URLUtils.loadUserGroupMount(userInfo.getId());
+//		}
+//		Map<String, Object> map = new HashMap<String, Object>();
+//		map.put("userInfo", userInfo);
+//		map.put("userMore", userMore);
+//		map.put("groupNum", groupNum);
+//		// logger.debug("groupNum------------------------->"+URLUtils.loadUserGroupMount(userInfo.getId())
+//		// );
+//
+//		return suc(map);
+//	}
 
 }

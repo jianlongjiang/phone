@@ -47,7 +47,9 @@
                                                 <th>注册人数</th>
                                                 <th>登录人数</th>
                                                 <th>签到人数</th>
+                                                <!--
                                                 <th>卸载人数</th>
+                                                -->
                                                 <th>时间</th>
                                             </tr>
                                         </thead>
@@ -57,11 +59,12 @@
                                         		<#list infos as info>
                                             <tr>
                                                 <td> ${info.vipAmount}</td>
-                                               
                                                 <td>${info.int1}</td>
                                                 <td>${info.loginAmount}</td>
                                                 <td>${info.registAmount}</td>
+                                                <!--
                                                 <td>6---</td>
+                                                -->
                                                 <th> <#if (info.createTime)??>${info.createTime?string('yyyy-MM-dd')}<#else></#if> </th>
                                             </tr>
                                             </#list>

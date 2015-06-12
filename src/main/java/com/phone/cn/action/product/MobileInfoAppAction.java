@@ -15,6 +15,7 @@ import com.phone.cn.bean.BaseAppTokenBean;
 import com.phone.cn.bean.ResultBean;
 import com.phone.cn.bean.product.MobileInfoBean;
 import com.phone.cn.conf.enums.MobileInfoFromEnum;
+import com.phone.cn.conf.enums.SysConfigEnum;
 import com.phone.cn.entity.member.UserInfo;
 import com.phone.cn.entity.product.MobileInfo;
 import com.phone.cn.entity.sys.SysConfig;
@@ -71,7 +72,7 @@ public class MobileInfoAppAction extends BaseCRUDController<MobileInfoBean, Mobi
 	@AppUserLogin
 	public Map<String, Object> downloadmobile(BaseAppTokenBean baseApp,Integer firstCateId, Integer secondCateId,@RequestParam Integer num){
 		ResultBean b = new ResultBean();
-		SysConfig s = sysConfigService.findOne(4);
+		SysConfig s = sysConfigService.findOne(SysConfigEnum.dow_mobile_score.getValue());
 		UserInfo user = baseApp.getAppUser();
 		if(user.getIntegration() < Integer.parseInt(s.getConfigValue())*num   ){
 			b.setIsSuccess(Boolean.FALSE);
@@ -109,13 +110,15 @@ public class MobileInfoAppAction extends BaseCRUDController<MobileInfoBean, Mobi
 		Integer  dayDownLimit = sysConfigService.loadDownLimit(user);
 		dayDown_last = dayDown_last==null?0:dayDown_last;
 		dayDownLimit = dayDownLimit==null?0:dayDownLimit;
-		//TODO 被注释了
-		if(dayDown_last + num > dayDownLimit ) {
-			num = dayDownLimit - dayDown_last;
-		}
-		if(num == 0){
-			return  fail("今日下载已达到上限");
-		}
+		
+//		if(dayDown_last >= dayDownLimit){
+//			num = 0;
+//		}else if(dayDown_last + num > dayDownLimit ){
+//			num = dayDownLimit - dayDown_last;
+//		}
+//		if(num <= 0){
+//			return  fail("今日下载已达到上限");
+//		}
 		
 		return suc(mobileService.getMobiles(user, num, downMobiles,mustDowns,  vipMobileInfos, normalpMobileInfos,otherMobiles, s));
 	}

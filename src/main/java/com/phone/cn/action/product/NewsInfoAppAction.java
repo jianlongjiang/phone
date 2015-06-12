@@ -25,6 +25,7 @@ import com.phone.cn.exception.SimpleException;
 import com.phone.cn.service.product.NewsCateService;
 import com.phone.cn.service.product.NewsInfoService;
 import com.phone.cn.service.product.UpDownLogService;
+import com.phone.cn.utils.HtmlUtil;
 import com.phone.cn.utils.JsonMapper;
 import com.phone.cn.web.action.BaseAppController;
 import com.phone.cn.web.interceptor.AppUserLogin;
@@ -55,7 +56,7 @@ public class NewsInfoAppAction extends BaseAppController<NewsInfoBean, NewsInfo,
 	@ResponseBody
 	@RequestMapping(value = "detail/{id}")
 	public Map<String, Object> detail(BaseAppTokenBean baseApp, @PathVariable Integer id) {
-		NewsInfo newsinfo = newsInfoService.findOne(id);
+		NewsInfo newsinfo = newsInfoService.findOneView(id);
 		NewsInfoBean bean = new NewsInfoBean();
 		bean.setCateId(newsinfo.getCateId());
 		bean.setSort("update_time.desc");
@@ -70,6 +71,7 @@ public class NewsInfoAppAction extends BaseAppController<NewsInfoBean, NewsInfo,
 			int  index = random.nextInt(list.size());
 			NewsInfo getInfo = list.remove(index);
 			if(getInfo.getId().intValue() != id){
+				getInfo.setNewsDesc(HtmlUtil.htmlUnescape(getInfo.getNewsDesc(), 50));
 				rec_info.add(getInfo);
 			}
 		}
@@ -113,7 +115,11 @@ public class NewsInfoAppAction extends BaseAppController<NewsInfoBean, NewsInfo,
 		news.setSort("update_time.desc");
 		Map<String, Object> map = new HashMap<String, Object>();
 		// 首页
-		map.put("lastNews", newsInfoService.queryAllWithPage(news, news.toPageBounds()));
+		List<NewsInfo> lastNews = newsInfoService.queryAllWithPage(news, news.toPageBounds());
+		for (NewsInfo getInfo : lastNews) {
+			getInfo.setNewsDesc(HtmlUtil.htmlUnescape(getInfo.getNewsDesc(), 50));
+		}
+		map.put("lastNews", lastNews);
 		news.setPageSize(5);
 		news.setSort("order_by.asc");
 		// 新闻推荐
@@ -202,6 +208,9 @@ public class NewsInfoAppAction extends BaseAppController<NewsInfoBean, NewsInfo,
 		bean.setCateId(id);
 		bean.setPageSize(5);
 		List<NewsInfo> infos = newsInfoService.queryAllWithPage(bean, bean.toPageBounds());
+		for (NewsInfo newsInfo : infos) {
+			newsInfo.setNewsDesc(HtmlUtil.htmlUnescape(newsInfo.getNewsDesc() , 50));
+		}
 		map.put("newsCenterCate", infos);
 		return suc(map);
 	}

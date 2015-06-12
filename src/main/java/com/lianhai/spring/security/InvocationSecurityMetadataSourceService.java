@@ -12,6 +12,8 @@ import java.util.Map;
 
 import javax.annotation.PostConstruct;
 
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.ConfigAttribute;
@@ -116,8 +118,25 @@ public class InvocationSecurityMetadataSourceService implements FilterInvocation
 		List<ConfigAttribute> allows = new ArrayList<ConfigAttribute>(); 
 		while (ite.hasNext()) {
 			String resURL = ite.next();
-			RequestMatcher requestMatcher = new AntPathRequestMatcher(resURL);
+			String   doResURL = resURL;
+			if(StringUtils.isNotBlank(resURL)){
+				if(resURL.endsWith("**")) {
+			//		resURL+="**";
+				}else if(resURL.endsWith("*")) {
+					doResURL+="*";
+				}else {
+					doResURL+="**";
+				}
+			}
+			
+			if(StringUtils.equals("/admin/mobilecate/oneList/p**",doResURL)){
+				System.out.println("");
+			}
+			RequestMatcher requestMatcher = new AntPathRequestMatcher(doResURL,null, true);
+//			new AntPathRequestMatcher(pattern, httpMethod, caseSensitive);
+//			RegexUrlPathMatch
 			logger.debug("==============> spring security: "+ resURL); //$NON-NLS-1$
+//			resURL.to
 			if (requestMatcher.matches(fi.getHttpRequest())) {
 				logger.info("===================   访问的url  和收保护的index  >"+ resURL);
 				Collection<ConfigAttribute> returnCollection = resourceMap.get(resURL);
@@ -125,8 +144,8 @@ public class InvocationSecurityMetadataSourceService implements FilterInvocation
 					logger.debug("getAttributes(Object) - end"); //$NON-NLS-1$
 				}
 //				return returnCollection;
-				
-				allows.addAll(returnCollection);
+				if(CollectionUtils.isNotEmpty(returnCollection))
+					allows.addAll(returnCollection);
 				
 			}
 //			return  allows;

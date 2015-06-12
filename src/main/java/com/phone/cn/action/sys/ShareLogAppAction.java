@@ -17,6 +17,7 @@ import com.phone.cn.service.member.UserInfoService;
 import com.phone.cn.service.sys.ShareLogService;
 import com.phone.cn.service.sys.SysConfigService;
 import com.phone.cn.web.action.BaseCRUDController;
+import com.phone.cn.web.interceptor.AppUserLogin;
 
 
 @Controller
@@ -32,6 +33,7 @@ public class ShareLogAppAction extends BaseCRUDController<ShareLogBean, ShareLog
 	
 		@RequestMapping("shareFirend")
 		@ResponseBody
+		@AppUserLogin
 		public Object  shareFirend(BaseAppTokenBean baseApp){
 			UserInfo userInfo = baseApp.getAppUser();
 			
@@ -44,7 +46,12 @@ public class ShareLogAppAction extends BaseCRUDController<ShareLogBean, ShareLog
 			if(dayCount == null || dayCount.intValue()==0){
 				SysConfig sysConfig =  sysConfigService.findOne(SysConfigEnum.to_share_firend.getValue());
 				if(sysConfig != null){
-					userInfoService.addIntegration(userInfo, null, "分享好友", Integer.parseInt(sysConfig.getConfigValue()), false);
+					ShareLog shareLog = new ShareLog();
+					shareLog.setAction("friend");
+					shareLog.setUserId(userInfo.getId());
+					shareLog.setCreateTime(new Date());
+					shareLogService.save(shareLog);
+					userInfoService.addIntegration(userInfo, null, "分享好友", Math.abs(Integer.parseInt(sysConfig.getConfigValue())), false);
 				}
 				
 			}

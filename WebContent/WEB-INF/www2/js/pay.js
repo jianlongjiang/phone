@@ -40,10 +40,9 @@ function cancelOrder(to){
 	});
 }
 
+
 var  isTestPay = false;
-
 function	payMoney(to){
-
 	if(isTestPay){
 		appAjax({
 			type : "POST",
@@ -65,7 +64,6 @@ function	payMoney(to){
 		var 	subject = orderRecod.outtradeno;;
 		var bodtxt = orderRecod.outtradeno;;
 		var total_fee = orderRecod.tradeCount;
-		total_fee  = 0.01;
 		 var url = BASE_URL+"/ordernotifyurl";
 		 
 	     window.plugins.Pgalipay.alipay(out_trade_no,subject,bodtxt,total_fee,url,

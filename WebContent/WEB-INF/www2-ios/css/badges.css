@@ -22,7 +22,7 @@
 	/* position:absolute;
 	top:2px; right:2px; */
 	display:inline-block;
-	min-width:20px;	max-width:90%; height:20px;
+	min-width:20px; height:20px;
 	padding:0 3px;
 	background-color:red;
 	border-radius:20px;
@@ -35,6 +35,10 @@
 	text-overflow:ellipsis;
 	text-align:center;
 	text-shadow:0 -1px 0 rgba(64,0,0,.6);
+	  position: absolute;
+  right: 30px;
+  top: 48%;
+  margin-top: -10px;
 }
 
 #afui .af-badge.br { bottom:20px; right:2px; top:auto; left:auto; background-color: #cccccc;}

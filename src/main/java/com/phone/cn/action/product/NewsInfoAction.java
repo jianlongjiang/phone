@@ -95,4 +95,5 @@ public class NewsInfoAction extends BaseCRUDController<NewsInfoBean, NewsInfo, I
 	
 	
 	
+	
 }

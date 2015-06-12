@@ -22,6 +22,8 @@
                             <#if infos?has_content>
                 			<#list infos as info>
                             <div class="form-group">
+                            
+                            ${info.id} 
                                 <label class="col-sm-2 control-label" for="form-field-1"> <span class="red">*</span> ${info.configName}：</label>
                                 <div class="col-sm-4">
                                 	<input type="hidden" value="${info.id}" name="id"/>

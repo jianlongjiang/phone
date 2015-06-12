@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.googlecode.ehcache.annotations.Cacheable;
 import com.googlecode.ehcache.annotations.TriggersRemove;
+import com.phone.cn.conf.enums.SysConfigEnum;
 import com.phone.cn.entity.member.UserInfo;
 import com.phone.cn.entity.sys.SysConfig;
 import com.phone.cn.mapper.sys.SysConfigMapper;
@@ -82,9 +83,9 @@ public class SysConfigService extends BaseService<SysConfig, Integer>{
 	public Integer loadDownLimit(UserInfo user) {
 		String  value = null;
 		if(user.getIsVip() != null && user.getIsVip()) {
-			value =	sysconfigMapper.selectByPrimaryKey(15).getConfigValue();
+			value =	sysconfigMapper.selectByPrimaryKey(SysConfigEnum.day_vip_downCount.getValue()).getConfigValue();
 		}else {
-			value =  sysconfigMapper.selectByPrimaryKey(14).getConfigValue();
+			value =  sysconfigMapper.selectByPrimaryKey(SysConfigEnum.day_common_downCount.getValue()).getConfigValue();
 		}
 		try {
 			return Integer.parseInt(value);
@@ -93,5 +94,13 @@ public class SysConfigService extends BaseService<SysConfig, Integer>{
 			return 0;
 		}
 	}
+	
+	
+	@Override
+	public SysConfig findOne(Integer id) {
+		// TODO Auto-generated method stub
+		return super.findOne(id);
+	}
+	
 	
 }

@@ -28,7 +28,8 @@ public class UserScoreLogAppAction extends BaseAppController<UserScoreLogBean, U
 	public Object list(BaseAppTokenBean baseApp, UserScoreLogBean bean ) {
 		UserInfo userInfo = baseApp.getAppUser();
 		bean.setUserId(userInfo.getId());
-		_defaultSort(bean);
+		bean.setSort("update_time.desc");
+//		_defaultSort(bean);
 		//  信息已读 设置
 		userScoreLogService.userReadAll(userInfo.getId());
 		return suc(baseService.queryPage(bean));

@@ -60,10 +60,16 @@ public class ExalUtils{
 				if (DateUtil.isCellDateFormatted(cell)) { // poi
 					result = cell.getDateCellValue();
 				} else {
-					result = cell.getNumericCellValue();
+					double d = cell.getNumericCellValue();
+					
+					if( d == (int)d){
+						result = (int)d;
+					}else {
+						result = d;
+					}
 				}
-				result = cell.getDateCellValue(); // date
-				result = cell.getNumericCellValue(); // double
+//				result = cell.getDateCellValue(); // date
+//				result = cell.getNumericCellValue(); // double
 				break;
 			case Cell.CELL_TYPE_FORMULA: // getCellFormula
 				try {

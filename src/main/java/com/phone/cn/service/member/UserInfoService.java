@@ -78,7 +78,7 @@ public class UserInfoService extends BaseService<UserInfo, Integer> {
 
 	@Transactional
 	public Boolean jifenhongbao(UserInfo formUser, String mobile, Integer jifen) {
-
+		jifen =  Math.abs(jifen);
 		if(StringUtils.equals(formUser.getMobile(), mobile))  return  false;
 		UserInfo mobileUser = mapper.findByMobile(mobile);
 		if (jifen.intValue() < 0) {
@@ -206,10 +206,16 @@ public class UserInfoService extends BaseService<UserInfo, Integer> {
 //		if (userInfo.getIsVip() != null && userInfo.getIsVip()) {
 //			throw new SimpleException("您已经是金蜗牛!");
 //		}
+		//  用户自己充值为金蜗牛 加积分
+			SysConfig otherConfig1 = sysConfigService.findOne(SysConfigEnum.be_vip_own.getValue());
+			addIntegration(userInfo, null, "恭喜成为金蜗牛", Math.abs(Integer.parseInt(otherConfig1.getConfigValue())), Boolean.FALSE);
+		
+//			SysConfig sysConfig = sysConfigService.findOne(SysConfigEnum.be_vip_own.getValue());
+//			addIntegration(userInfo, null, "成为会员", Integer.parseInt(sysConfig.getConfigValue()), Boolean.FALSE);
+		
 		if (userInfo.getInviteesId() != null) {
 			UserInfo inviteeUser = super.findOne(userInfo.getInviteesId());
-			
-			if (inviteeUser != null){ // 推荐人拿积分
+			if (inviteeUser != null){ // 推荐人拿积分,  不区分 金蜗牛
 				SysConfig otherConfig = sysConfigService.findOne(SysConfigEnum.be_vip_other.getValue());
 				addIntegration(inviteeUser, null, "好友成为会员", Integer.parseInt(otherConfig.getConfigValue()), Boolean.FALSE);
 			}
@@ -229,13 +235,8 @@ public class UserInfoService extends BaseService<UserInfo, Integer> {
 					redPacketRuleService.sendGroupRedPack(secondnviteeUser, userInfo, groupMoney);
 					save(secondnviteeUser);
 				}
-
 			}
-
 		}
-		SysConfig sysConfig = sysConfigService.findOne(SysConfigEnum.be_vip_own.getValue());
-		addIntegration(userInfo, null, "成为会员", Integer.parseInt(sysConfig.getConfigValue()), Boolean.FALSE);
-
 	}
 
 	/**

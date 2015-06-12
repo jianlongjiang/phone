@@ -77,7 +77,7 @@ function saveForm(key,url, toUrl){
 //			if(data.message !== null && data.message !=""){
 //			alert(data.message);
 //		}   
-			alert("操作成功！");
+//			
 			if(data.isSuccess == true){
 //				alert("data.result"+data.result);
 //				alert(!data.result);
@@ -94,6 +94,7 @@ function saveForm(key,url, toUrl){
 						location.href=toUrl;
 					}
 				}	    
+				alert("操作成功！");
 			}else {
 				alert(data.message);
 			}

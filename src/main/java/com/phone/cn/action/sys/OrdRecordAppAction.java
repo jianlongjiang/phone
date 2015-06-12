@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.phone.cn.bean.BaseAppTokenBean;
 import com.phone.cn.bean.sys.OrdRecordBean;
+import com.phone.cn.conf.enums.SysConfigEnum;
 import com.phone.cn.entity.member.UserInfo;
 import com.phone.cn.entity.sys.OrdRecord;
 import com.phone.cn.service.sys.SysConfigService;
@@ -66,7 +67,7 @@ public class OrdRecordAppAction extends BaseAppController<OrdRecordBean, OrdReco
 							sysSequenceService.nextSequence("beViip", true)
 									.getSeqValue(), 6, "0");
 			ordRecord.setOuttradeno(code);
-			ordRecord.setTradeCount(Double.parseDouble(sysConfigService.findOne(20).getConfigValue()));
+			ordRecord.setTradeCount(Double.parseDouble(sysConfigService.findOne(SysConfigEnum.to_be_vip.getValue()).getConfigValue()));
 //			ordRecord.setTradeCount(0.01);
 			ordRecord.setContentType("order");
 			baseService.save(ordRecord);

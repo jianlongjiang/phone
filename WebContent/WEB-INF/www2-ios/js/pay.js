@@ -41,9 +41,7 @@ function cancelOrder(to){
 }
 
 
-
-
-var  isTestPay = true;
+var  isTestPay = false;
 
 function	payMoney(to){
 	if(isTestPay){
@@ -67,7 +65,7 @@ function	payMoney(to){
 		var 	subject = orderRecod.outtradeno;;
 		var bodtxt = orderRecod.outtradeno;;
 		var total_fee = orderRecod.tradeCount;
-		alert(total_fee);
+//		alert(total_fee);
 //		total_fee  = 0.01;  //  正式测试的
 //		total_fee = 100;
 		 var url = BASE_URL+"/ordernotifyurl";
@@ -88,7 +86,7 @@ function	payMoney(to){
 }   
 
 function resultString(data){
-	alert(data.resultStatus);
+//	alert(data.resultStatus);
 	if(!isBlack(data) &&  data.resultStatus==9000){
 		$("#show_orderNo").html(orderRecod.outtradeno);
 		$("#show_createTime").html(orderRecod.createTime);

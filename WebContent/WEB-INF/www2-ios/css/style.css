@@ -212,6 +212,13 @@ span.up-ico{
 	-webkit-background-size: 12px 12px;
 	background-size: 23px 23px;
 }
+#up-ico.active {
+	background-image: url(../image/up_active.png);
+}
+
+#down-ico.active{
+	background-image: url(../image/dow_active.png);
+}
 span.down-ico{
 	width: 23px;
 	height: 23px;
@@ -732,6 +739,7 @@ table.recommend-users{
 	text-align: center;
 	display: inline-block;
     padding-top: 20px;
+    position: relative;
 }
 #my-messages .message-btn.active{
 	color: #fff;
@@ -778,7 +786,7 @@ table.recommend-users{
 	padding: 5% 5% 50px 5%;
 }
 #news-detail .container .news-title{
-	font-size: 25px;
+	font-size: 22px;
 	font-weight: bold;
 }
 #news-detail .container .news-date{

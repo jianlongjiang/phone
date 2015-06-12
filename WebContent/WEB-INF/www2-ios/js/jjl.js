@@ -462,7 +462,7 @@ function  into_chat(isMore){
 				pageNo++;
 				var list = data.result;
 				if (list.length == 0) {
-					$(".more").html("无");
+					$(".more").html("");  // 无
 					return;
 				} else {
 					// / var list = [1,2,3,4,5];
@@ -936,7 +936,7 @@ function into_payDetail(isMore) {
 
 						var list = r.result;
 						if (list.length == 0) {
-							$(".more").html("无");
+							$(".more").html("");  // 无
 						} else {
 							// / var list = [1,2,3,4,5];
 							var html = "";
@@ -1222,9 +1222,8 @@ function modifyWeiXinFun() {
 
 }
 
-// my-messages
-function into_myMessages() {
 
+function  myMessages_unreadCount(){
 	appAjax({
 		url : "app/userinfo/unreadCount",
 		data : {},
@@ -1255,6 +1254,13 @@ function into_myMessages() {
 			}
 		}
 	});
+}
+
+
+// my-messages
+function into_myMessages() {
+
+	myMessages_unreadCount();
 
 	var userInfo = get("userInfo");
 
@@ -1507,12 +1513,17 @@ function choseFriend(friendId) {
 function load_userScoreMsg(isMore) {
 	$("#user-message-div").show();
 	$("#sys-message-div").hide();
+	
+	
 	if (isMore==1 ){
 		isMore = true;
 	}else {
+		$(".message-btn").removeClass("active");
+		$("#user-message-btn").addClass("active");
 		//$.ui.scrollToTop("my-messages");
 		isMore = false;
 		pageNo = 1;
+		myMessages_unreadCount();
 		$(".more").html("加载更多");
 	}
 
@@ -1530,7 +1541,7 @@ function load_userScoreMsg(isMore) {
 
 				var list = r.result;
 				if (list.length == 0) {
-					$(".more").html("无");
+					$(".more").html("");  // 无
 				} else {
 					// / var list = [1,2,3,4,5];
 					var html = "";
@@ -1575,6 +1586,7 @@ function load_userRedMsg(isMore) {
 		pageNo = 1;
 //		$.ui.scrollToTop("my-messages");
 		$(".more").html("加载更多");
+		myMessages_unreadCount();
 	}
 	appAjax({
 		url : "app/redPack/list",
@@ -1589,7 +1601,7 @@ function load_userRedMsg(isMore) {
 				pageNo++;
 				var list = r.result;
 				if (list.length == 0) {
-					$(".more").html("无");
+					$(".more").html("");  // 无
 				} else {
 					// / var list = [1,2,3,4,5];
 					var html = "";
@@ -1847,11 +1859,11 @@ function getNewsDetail(newsId) {
 			$.ui.hideMask();
 			
 			$(".newsId").attr("data-value",d.id);
-			$("#news-detail #news-detail_1 .news-title").text(d.title);
+			$("#news-detail #news-detail_1 .news-title").html(d.title);
 			$("#news-detail #news-detail_1 .news-date").text(d.author);
 			$("#news-detail #news-date").text(d.createTime);
 
-			$("#news-content").text(d.newsDesc);
+			$("#news-content").html(d.newsDesc);
 			$("#news-detail #news-detail_1 .news-img").attr('src',
 					BASE_IMAGE + d.image);
 			$("#icon-up-num").text(d.pointGoodCount);
@@ -1876,7 +1888,7 @@ function getNewsDetail(newsId) {
 			
 			//TODO
 			$(".icon.down-ico").attr("data-id",newsId);
-
+			 $("#news-detail .jjl_news-detail").hide();
 			r.forEach(function(e, i, a) {
 				var item = $("#news-detail .jjl_news-detail").eq(
 						i);
@@ -1885,6 +1897,7 @@ function getNewsDetail(newsId) {
 				item.find(".news-date").text(e.createTime);
 				item.find(".news-content").text(e.newsDesc);
 				item.attr("data-id",e.id);
+				item.show();
 			});
 		}
 	});

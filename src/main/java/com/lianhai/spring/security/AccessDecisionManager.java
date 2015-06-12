@@ -61,6 +61,10 @@ public class AccessDecisionManager implements org.springframework.security.acces
 				}
 			}
 		}
+		if(object.toString().indexOf("index") != -1) {
+			logger.debug("后台首页不拦截"); //$NON-NLS-1$
+			return ;
+		}
 //		ControllerTool
 		throw new AccessDeniedException("no access");
 	}

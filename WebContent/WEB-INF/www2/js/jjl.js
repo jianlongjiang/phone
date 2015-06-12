@@ -221,6 +221,14 @@ function weixinshare(event, title, url) {
       });
   }catch(e){
 	  console.error("分享插件	未添加");
+	  
+//	  appAjax({
+//			type : "POST",
+//			url : "app/shareLog/shareFirend",
+//			success : function(data) {
+//				alert("分享图片");
+//			}
+//		});
   }
 }
 
@@ -460,7 +468,7 @@ function  into_chat(isMore){
 				pageNo++;
 				var list = data.result;
 				if (list.length == 0) {
-					$(".more").html("无");
+					$(".more").html("");  // 无
 					return;
 				} else {
 					// / var list = [1,2,3,4,5];
@@ -921,7 +929,7 @@ function into_payDetail(isMore) {
 
 						var list = r.result;
 						if (list.length == 0) {
-							$(".more").html("无");
+							$(".more").html("");  // 无
 						} else {
 							// / var list = [1,2,3,4,5];
 							var html = "";
@@ -1204,12 +1212,11 @@ function modifyWeiXinFun() {
 			}
 		}
 	});
-
 }
 
-// my-messages
-function into_myMessages() {
 
+
+function  myMessages_unreadCount(){
 	appAjax({
 		url : "app/userinfo/unreadCount",
 		data : {},
@@ -1240,9 +1247,14 @@ function into_myMessages() {
 			}
 		}
 	});
+	
+}
 
+
+// my-messages
+function into_myMessages() {
+	myMessages_unreadCount();
 	var userInfo = get("userInfo");
-
 	// console.log("------体现金额 --1:reflectRed"+userInfo.reflectRed);
 	// var allMoney = userInfo.balance + userInfo.reflectRed;
 	// $("#sys-message-div .all .message-price").html("￥"+allMoney);
@@ -1456,7 +1468,7 @@ function  addMobileFun(){
 		alert("请填写正确手机号码");
 		return;
 	}
-	
+	var userInfo = get("userInfo");
 	if(userInfo.mobile == mobile){
 		alert("不可填写本人");
 		return;
@@ -1496,9 +1508,12 @@ function load_userScoreMsg(isMore) {
 		isMore = true;
 	}else {
 //		$.ui.scrollToTop("my-messages");
+		$(".message-btn").removeClass("active");
+		$("#user-message-btn").addClass("active");
 		isMore = false;
 		pageNo = 1;
 		$(".more").html("加载更多");
+		myMessages_unreadCount();
 	}
 
 	appAjax({
@@ -1515,7 +1530,7 @@ function load_userScoreMsg(isMore) {
 
 				var list = r.result;
 				if (list.length == 0) {
-					$(".more").html("无");
+					$(".more").html("");  // 无
 				} else {
 					// / var list = [1,2,3,4,5];
 					var html = "";
@@ -1555,6 +1570,7 @@ function load_userRedMsg(isMore) {
 		pageNo = 1;
 //		$.ui.scrollToTop("my-messages");
 		$(".more").html("加载更多");
+		myMessages_unreadCount();
 	}
 	appAjax({
 		url : "app/redPack/list",
@@ -1569,7 +1585,7 @@ function load_userRedMsg(isMore) {
 				pageNo++;
 				var list = r.result;
 				if (list.length == 0) {
-					$(".more").html("无");
+					$(".more").html("");  // 无
 				} else {
 					// / var list = [1,2,3,4,5];
 					var html = "";
@@ -1827,11 +1843,11 @@ function getNewsDetail(newsId) {
 			$.ui.hideMask();
 			
 			$(".newsId").attr("data-value",d.id);
-			$("#news-detail #news-detail_1 .news-title").text(d.title);
+			$("#news-detail #news-detail_1 .news-title").html(d.title);
 			$("#news-detail #news-detail_1 .news-date").text(d.author);
 			$("#news-detail #news-date").text(d.createTime);
 
-			$("#news-content").text(d.newsDesc);
+			$("#news-content").html(d.newsDesc);
 			$("#news-detail #news-detail_1 .news-img").attr('src',
 					BASE_IMAGE + d.image);
 			$("#icon-up-num").text(d.pointGoodCount);
@@ -1856,15 +1872,17 @@ function getNewsDetail(newsId) {
 			
 			//TODO
 			$(".icon.down-ico").attr("data-id",newsId);
-
+			$("#news-detail .jjl_news-detail").hide();
 			r.forEach(function(e, i, a) {
 				var item = $("#news-detail .jjl_news-detail").eq(
 						i);
+				
 				item.find("img").attr("src", BASE_IMAGE + e.image);
 				item.find(".news-title").text(e.title);
 				item.find(".news-date").text(e.createTime);
 				item.find(".news-content").text(e.newsDesc);
 				item.attr("data-id",e.id);
+				item.show();
 			});
 		}
 	});

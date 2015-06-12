@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.phone.cn.bean.ResultBean;
+import com.phone.cn.conf.enums.SysConfigEnum;
 import com.phone.cn.entity.member.UserInfo;
 import com.phone.cn.entity.sys.OrdRecord;
 import com.phone.cn.exception.SimpleException;
@@ -107,7 +108,7 @@ public class AlipayApiAction {
 					// order.setTradeCount(tradeCount);
 					ordRecordService.save(order);
 					UserInfo userInfo = userInfoService.findOne(order.getUserId());
-					Double beVip = Double.parseDouble(sysConfigService.findOne(20).getConfigValue());
+					Double beVip = Double.parseDouble(sysConfigService.findOne(SysConfigEnum.to_be_vip.getValue()).getConfigValue());
 					Double balance = userInfo.getBalance() + order.getTradeCount() - beVip;
 					userInfo.setBalance(balance);
 					userInfo.setIsVip(true);
