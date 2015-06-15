@@ -204,6 +204,13 @@
      user_id = #{userId,jdbcType=INTEGER}  and cash > 0  and to_days(create_time) = to_days(now())
   </select>
   
+  <select id="selectByMobile" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from cash_user_log
+    where mobile = #{mobile,jdbcType=VARCHAR}
+  </select>
+  
   
   <select id="query" resultMap="BaseResultMap"  >
     select 
@@ -267,6 +274,10 @@
         is_see = #{isSee}
       </if>
       
+      <if test="id != null"> and
+        id = #{id}
+      </if>
+      
       <if test="startCash != null"> and
      	 <![CDATA[ cash >=  #{startCash} ]]>
       </if>
@@ -278,6 +289,10 @@
       </if>
       <if test="endDate != null"> and
       <![CDATA[ create_time <=  #{endDate} ]]>
+      </if>
+      
+       <if test="condition != null"> 
+     		${condition}
       </if>
       
   </select>

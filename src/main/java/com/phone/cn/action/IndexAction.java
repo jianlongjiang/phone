@@ -77,7 +77,12 @@ public class IndexAction {
 		UserInfo user = userInfoService.findOne(id);
 		model.addAttribute("levelName", userLevelService.findLevelName(user.getExperience()));
 		model.addAttribute("info", user);
-		return "memberindex";
+		
+		if(user == null || !user.getIsVip())
+			return "memberindex";
+		model.addAttribute("groupCount", URLUtils.loadUserGroupMount(user.getId()));
+		return "vipMember";
+//		return "memberindex";
 	}
 	
 	@RequestMapping(value="teamMessage2/{id}")

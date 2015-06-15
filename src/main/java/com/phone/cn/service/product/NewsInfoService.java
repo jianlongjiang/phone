@@ -12,6 +12,7 @@ import com.phone.cn.bean.SearchBean;
 import com.phone.cn.entity.product.NewsInfo;
 import com.phone.cn.mapper.product.NewsInfoMapper;
 import com.phone.cn.service.BaseService;
+import com.phone.cn.utils.HtmlUtil;
 
 /**
  * @author zgdcool
@@ -54,10 +55,10 @@ public class NewsInfoService extends BaseService<NewsInfo, Integer>{
 				String title = newsInfo.getTitle();
 				String desc = newsInfo.getNewsDesc();
 				if(StringUtils.isNotEmpty(title) && title.length() >= 13){
-					newsInfo.setTitle(title.substring(0,13)+"...");
+					newsInfo.setTitle(HtmlUtil.htmlUnescape(title,13));
 				}
 				if(StringUtils.isNotEmpty(desc) && desc.length() >= 20){
-					newsInfo.setNewsDesc(desc.substring(0,20)+"...");
+					newsInfo.setNewsDesc(HtmlUtil.htmlUnescape(desc,20));
 				}
 			}
 		}

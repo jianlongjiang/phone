@@ -209,7 +209,7 @@ function weixinshare(event, title, url) {
 //    	  				"mobile" : mobile,
 //    	  			},
     	  			success : function(data) {
-    	  				alert("分享图片");
+//    	  				alert("分享图片");
     	  			}
     	  		});
     	  	}
@@ -806,7 +806,7 @@ function reflectMoneyFun(to) {
 			if (r.isSuccess) {
 				// 钱
 				var userInfo = get("userInfo");
-				userInfo.balance = userMoney - money;
+				userInfo.balance = (userMoney - money).toFixed(2);
 				set("userInfo", userInfo);
 				var panel = $("#withdraw-cash-details");
 				panel.find(".createTime").html(r.result);
@@ -1709,8 +1709,11 @@ $.ui.ready(function(){
 			url : "app/newsinfo/pointgood?newsId=" +$(this).attr("data-id"),
 			success : function(temp) {
 				if (temp.isSuccess) {
-					var up_num = $("#icon-up-num").text();
-					$("#icon-up-num").text(++up_num);
+					var c = $("#icon-up-num").text();
+					if(isBlack(c)) {
+						up_num = 0;
+					}
+					$("#icon-up-num").html(++up_num);
 					$(".up-ico").addClass("active");
 				} else {
 					alert("知道了");
@@ -1727,6 +1730,7 @@ $.ui.ready(function(){
 			success : function(temp) {
 				if (temp.isSuccess) {
 					var up_down = $("#icon-up-down").text();
+					if(isBlack(up_down))  up_down = 0;
 					$("#icon-up-down").text(++up_down);
 					$(".down-ico").addClass("active");
 				} else {
@@ -1775,9 +1779,9 @@ function load_indexMsg() {
 				d.forEach(function(e, i, a) {
 					var item = $("#home .news-item").eq(i);
 					item.find("img").attr("src", BASE_IMAGE + e.image);
-					item.find(".news-title").text(e.title);
-					item.find(".news-date").text(e.createTime);
-					item.find(".news-content").text(e.newsDesc.substr(0,30));
+					item.find(".news-title").html(e.title);
+					item.find(".news-date").html(e.createTime);
+					item.find(".news-content").html(e.newsDesc.substr(0,30));
 					item.attr("data-id",e.id);
 				});
 				
@@ -1844,14 +1848,14 @@ function getNewsDetail(newsId) {
 			
 			$(".newsId").attr("data-value",d.id);
 			$("#news-detail #news-detail_1 .news-title").html(d.title);
-			$("#news-detail #news-detail_1 .news-date").text(d.author);
-			$("#news-detail #news-date").text(d.createTime);
+			$("#news-detail #news-detail_1 .news-date").html(d.author);
+			$("#news-detail #news-date").html(d.createTime);
 
 			$("#news-content").html(d.newsDesc);
 			$("#news-detail #news-detail_1 .news-img").attr('src',
 					BASE_IMAGE + d.image);
-			$("#icon-up-num").text(d.pointGoodCount);
-			$("#icon-down-num").text(d.pointBadCount);
+			$("#icon-up-num").html(d.pointGoodCount);
+			$("#icon-down-num").html(d.pointBadCount);
 			$(".J_weixin_share_member").attr("data-value", d.id);
 			$(".J_weixin_share_member")
 					.attr("data-image", BASE_IMAGE + d.image);
@@ -1878,9 +1882,9 @@ function getNewsDetail(newsId) {
 						i);
 				
 				item.find("img").attr("src", BASE_IMAGE + e.image);
-				item.find(".news-title").text(e.title);
-				item.find(".news-date").text(e.createTime);
-				item.find(".news-content").text(e.newsDesc);
+				item.find(".news-title").html(e.title);
+				item.find(".news-date").html(e.createTime);
+				item.find(".news-content").html(e.newsDesc);
 				item.attr("data-id",e.id);
 				item.show();
 			});

@@ -150,6 +150,8 @@
     select  sum(mobilenum)  from  download_log  where to_days(create_time) = to_days( #{date} )
   </select>
   
+  
+  
   <select id="loadDay_downloadPeople"   resultType="java.lang.Integer" >
     select   count(distinct user_id )   from  download_log  where to_days(create_time) = to_days(#{date})
   </select>

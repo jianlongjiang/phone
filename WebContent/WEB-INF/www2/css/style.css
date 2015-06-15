@@ -330,6 +330,7 @@ img.news-item-png {}
 }
 #afui .swiper-wrapper img{
 	width: 100%;
+	height:100%;
 /* 	height:110px; */
 }
 .pagination {

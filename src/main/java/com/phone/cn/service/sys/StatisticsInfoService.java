@@ -97,5 +97,6 @@ public class StatisticsInfoService extends BaseService<StatisticsInfo, Integer>{
 	public List<DownloadLog> findByTime(Date startTime, Date endTime){
 		return downloadLogMapper.findByTime(startTime, endTime);
 	}
+
 	
 }

@@ -70,7 +70,8 @@ public class NewsInfoAppAction extends BaseAppController<NewsInfoBean, NewsInfo,
 		while(rec_info.size()<=3 && list.size() > 0){
 			int  index = random.nextInt(list.size());
 			NewsInfo getInfo = list.remove(index);
-			if(getInfo.getId().intValue() != id){
+			if(getInfo.getId().intValue() != id  ){
+				getInfo.setTitle(HtmlUtil.htmlUnescape(getInfo.getTitle() , 10));
 				getInfo.setNewsDesc(HtmlUtil.htmlUnescape(getInfo.getNewsDesc(), 50));
 				rec_info.add(getInfo);
 			}
@@ -207,10 +208,11 @@ public class NewsInfoAppAction extends BaseAppController<NewsInfoBean, NewsInfo,
 		bean.setPageNo(pageNo);
 		bean.setCateId(id);
 		bean.setPageSize(5);
-		List<NewsInfo> infos = newsInfoService.queryAllWithPage(bean, bean.toPageBounds());
-		for (NewsInfo newsInfo : infos) {
-			newsInfo.setNewsDesc(HtmlUtil.htmlUnescape(newsInfo.getNewsDesc() , 50));
-		}
+		List<NewsInfo> infos = newsInfoService.queryAllWithPageApp(bean, bean.toPageBounds());
+//		for (NewsInfo newsInfo : infos) {
+//			newsInfo.setNewsDesc(HtmlUtil.htmlUnescape(newsInfo.getNewsDesc() , 50));
+//			newsInfo.setTitle(HtmlUtil.htmlUnescape(newsInfo.getTitle() , 10));
+//		}
 		map.put("newsCenterCate", infos);
 		return suc(map);
 	}

@@ -119,7 +119,7 @@ function signIn(){
 		success : function(d) {				
 			var s = d.isSuccess;
 			if (s==false) {
-				$("#home #signIn").text(d.message);
+				$("#home #signIn").html(d.message);
 			}
 			$('#home #alert1').show();
 		}

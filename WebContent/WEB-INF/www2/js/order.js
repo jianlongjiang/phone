@@ -95,7 +95,7 @@ var orderLoadType = "orderStatus=un_audit";
 function onOrderLoad(){
 	$('#orderTopBtn').show();
 	loadBanner();
-	$('#common_header h1').text('我的订单');
+	$('#common_header h1').html('我的订单');
 	// $('#order .afScrollPanel')[0].style.cssText="";
 }
 function loadBanner(){

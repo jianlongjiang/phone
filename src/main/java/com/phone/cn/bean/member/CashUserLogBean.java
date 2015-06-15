@@ -8,8 +8,19 @@ public class CashUserLogBean extends CashUserLog {
 	
 	Double  startCash;
 	Double  endCash;
+	
+	 String   condition;
+	 
 
 	
+	public String getCondition() {
+		return condition;
+	}
+
+	public void setCondition(String condition) {
+		this.condition = condition;
+	}
+
 	@Override
 	public String getAplipay() {
 		return (String) doNull(super.getAplipay());

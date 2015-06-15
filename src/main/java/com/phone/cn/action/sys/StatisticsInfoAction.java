@@ -61,8 +61,9 @@ public class StatisticsInfoAction extends BaseCRUDController<StatisticsInfoBean,
 			bean.setPageSize(inviteNum);
 		}
 		if (goldenNum==null && inviteNum==null && maxMoney!=null) {
-			bean.setSort("balance.desc");
-			bean.setSort("reflect_red.desc");
+//			bean.setSort(" (balance -reflect_red).desc");
+			bean.setCondition("  order by (balance -reflect_red) desc ");
+//			bean.setSort("reflect_red.desc");
 			bean.setPageSize(maxMoney);
 		}
 		bean.setPageNo(pageNo);

@@ -7,6 +7,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -46,7 +48,8 @@ public class CashUserLogAdminAction extends BaseCRUDController<CashUserLogBean,C
 
 	@Override
 	public String list(CashUserLogBean bean, Model model,@PathVariable Integer pageNo) {
-		bean.setSort("update_time.desc");;
+		bean.setSort("update_time.desc");
+		bean.setCondition(" and  cash  <  0 ");
 		return super.list(bean, model, pageNo);
 	}
 	
@@ -94,22 +97,34 @@ public class CashUserLogAdminAction extends BaseCRUDController<CashUserLogBean,C
 	@RequestMapping("batchFail")
 	@ResponseBody
 	public Object batchFail(String ids){
-		Integer flag =cashUserLogService.batchFail(ids);
-		if (flag>0) {
-			return suc(SUCCESS);
+		try {
+			Integer flag =cashUserLogService.batchFail(ids);
+			if (flag>0) {
+				return suc(SUCCESS);
+			}
+			return fail("编号信息有误");
+		} catch (SimpleException e) {
+			return  fail(e);
 		}
-		return fail(FAIL);
 	}
 	
 	@RequestMapping("batchSuc")
 	@ResponseBody
 	public Object batchSuc(CashUserLogBean bean){
 		List<CashUserLog> logs = cashUserLogService.queryAll(bean);
-		for (CashUserLog log : logs) {
-			log.setDoStatus("1");
-			cashUserLogService.update(log);
+		if(CollectionUtils.isNotEmpty(logs)){
+			for (CashUserLog log : logs) {
+				if(StringUtils.equals(log.getDoStatus(), "2") ){
+					log.setDoStatus("1");
+				}else {
+					return fail("编号有误:"+log.getId());
+				}
+				cashUserLogService.update(log);
+			}
+			return suc(SUCCESS);
+		}else {
+			return fail("数据为空");
 		}
-		return suc(SUCCESS);
 	}
 	
 }

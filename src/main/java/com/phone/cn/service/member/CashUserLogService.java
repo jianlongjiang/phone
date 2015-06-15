@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import com.phone.cn.bean.member.CashUserLogBean;
 import com.phone.cn.entity.member.CashUserLog;
 import com.phone.cn.entity.member.UserInfo;
+import com.phone.cn.exception.SimpleException;
 import com.phone.cn.mapper.member.CashUserLogMapper;
 import com.phone.cn.service.BaseService;
 import com.phone.cn.utils.JsonMapper;
@@ -103,29 +104,35 @@ public class CashUserLogService extends BaseService<CashUserLog, java.lang.Integ
 	}
 	
 	//批量失败
-	public Integer batchFail(String ids){
-		Pattern p = Pattern.compile("\n");
-		String [] strIds = p.split(ids);
-		logger.debug("---------------------------------------------------------------------->ids="+ids); 
+	public Integer batchFail(String ids) throws SimpleException{
+		try {
+			Pattern p = Pattern.compile("\n");
+			String [] strIds = p.split(ids);
+			logger.debug("---------------------------------------------------------------------->ids="+ids); 
 //		String [] str = ids.split("\\,");
-		Integer flag = 0;
-		for (String s : strIds) {
-			if (StringUtils.isEmpty(s)) {
-				return flag;
-			}
-			logger.debug("---------------------->s="+s);
+			Integer flag = 0;
+			for (String s : strIds) {
+				if (StringUtils.isEmpty(s)) {
+					return flag;
+				}
+				logger.debug("---------------------->s="+s);
 //			Integer i = Integer.parseInt(s);
 //			System.out.println(i);
-			CashUserLog c = mapper.selectByPrimaryKey(Integer.parseInt(s));
-			if (c!=null) {
-				if(StringUtils.equals(c.getDoStatus(), "2") ){
-					c.setDoStatus("0");
-				}
-				flag=mapper.updateByPrimaryKeySelective(c);	
-			}	
+				CashUserLog c = mapper.selectByPrimaryKey(Integer.parseInt(s.trim()));
+				if (c!=null) {
+					if(StringUtils.equals(c.getDoStatus(), "2") ){
+						c.setDoStatus("0");
+					}else {
+						return  0;
+					}
+					flag=mapper.updateByPrimaryKeySelective(c);	
+				}	
+			}
+			logger.debug("---------------------------------------------------------------------->flag="+flag); 
+			return flag;
+		} catch (NumberFormatException e) {
+			throw  new SimpleException("编号数据格式有问题,请参照提示");
 		}
-		logger.debug("---------------------------------------------------------------------->flag="+flag); 
-		return flag;
 	}
 
 

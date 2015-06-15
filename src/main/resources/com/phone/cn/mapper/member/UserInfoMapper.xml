@@ -435,6 +435,10 @@
         invite_friend_vip_amount &lt;  #{gsMaxNum}
       </if>
       
+      
+       <if test="condition != null"> 
+         ${condition}
+      </if>
        
   </select>
   

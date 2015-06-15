@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.phone.cn.entity.product.DownloadLog;
+import com.phone.cn.entity.sys.StatisticsInfo;
 import com.phone.cn.mapper.BaseMapper;
 
 public interface DownloadLogMapper extends BaseMapper<DownloadLog, Integer>{
@@ -34,4 +35,6 @@ public interface DownloadLogMapper extends BaseMapper<DownloadLog, Integer>{
 	Integer loadDayDownAmountForUser(@Param("userId") Integer userId, @Param("date") Date date);
 	
 	Integer loadDownAmountForUser(@Param("userId") Integer userId);
+
+	List<StatisticsInfo> checkDateTime(Date time);
 }

@@ -72,6 +72,17 @@ public class UserInfoBean extends UserInfo {
     // 邀请好友数最小值
 	private Integer gsMinNum;
 	
+	
+	private String  condition;
+	
+
+	public String getCondition() {
+		return condition;
+	}
+
+	public void setCondition(String condition) {
+		this.condition = condition;
+	}
 
 	public Integer getFirstCateId() {
 		return firstCateId;

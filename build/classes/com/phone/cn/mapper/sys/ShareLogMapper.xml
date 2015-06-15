@@ -33,11 +33,11 @@
     from share_log
     where   1=1
       <if test="userId != null" >  and
-        #{userId,jdbcType=INTEGER}
+        user_id = #{userId,jdbcType=INTEGER}
       </if>
       <if test="action != null" >
       and 
-        #{action,jdbcType=VARCHAR}
+       action =  #{action,jdbcType=VARCHAR}
       </if>
       <if test="createTime != null" >
       and 
@@ -52,7 +52,7 @@
     delete from share_log
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.phone.cn.entity.sys.ShareLog" >
+  <insert id="insert" parameterType="com.phone.cn.entity.sys.ShareLog" useGeneratedKeys="true" keyProperty="id" >
     insert into share_log (id, create_user, create_time, 
       update_user, update_time, more1, 
       more2, more3, int_1, 
@@ -150,7 +150,7 @@
    			 <include refid="Base_Column_List" />
    			 from share_log
    			 where 1=1
-   			   <if test="userId != null"> and
+   		<if test="userId != null"> and
         user_id = #{userId,jdbcType=INTEGER}
       </if>
       <if test="action != null"> and
@@ -203,6 +203,7 @@
         action = #{action,jdbcType=VARCHAR}
       </if>
   </select>
+  
   
   
   <update id="updateByPrimaryKeySelective" parameterType="com.phone.cn.entity.sys.ShareLog" >

@@ -54,6 +54,7 @@ import com.phone.cn.service.sys.SysConfigService;
 import com.phone.cn.service.sys.UserScoreLogService;
 import com.phone.cn.utils.JsonMapper;
 import com.phone.cn.utils.PasswordUtils;
+import com.phone.cn.utils.URLUtils;
 import com.phone.cn.web.MySessionContext;
 import com.phone.cn.web.action.BaseCRUDController;
 import com.phone.cn.web.interceptor.AppUserLogin;
@@ -167,7 +168,7 @@ public class UserInfoAppAction extends BaseCRUDController<UserInfoBean, UserInfo
 		if (isSend) {
 			return suc(userInfo.getIntegration());
 		}
-		return fail("赠送失败！");
+		return fail("赠送失败！用户不存在");
 	}
 
 	/**
@@ -244,6 +245,11 @@ public class UserInfoAppAction extends BaseCRUDController<UserInfoBean, UserInfo
 		if (memberInfo != null) {
 			boolean isSnapPwd = false;
 			// 普通的账号登入方式 ||
+			
+			if(memberInfo.getIsFreeze()){
+				return  fail("该账号以被冻结！");
+			}
+			
 			if (isSnapPwd || PasswordUtils.validPassword(memberInfo.getPassword(), password)) {
 				resultBean.setIsSuccess(Boolean.TRUE);
 				resultBean.setMessage("登入成功！");
@@ -251,7 +257,6 @@ public class UserInfoAppAction extends BaseCRUDController<UserInfoBean, UserInfo
 				if (StringUtils.isNotBlank(backUrl)) {
 					resultBean.setResult(backUrl);
 				}
-
 				HttpSession session = _createNewSessionByLogin();
 				session.setAttribute(DataConfig.APP_USER, memberInfo);
 				Map<String, Object> map = new HashMap<String, Object>();
@@ -284,6 +289,8 @@ public class UserInfoAppAction extends BaseCRUDController<UserInfoBean, UserInfo
 		if (memberInfo == null) {
 			return fail("用户不存在!");
 		}
+		if(memberInfo.getIsFreeze()!= null &&  memberInfo.getIsFreeze()) 
+			return fail("该账号已被冻结");
 		HttpSession session = _createNewSessionByLogin();
 		session.setAttribute(DataConfig.APP_USER, memberInfo);
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -784,34 +791,34 @@ public class UserInfoAppAction extends BaseCRUDController<UserInfoBean, UserInfo
 	}
 
 	// 电话号码查询
-//	@RequestMapping("findMobile")
-//	@ResponseBody
-//	@AppUserLogin
-//	public Object findMobile(BaseAppTokenBean baseApp, String mobile) {
-//		UserInfo appUser = baseApp.getAppUser();
-//		Integer s = Integer.parseInt(sysConfigService.findOne(SysConfigEnum.search_msg_mobile.getValue()).getConfigValue());
-//		if (appUser.getIntegration() != null && appUser.getIntegration().intValue() > s.intValue()) {
-//			userInfoService.addIntegration(appUser, null, "查询消耗", s, Boolean.TRUE);
-//		} else {
-//			return fail("积分不足!");
-//		}
-//		
-//		UserInfo userInfo = userInfoService.findByMobile(mobile);
-//		UserMore userMore = new UserMore();
-//		Integer groupNum = 0;
-//		if (userInfo != null) {
-////			userInfoService.findMobileIntegrationModify(userInfo);
-//			userMore = userMoreService.findOne(userInfo.getId());
-//			groupNum = URLUtils.loadUserGroupMount(userInfo.getId());
-//		}
-//		Map<String, Object> map = new HashMap<String, Object>();
-//		map.put("userInfo", userInfo);
-//		map.put("userMore", userMore);
-//		map.put("groupNum", groupNum);
-//		// logger.debug("groupNum------------------------->"+URLUtils.loadUserGroupMount(userInfo.getId())
-//		// );
-//
-//		return suc(map);
-//	}
+	@RequestMapping("findMobile")
+	@ResponseBody
+	@AppUserLogin
+	public Object findMobile(BaseAppTokenBean baseApp, String mobile) {
+		UserInfo appUser = baseApp.getAppUser();
+		Integer s = Integer.parseInt(sysConfigService.findOne(SysConfigEnum.search_msg_mobile.getValue()).getConfigValue());
+		if (appUser.getIntegration() != null && appUser.getIntegration().intValue() > s.intValue()) {
+			userInfoService.addIntegration(appUser, null, "查询消耗", -Math.abs(s.intValue()), Boolean.TRUE);
+		} else {
+			return fail("积分不足!");
+		}
+		
+		UserInfo userInfo = userInfoService.findByMobile(mobile);
+		UserMore userMore = new UserMore();
+		Integer groupNum = 0;
+		if (userInfo != null) {
+//			userInfoService.findMobileIntegrationModify(userInfo);
+			userMore = userMoreService.findOne(userInfo.getId());
+			groupNum = URLUtils.loadUserGroupMount(userInfo.getId());
+		}
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("userInfo", userInfo);
+		map.put("userMore", userMore);
+		map.put("groupNum", groupNum);
+		// logger.debug("groupNum------------------------->"+URLUtils.loadUserGroupMount(userInfo.getId())
+		// );
+
+		return suc(map);
+	}
 
 }

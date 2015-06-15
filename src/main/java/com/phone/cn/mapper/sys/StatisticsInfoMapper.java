@@ -22,4 +22,5 @@ public interface StatisticsInfoMapper extends BaseMapper<StatisticsInfo, Integer
     int updateByPrimaryKey(StatisticsInfo record);
     
     List<StatisticsInfo> findByTime(@Param("startTime") Date startTime, @Param("endTime") Date endTime);
+
 }

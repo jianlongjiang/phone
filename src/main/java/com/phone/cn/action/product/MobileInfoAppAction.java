@@ -111,14 +111,14 @@ public class MobileInfoAppAction extends BaseCRUDController<MobileInfoBean, Mobi
 		dayDown_last = dayDown_last==null?0:dayDown_last;
 		dayDownLimit = dayDownLimit==null?0:dayDownLimit;
 		
-//		if(dayDown_last >= dayDownLimit){
-//			num = 0;
-//		}else if(dayDown_last + num > dayDownLimit ){
-//			num = dayDownLimit - dayDown_last;
-//		}
-//		if(num <= 0){
-//			return  fail("今日下载已达到上限");
-//		}
+		if(dayDown_last >= dayDownLimit){
+			num = 0;
+		}else if(dayDown_last + num > dayDownLimit ){
+			num = dayDownLimit - dayDown_last;
+		}
+		if(num <= 0){
+			return  fail("今日下载已达到上限");
+		}
 		
 		return suc(mobileService.getMobiles(user, num, downMobiles,mustDowns,  vipMobileInfos, normalpMobileInfos,otherMobiles, s));
 	}

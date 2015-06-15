@@ -66,7 +66,6 @@ public abstract class BaseService<M extends BaseEntity<ID>, ID extends Serializa
 	 */
 	public M save(M m) {
 		if (m.getId() != null ) {
-		
 			baseRepository.updateByPrimaryKeySelective(updateBaseEnity(m));
 		} else {
 			initSave(m);

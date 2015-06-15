@@ -54,7 +54,7 @@
             <button class="btn btn-sm btn-primary">
                 <i class="icon-search align-top"></i>搜索
             </button>
-            <button class="btn btn-sm btn-primary toUrl" type="button" data-toUrl="${request.contextPath}/admin/cashUserLog/exportExcel">
+            <button class="btn btn-sm btn-primary toExalUrl" type="button"  onclick='exportExal()'  data-toUrl="${request.contextPath}/admin/cashUserLog/exportExcel">
                 <i class="icon-search align-top"></i>导出
             </button>
             <br>
@@ -192,6 +192,17 @@ $(function(){
   
 });
 
+function  exportExal(){
+ var toUrl = $(".toExalUrl").attr("data-toUrl");
+  //var url = $("#batchFail").attr("batchFailUrl");
+  console.log(ids);
+  bootbox.confirm("请确定导出的数据为提款数据",function(result){
+    if(result){
+    		window.location.href = toUrl;
+    }
+  });
+}
+
 function fail(){
   var ids = $("#ids").val();
   //var url = $("#batchFail").attr("batchFailUrl");
@@ -204,10 +215,13 @@ function fail(){
         data: {"ids":ids},
         dataType: "json",
         success: function(data){
-          alert("操做成功。");
+         
           if(data.isSuccess == true){  
+           alert("操做成功。");
             window.location.reload();
           //window.location.href="${request.contextPath}/admin/cashUserLog/list/p1";
+          }else {
+          	alert(data.message);
           }
         },
         erro: function(){

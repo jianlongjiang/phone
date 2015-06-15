@@ -38,12 +38,19 @@ public class StatisticsInfoDayJob {
 	@Autowired
 	StatisticsInfoService statisticsInfoService; 
 	
+	private  static  Long time = 0l;
+	
 	/**
 	 * 晚上 3-4
 	 */
 	public  void  dayJob(){
 		Calendar calendar = Calendar.getInstance();
 		calendar.add(Calendar.DATE, -1);
+		
+		// 多核 该检查无效
+		if(time == calendar.getTimeInMillis()) return ;
+		time = calendar.getTimeInMillis();
+		
 		Integer  downCount = downloadLogService.loadDayDownAmount(calendar.getTime());
 		Integer  registAmount =  userInfoService.loadDayRegisterAmount(calendar.getTime());
 		Integer  downloadPeople = downloadLogService.loadDay_downloadPeople(calendar.getTime()); 
@@ -64,7 +71,12 @@ public class StatisticsInfoDayJob {
 		statisticsInfo.setInt1(registrationAmount);
 		statisticsInfo.setCreateTime(calendar.getTime());
 		
-		statisticsInfoService.save(statisticsInfo);
+		try {
+			statisticsInfoService.save(statisticsInfo);
+		} catch (Exception e) {
+//			e.printStackTrace();
+//			服务器为四核  四个线程同时跑
+		}
 	}
 	
 }

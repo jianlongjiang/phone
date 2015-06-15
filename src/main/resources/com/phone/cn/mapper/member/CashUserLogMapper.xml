@@ -274,6 +274,10 @@
         is_see = #{isSee}
       </if>
       
+      <if test="id != null"> and
+        id = #{id}
+      </if>
+      
       <if test="startCash != null"> and
      	 <![CDATA[ cash >=  #{startCash} ]]>
       </if>
@@ -285,6 +289,10 @@
       </if>
       <if test="endDate != null"> and
       <![CDATA[ create_time <=  #{endDate} ]]>
+      </if>
+      
+       <if test="condition != null"> 
+     		${condition}
       </if>
       
   </select>

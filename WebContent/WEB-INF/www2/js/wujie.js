@@ -84,20 +84,20 @@ function query_mobile(){
 				$('#alert4').show();
 			}else {
 				if (u.isVip==1) {
-					$("#query-gold-member #gold_fakeId").text(u.fakeId);
-					$("#query-gold-member #gold_mobile").text(u.mobile);
-					$("#query-gold-member #gold_weixin").text(u.weixin);
+					$("#query-gold-member #gold_fakeId").html(u.fakeId);
+					$("#query-gold-member #gold_mobile").html(u.mobile);
+					$("#query-gold-member #gold_weixin").html(u.weixin);
 					$(".friendId").attr("data-value", u.id);
 					
 					if(!isBlack(uMore))
-					$("#query-gold-member #gold_xy").text(uMore.xuanYan);
-					$("#query-gold-member #gold_ct").text(u.vipTime);
+					$("#query-gold-member #gold_xy").html(uMore.xuanYan);
+					$("#query-gold-member #gold_ct").html(u.vipTime);
 					$("#query-gold-member #gold_group").html(d.result.groupNum);
 					showPage("query-gold-member");
 				}else  {
 					console.log("蜗牛巴巴成员");
 					$('#query-ID #alert5').show();
-					$("#query-ID #res_id").text(u.fakeId);
+					$("#query-ID #res_id").html(u.fakeId);
 					$("#query-ID #res_mobile").html(u.mobile);
 					$("#query-ID #res_weixin").html(u.weixin);
 					if(!isBlack(uMore))
@@ -118,7 +118,7 @@ function signIn(){
 		success : function(d) {				
 			var s = d.isSuccess;
 			if (s==false) {
-				$("#home #signIn").text(d.message);
+				$("#home #signIn").html(d.message);
 			}
 			var user = get("userInfo");
 			user.Integration = d.result;
@@ -315,7 +315,7 @@ function  into_newsCenter1(){
 				});
 				console.log($("#news #jtlg-pub-pic .cateName").eq(1).val());
 				newscates.forEach(function(e,i,a){
-					$("#news #jtlg-pub-pic .cateName").eq(i).text(e.cateName);
+					$("#news #jtlg-pub-pic .cateName").eq(i).html(e.cateName);
 					$("#news #jtlg-pub-pic .cateName").eq(i).attr("data-id",e.id);
 				});
 				

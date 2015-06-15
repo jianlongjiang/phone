@@ -56,8 +56,8 @@
             <input class="input-large Wdate" type="text" name="endDate" value="<#if (bean.endDate)??>${bean.endDate?string('yyyy-MM-dd')}</#if>"  onFocus="WdatePicker({startDate:'%y-%M-%d',dateFmt:'yyyy-MM-dd',alwaysUseStartDate:true})" >
             <select class="input-large" name="isFreeze">
                 <option value="">&nbsp;用户是否冻结</option>
-                <option <#if bean.isFreeze?? && bean.isFreeze=false>selected</#if> value="1">已冻结</option>
-                <option <#if bean.isFreeze?? && bean.isFreeze=true>selected</#if> value="0">未冻结</option>
+                <option <#if bean.isFreeze?? && bean.isFreeze=true>selected</#if> value="1">已冻结</option>
+                <option <#if bean.isFreeze?? && bean.isFreeze=false>selected</#if> value="0">未冻结</option>
             </select>
             
         </div>
